@@ -1,0 +1,45 @@
+---
+title: "M.Agendy: Healthcare Management & Analytics"
+slug: "m-agendy"
+description: "Plataforma inteligente voltada para a gestão de clínicas médicas e agendamentos complexos. A solução resolve o desafio da alocação dinâmica de horários através de algoritmos de otimização, oferecendo dashboards de Analytics para monitoramento de performance e saúde financeira do negócio."
+projectImage: "/m-agendy.png"
+urlProject: "https://m-agendy.vercel.app"
+urlRepository: "https://github.com/matheusqueiroz92/m-agendy"
+technologies:
+  - React
+  - Next.js
+  - TypeScript
+  - TailwindCSS
+  - Shadcn/UI
+  - React-hook-form
+  - Zod
+  - PostgreSQL
+  - Drizzle ORM
+tags:
+  - fullstack
+publishedDate: "2025-12-20"
+featured: true
+order: 3
+---
+
+## Contexto
+
+Clínicas multi-profissionais sofrem com agendamento: médicos com agendas conflitantes, horários ociosos, no-shows não rastreados e nenhuma visão analítica sobre performance. **M.Agendy** é uma plataforma que trata agendamento como um **problema de otimização**, não como um calendário simples.
+
+## O que resolve
+
+- **Alocação dinâmica** — algoritmo propõe o melhor encaixe de novo atendimento baseado em duração do procedimento, disponibilidade do profissional, tempo de preparo e histórico do paciente.
+- **Detecção de no-show** — score por paciente baseado em cancelamentos anteriores, com política de overbooking inteligente em horários de alta demanda.
+- **Lembretes automatizados** — via WhatsApp e e-mail, reduzindo faltas.
+- **Analytics completo** — taxa de ocupação por profissional, receita por especialidade, ticket médio, cohort de retenção.
+
+## Stack
+
+- **Frontend** Next.js 15 (App Router) + Shadcn/UI + TailwindCSS, com dashboards em Recharts.
+- **Backend** via Server Actions e rotas API do próprio Next, persistência em PostgreSQL com Drizzle ORM.
+- **Validação** unificada com Zod (cliente + servidor).
+- **Autenticação** com NextAuth e controle de papéis (clínica, profissional, recepção).
+
+## Resultado
+
+Redução de horários ociosos, aumento de receita por consultório e dados confiáveis para tomada de decisão — tudo numa interface limpa e moderna.

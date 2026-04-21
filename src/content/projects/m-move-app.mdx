@@ -1,0 +1,56 @@
+---
+title: 'M. Move App'
+slug: 'm-move-app'
+description: 'SaaS de gestão de treinos para alunos autônomos, personal trainers e academias, com multi-tenancy por plano, RBAC, API stateless em Fastify e produto web em Next.js dentro de um monorepo Turborepo.'
+urlRepository: 'https://github.com/matheusqueiroz92/m-move-app'
+technologies:
+  - Turborepo
+  - Node.js
+  - TypeScript
+  - Fastify
+  - Prisma
+  - PostgreSQL
+  - Better Auth
+  - Stripe
+  - OpenAI
+  - Zod
+  - Vitest
+  - React
+  - Next.js
+  - Tailwind CSS
+  - TanStack Query
+  - Zustand
+  - GSAP
+  - Recharts
+tags:
+  - fullstack
+  - saas
+publishedDate: '2026-04-12'
+featured: false
+order: 4
+---
+
+## Contexto
+
+Treinos presenciais e online exigem **organização de planos**, acompanhamento de progresso e comunicação entre aluno e profissional. O **M. Move App** trata isso como um produto **multi-tenant**, onde cada plano (aluno, personal ou academia) molda permissões e limites de uso.
+
+## O que resolve
+
+- **Gestão de treinos** — estrutura para montar e acompanhar planos, com visão adequada a cada papel.
+- **Multi-tenancy por plano** — isolamento conceitual entre perfis de uso (Student, Personal Trainer, Gym).
+- **RBAC** — papéis como `OWNER`, `PERSONAL_TRAINER`, `STUDENT` e `LINKED_STUDENT` para governar acesso.
+- **IA e assinaturas** — integração com OpenAI para geração de planos e suporte conversacional; Stripe para monetização.
+- **Qualidade contínua** — TDD com Vitest como referência de desenvolvimento no repositório.
+
+## Arquitetura
+
+Monorepo **Turborepo** com **Clean Architecture** e **DDD**: `apps/api` (Fastify), `apps/web` (Next.js / React 19) e pacotes compartilhados (`types`, `validators`, `utils`, `constants`, `ui`).
+
+## Stack
+
+- **Backend:** Node.js, Fastify, Prisma, PostgreSQL, Better Auth, Stripe, OpenAI, Zod, Vitest.
+- **Frontend:** React 19, Next.js 16, Tailwind CSS, Shadcn UI, TanStack Query, Zustand, GSAP, Recharts.
+
+## Resultado
+
+Uma base de produto **SaaS** alinhada a **escala operacional** (vários perfis e tenants), com camadas explícitas de domínio e uma API preparada para evoluir junto com apps web e mobile planejados no monorepo.

@@ -1,17 +1,15 @@
-import { withPayload } from '@payloadcms/next/withPayload'
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Your Next.js config here
-  webpack: (webpackConfig) => {
-    webpackConfig.resolve.extensionAlias = {
-      '.cjs': ['.cts', '.cjs'],
-      '.js': ['.ts', '.tsx', '.js', '.jsx'],
-      '.mjs': ['.mts', '.mjs'],
-    }
-
-    return webpackConfig
+  reactStrictMode: true,
+  // Gera um server self-contained em .next/standalone com só as deps realmente
+  // usadas em runtime. Essencial para a imagem Docker ficar pequena e para
+  // `next start` rodar fora do node_modules completo.
+  images: {
+    // Adicione aqui domínios remotos caso você passe a usar imagens externas
+    // (ex.: CDN do Cloudflare Images). Vazio por padrão — suas imagens hoje
+    // ficam em /public.
+    remotePatterns: [],
   },
 }
 
-export default withPayload(nextConfig, { devBundleServerPackages: false })
+export default nextConfig

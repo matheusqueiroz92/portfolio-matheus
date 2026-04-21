@@ -1,0 +1,50 @@
+---
+title: "EternAI: Restauração GenAI de Memórias Históricas"
+slug: "etern-ai"
+description: "Aplicação de preservação digital que utiliza Inteligência Artificial Generativa para restauração e colorização de fotografias antigas. O sistema integra modelos de processamento de imagem de alta fidelidade para remover danos físicos e aplicar cores realistas, respeitando o contexto histórico original."
+projectImage: "/etern-ai.png"
+urlProject: "https://eternai.com.br"
+urlRepository: "https://github.com/matheusqueiroz92/etern-ai"
+technologies:
+  - React
+  - Next.js
+  - TypeScript
+  - TailwindCSS
+  - Shadcn/UI
+  - React-hook-form
+  - Zod
+  - PostgreSQL
+  - Drizzle ORM
+tags:
+  - fullstack
+publishedDate: "2025-11-10"
+featured: true
+order: 2
+---
+
+## Contexto
+
+Fotografias antigas contam histórias de famílias inteiras, mas envelhecem: amarelam, rasgam, perdem contraste. **EternAI** nasceu para devolver essas memórias em alta fidelidade, usando **IA generativa** para restaurar e colorizar imagens sem distorcer o contexto histórico original.
+
+## Como funciona
+
+O usuário faz upload de uma foto antiga (via drag-and-drop ou captura de câmera). O backend processa em três estágios:
+
+1. **Detecção de danos** — modelo de segmentação identifica rasgos, manchas e áreas descoloridas.
+2. **Restauração** — GAN especializada em inpainting preenche áreas danificadas respeitando a textura original.
+3. **Colorização** — modelo treinado em conjuntos de imagens antigas aplica cores historicamente plausíveis.
+
+A resposta é entregue em streaming no frontend, com prévia em baixa resolução seguida do resultado final.
+
+## Arquitetura técnica
+
+- **Frontend** em Next.js 15 (App Router), com Shadcn/UI e TailwindCSS.
+- **Formulários** controlados com React Hook Form + Zod para validação.
+- **Persistência** em PostgreSQL com Drizzle ORM (imagens armazenadas em object storage, metadados no banco).
+- **Pipeline de IA** integrado via API externa, com fila de processamento assíncrona e webhook de conclusão.
+
+## Diferenciais
+
+- Preserva o **grão e textura** original das fotos (não "borra" como filtros tradicionais).
+- Sistema de revisão manual: o usuário pode ajustar regiões específicas antes de confirmar o resultado.
+- Histórico de restaurações por conta, com download em alta resolução e impressão física opcional.

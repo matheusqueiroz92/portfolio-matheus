@@ -1,0 +1,47 @@
+---
+title: "Óticas Queiroz: Ecossistema de Gestão ERP Fullstack"
+slug: "oticas-queiroz"
+description: "Ecossistema completo de gestão empresarial projetado para centralizar a operação de uma rede de óticas. A arquitetura utiliza Monorepo para integrar um painel administrativo robusto, controle de estoque inteligente e automação de fluxos comerciais, garantindo consistência de dados e escalabilidade técnica."
+projectImage: "/app-oticas-queiroz.png"
+urlProject: "https://app.oticasqueiroz.com.br"
+urlRepository: "https://github.com/matheusqueiroz92/oticas-queiroz-monorepo"
+technologies:
+  - Turborepo
+  - Node.js
+  - Express
+  - TypeScript
+  - MongoDB
+  - React
+  - Next.js
+  - TailwindCSS
+  - Shadcn/UI
+tags:
+  - fullstack
+publishedDate: "2025-08-01"
+featured: true
+order: 1
+---
+
+## Contexto
+
+As **Óticas Queiroz** são uma rede com múltiplas filiais que precisava unificar operações antes fragmentadas em planilhas, sistemas legados e controle manual de estoque. O desafio: criar uma plataforma única para cadastro de clientes e produtos, gestão de vendas, controle de estoque por filial, relatórios financeiros e acompanhamento de ordens de serviço de laboratório ótico.
+
+## Arquitetura
+
+A solução foi estruturada como um **monorepo Turborepo** com três pacotes principais:
+
+- **`apps/api`** — API Node.js + Express em TypeScript, conectada ao MongoDB via Mongoose, autenticação JWT, controle de acesso baseado em papéis (admin, gerente, vendedor, laboratório).
+- **`apps/web`** — Painel administrativo em Next.js App Router, com shadcn/UI e TailwindCSS.
+- **`packages/shared`** — Tipos, validações Zod e utilitários compartilhados entre front e back.
+
+## Principais entregas
+
+- Cadastro unificado de clientes, produtos (armações, lentes, acessórios) e fornecedores.
+- Módulo de vendas com cálculo automático de comissões e integração com ordem de serviço do laboratório.
+- Controle de estoque em tempo real, multi-filial, com alertas de ruptura.
+- Dashboards de performance de vendas, ticket médio e ranking de vendedores.
+- Deploy em VPS com PM2, Nginx e Let's Encrypt.
+
+## Resultado
+
+Redução significativa de erros operacionais, visibilidade em tempo real das vendas e estoque, e base técnica preparada para integrações futuras (fiscal, PDV, integração com fornecedores).

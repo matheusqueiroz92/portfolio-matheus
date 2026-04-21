@@ -1,13 +1,19 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/node_modules/
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.pnpm-debug.log*
 
 /.idea/*
 !/.idea/runConfigurations
+.cursor/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
 
 # testing
 /coverage
@@ -15,9 +21,12 @@
 # next.js
 /.next/
 /out/
+/.pnpm-store/
+/.turbo/
 
 # production
 /build
+/dist/
 
 # misc
 .DS_Store
@@ -27,9 +36,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # local env files
+.env
 .env*.local
+.env.*.local
 
 # vercel
 .vercel
@@ -38,12 +50,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.env
-
 /media
 
 # Playwright
-node_modules/
 /test-results/
 /playwright-report/
 /blob-report/

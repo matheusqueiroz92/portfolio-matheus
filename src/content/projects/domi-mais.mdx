@@ -1,0 +1,38 @@
+---
+title: 'DomiMais'
+slug: 'domi-mais'
+description: 'Jogo de dominó digital para dois jogadores no mesmo dispositivo, com mecânica de blefe e verso das peças exibindo apenas a soma dos lados — dedução, estratégia e interface inspirada em jogos mobile com Framer Motion.'
+urlRepository: 'https://github.com/matheusqueiroz92/domi-mais'
+technologies:
+  - React
+  - TypeScript
+  - Vite
+  - Framer Motion
+  - CSS
+tags:
+  - frontend
+  - game
+publishedDate: '2026-04-08'
+featured: false
+order: 11
+---
+
+## Contexto
+
+O **DomiMais** parte do dominó clássico e adiciona uma camada de **blefe e informação incompleta**: no verso, o adversário vê só a **soma** dos valores, não os lados individuais. O MVP foi pensado para **dois jogadores locais**, passando o dispositivo a cada turno.
+
+## O que resolve
+
+- **Partidas rápidas** — fluxo claro: compra obrigatória do monte, jogada nas pontas, opção de blefar quando a peça encaixa.
+- **Estado previsível** — `useReducer` + Context API, tipos TypeScript e validação de encaixe antes de jogar.
+- **Feedback constante** — modais de turno, encaixe, blefe e fim de jogo; pontas da mesa destacam jogadas válidas.
+- **Jogo fechado** — detecção quando não há mais encaixes possíveis, além de regra de vitória por menor soma na mão.
+
+## Stack
+
+- **React 19** e **TypeScript** com **Vite** para build e dev server ágil.
+- **Framer Motion** para arraste e transições; **clsx** e CSS para layout e peças com aparência “3D” na mesa.
+
+## Resultado
+
+Um MVP jogável e didático, com **lógica de jogo isolada** (`game/state`, reducer e tipos) e componentes de UI focados em leitura imediata do estado da partida — pronto para evoluir para online, ranking ou modo contra IA no futuro.

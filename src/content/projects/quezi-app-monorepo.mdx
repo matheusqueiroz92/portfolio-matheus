@@ -1,0 +1,46 @@
+---
+title: 'Quezi'
+slug: 'quezi-app-monorepo'
+description: 'Monorepo Turborepo para marketplace de agendamento de serviços (foco em beleza e estética), conectando profissionais a clientes com API REST em Node.js, Fastify, PostgreSQL e Prisma, documentada com Swagger.'
+urlRepository: 'https://github.com/matheusqueiroz92/quezi-app-monorepo'
+technologies:
+  - Turborepo
+  - Node.js
+  - TypeScript
+  - Fastify
+  - PostgreSQL
+  - Prisma
+  - Zod
+  - Docker
+  - Swagger
+tags:
+  - fullstack
+  - api
+publishedDate: '2026-04-05'
+featured: false
+order: 12
+---
+
+## Contexto
+
+A **Quezi** nasce para digitalizar a ponte entre **profissionais** e **clientes**: descoberta de serviços, perfil, solicitação e gestão de **agendamentos**, com domínio explícito (usuários, serviços, categorias, avaliações).
+
+## O que resolve
+
+- **Descoberta** — base para busca e filtro por categoria e perfil profissional.
+- **Agendamentos** — fluxo de solicitação e gestão entre cliente e profissional.
+- **Confiança** — modelo prevê avaliações após a prestação do serviço.
+- **API-first** — backend REST com validação (Zod) e documentação Swagger para integração com web e mobile.
+
+## Arquitetura
+
+Monorepo com **Turborepo**: `apps/api` como núcleo atual; `apps/web` e `apps/mobile` previstos na documentação do repositório. Pacotes compartilhados de **TypeScript** e **ESLint** mantêm padrão entre workspaces.
+
+## Stack
+
+- **API:** Node.js, Fastify, TypeScript, PostgreSQL, Prisma, Docker, Zod, Swagger.
+- **Tooling:** workspaces npm na raiz, scripts unificados de `dev`, `build`, `test` e Prisma.
+
+## Resultado
+
+Fundação sólida de **domínio e persistência** para um marketplace de serviços, com caminho claro para evoluir o frontend web e o app mobile sobre a mesma API.

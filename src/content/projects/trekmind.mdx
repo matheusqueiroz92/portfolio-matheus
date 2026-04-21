@@ -1,0 +1,51 @@
+---
+title: 'TrekMind'
+slug: 'trekmind'
+description: 'Guia turístico inteligente em monorepo: busca de lugares, contexto por geocoding e Wikipedia, chat com assistente de viagens (OpenAI), autenticação com Better Auth e PostgreSQL com pgvector — web Next.js e app Expo compartilhando casos de uso em camadas DDD.'
+urlRepository: 'https://github.com/matheusqueiroz92/trekmind'
+technologies:
+  - Turborepo
+  - pnpm
+  - Next.js
+  - React
+  - Expo
+  - TypeScript
+  - Drizzle ORM
+  - PostgreSQL
+  - pgvector
+  - Better Auth
+  - OpenAI
+  - Zod
+  - Vitest
+tags:
+  - fullstack
+  - mobile
+publishedDate: '2026-04-14'
+featured: false
+order: 5
+---
+
+## Contexto
+
+Viajar e explorar uma cidade exige **contexto confiável**, **busca** e às vezes um **assistente** que una recomendações e conversa. O **TrekMind** organiza isso em um monorepo onde **web** e **mobile** reutilizam a mesma inteligência de aplicação, encapsulada em pacotes de domínio.
+
+## O que resolve
+
+- **Busca de lugares** — integração com fontes externas e geocoding para aproximar resultados da localização do usuário.
+- **Enriquecimento** — uso de Wikipedia e dados relacionados para dar contexto histórico e prático.
+- **Assistente de viagens** — chat apoiado em OpenAI para planejamento e dúvidas em linguagem natural.
+- **Contas e sessões** — Better Auth com PostgreSQL (Drizzle), incluindo fluxos web e suporte a JWT no mobile quando necessário.
+
+## Arquitetura
+
+Camadas **Domain**, **Application**, **Infrastructure** e **Shared** (Zod): a API em **Next.js Route Handlers** (`apps/web/app/api`) instancia infraestrutura e executa casos de uso; o app **Expo** consome a mesma API.
+
+## Stack
+
+- **Monorepo:** Turborepo + pnpm; testes com Vitest.
+- **Dados:** Drizzle, PostgreSQL com **pgvector** para cenários de busca semântica/embeddings conforme o desenho do projeto.
+- **Apps:** Next.js 16 e React 19 na web; Expo na mobile.
+
+## Resultado
+
+Experiência única de **descoberta + conversa** sobre destinos, com separação clara entre **regras de negócio** e **integrações externas**, facilitando evoluir fontes de lugares, modelos de IA e clients sem acoplar tudo à UI.
