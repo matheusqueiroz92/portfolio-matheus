@@ -1,27 +1,16 @@
 # Deploy — Portfólio Matheus Queiroz
 
-Este projeto é hospedado na **Vercel** com CI/CD via **GitHub Actions**.
-O Docker cobre apenas desenvolvimento local e verificação de build no CI.
+Este projeto é hospedado na **Vercel** com deploy automático via integração
+nativa Vercel ↔ GitHub. Um workflow de CI (`.github/workflows/ci.yml`) roda
+lint + typecheck + build em cada push/PR como camada extra de verificação.
 
 ---
 
-## 1. Desenvolvimento local (opcional, com Docker)
-
-```bash
-# Hot reload — código montado via volume
-docker compose up web-dev
-
-# Testar a imagem de produção localmente
-docker compose up --build web-prod
-```
-
-Ambos sobem em <http://localhost:3000>.
-
-Sem Docker, funciona exatamente como antes:
+## 1. Desenvolvimento local
 
 ```bash
 pnpm install
-pnpm dev
+pnpm dev                # http://localhost:3000
 ```
 
 ---
@@ -40,7 +29,7 @@ pnpm dev
    - `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
    - `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
    - `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
-5. Clique em **Deploy** — a primeira versão sobe em uma URL `*.vercel.app`.
+5. Clique em **Deploy**. A primeira versão sobe em uma URL `*.vercel.app`.
 
 ---
 
@@ -57,8 +46,8 @@ pnpm dev
 Remova os dois registros A antigos que apontam para a VPS (`147.79.107.246`)
 e crie os novos:
 
-| Tipo  | Nome | Conteúdo                  | Proxy         | TTL  |
-| ----- | ---- | ------------------------- | ------------- | ---- |
+| Tipo  | Nome | Conteúdo                  | Proxy           | TTL  |
+| ----- | ---- | ------------------------- | --------------- | ---- |
 | A     | @    | `76.76.21.21`             | **Somente DNS** | Auto |
 | CNAME | www  | `cname.vercel-dns.com`    | **Somente DNS** | Auto |
 
@@ -70,47 +59,25 @@ domínio fica ativo.
 
 ---
 
-## 4. CI/CD contínuo (push → deploy)
+## 4. Como o deploy acontece a partir daqui
 
-### 4.1. Gerar um token de deploy da Vercel
-
-1. Acesse <https://vercel.com/account/tokens>.
-2. Crie um token com escopo no time correto, sem expiração (ou 1 ano).
-3. Copie o token — você não conseguirá vê-lo de novo.
-
-### 4.2. Descobrir os IDs do projeto
-
-Rode uma vez localmente:
-
-```bash
-npx vercel link                 # cria .vercel/project.json
-cat .vercel/project.json        # mostra orgId e projectId
-```
-
-### 4.3. Adicionar os secrets no GitHub
-
-Em `Settings → Secrets and variables → Actions → New repository secret`:
-
-| Secret              | Valor                         |
-| ------------------- | ----------------------------- |
-| `VERCEL_TOKEN`      | Token da seção 4.1            |
-| `VERCEL_ORG_ID`     | `orgId` do `.vercel/project.json`     |
-| `VERCEL_PROJECT_ID` | `projectId` do `.vercel/project.json` |
-
-### 4.4. Como o pipeline funciona
-
-- **`.github/workflows/ci.yml`** roda em todo push e PR:
-  `pnpm lint` → `pnpm typecheck` → `pnpm build` → build da imagem Docker.
-- **`.github/workflows/deploy.yml`**:
-  - PR aberto → deploy de **preview** (URL única por PR).
-  - Push em `main` → espera o CI terminar → deploy em **produção**.
-
-Daí em diante, todo `git push origin main` dispara: CI verde → deploy
-automático → site atualizado em <https://matheusqueiroz.dev.br>.
+- **Push em `main`** → GitHub webhook aciona a Vercel → build → produção.
+  Em paralelo, o workflow de CI roda como verificação independente.
+- **Pull request aberto** → a Vercel cria uma URL de preview automaticamente
+  e comenta no PR com o link.
+- **Rollback** → no dashboard da Vercel, em qualquer deploy anterior clicar
+  em **⋯ → Promote to Production** reverte o site em segundos.
 
 ---
 
-## 5. Rollback rápido
+## 5. Variáveis de ambiente
 
-Em qualquer deploy anterior listado no dashboard da Vercel, clicar em
-**⋯ → Promote to Production** reverte o site para aquela versão em segundos.
+Defina no painel da Vercel em **Settings → Environment Variables**. Use
+**Production**, **Preview** e **Development** conforme o escopo.
+
+| Variável                           | Obrigatória | Descrição                              |
+| ---------------------------------- | ----------- | -------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`             | Sim         | URL pública (metadata, OG, sitemap)    |
+| `NEXT_PUBLIC_EMAILJS_SERVICE_ID`   | Sim         | Serviço EmailJS para o formulário      |
+| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`  | Sim         | Template EmailJS                       |
+| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`   | Sim         | Public key EmailJS                     |

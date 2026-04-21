@@ -1,7 +1,8 @@
 name: CI
 
-# Roda em todo push e em todo PR. É a nossa "garantia de qualidade" antes
-# do deploy. O deploy só acontece se este job passar (ver deploy.yml).
+# Verificação de qualidade em todo push e PR.
+# O deploy é feito pela integração nativa da Vercel com o GitHub —
+# este workflow é só a camada de gating (lint/typecheck/build).
 on:
   push:
     branches: [main]
@@ -47,28 +48,3 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: 1
           NEXT_PUBLIC_SITE_URL: https://matheusqueiroz.dev.br
-
-  docker-build:
-    name: Docker image build (smoke test)
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs: quality
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build production image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile
-          push: false
-          tags: portfolio:ci
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          build-args: |
-            NEXT_PUBLIC_SITE_URL=https://matheusqueiroz.dev.br
