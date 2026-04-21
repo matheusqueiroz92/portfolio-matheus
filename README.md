@@ -1,50 +1,87 @@
 # Portfólio — Matheus Queiroz
 
-Site pessoal e blog técnico. Construído com Next.js 15 (App Router) + React 19 + Tailwind CSS v4 + shadcn/ui.
+Aplicação de portfólio pessoal com blog técnico e vitrine de projetos, construída com Next.js 15 e React 19.
 
-## Stack
+## Visão geral
 
-- **Next.js 15** (App Router, Server Components)
-- **React 19**
-- **Tailwind CSS v4** com shadcn/ui
-- **TypeScript** strict
-- Conteúdo por **MDX** (em breve — Sprint 2)
-- Deploy previsto: **Vercel** · domínio `matheusqueiroz.dev.br`
+O projeto entrega:
+
+- Página inicial com seções institucionais (hero, sobre, áreas de atuação, tecnologias, projetos e contato)
+- Listagem e páginas individuais de posts em `/blog` e `/blog/[slug]`
+- Listagem e páginas individuais de projetos em `/projects` e `/projects/[slug]`
+- Conteúdo em MDX carregado de `src/content/posts` e `src/content/projects`
+- Formulário de contato com envio via EmailJS
+
+## Stack principal
+
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- shadcn/ui + Radix UI
+- framer-motion
+- next-mdx-remote + gray-matter (conteúdo MDX)
+- Vercel (deploy)
+
+## Requisitos
+
+- Node.js 20+
+- pnpm
+
+## Variáveis de ambiente
+
+Copie `.env.example` para `.env.local` e preencha os valores:
+
+```bash
+cp .env.example .env.local
+```
+
+Variáveis utilizadas:
+
+- `NEXT_PUBLIC_SITE_URL` (URL pública do site)
+- `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+- `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+- `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
 
 ## Como rodar localmente
 
 ```bash
 pnpm install
-cp .env.example .env   # ajuste se necessário
-pnpm dev               # http://localhost:3000
+pnpm dev
 ```
 
-Outros comandos:
+App em desenvolvimento: [http://localhost:3000](http://localhost:3000)
+
+## Scripts disponíveis
 
 ```bash
+pnpm dev         # ambiente de desenvolvimento
 pnpm build       # build de produção
-pnpm start       # servidor de produção
-pnpm lint        # eslint
-pnpm typecheck   # tsc --noEmit
-pnpm test:e2e    # playwright
+pnpm start       # inicia app em produção
+pnpm lint        # lint com Next.js
+pnpm typecheck   # checagem de tipos (tsc --noEmit)
+pnpm devsafe     # limpa .next e sobe o dev server
 ```
 
-## Estrutura
+## Estrutura resumida
 
-```
+```text
 src/
-├── app/(frontend)/    # rotas públicas (home, blog, projetos)
-├── components/        # layout, sections, UI (shadcn)
-├── constants/         # dados estáticos da home
-├── hooks/             # hooks de animação e tema
-├── lib/content.ts     # loader de conteúdo (MDX na Sprint 2)
-└── types/             # tipos compartilhados
+├── app/                    # rotas da aplicação (home, blog, projetos)
+├── components/             # layout, seções e componentes de UI
+├── content/
+│   ├── posts/              # posts em MDX
+│   └── projects/           # projetos em MDX
+├── constants/              # conteúdo estático da home
+├── lib/content.ts          # loader/normalizador de conteúdo MDX
+└── types/                  # tipos compartilhados da aplicação
 ```
 
-## Roadmap
+## Deploy
 
-1. ✅ Remoção do Payload CMS.
-2. Migração para conteúdo em MDX (`src/content/**`).
-3. Redesign de identidade visual.
-4. Animações 3D, parallax, scroll-triggered reveals.
-5. Deploy em Vercel com domínio final.
+O deploy é preparado para Vercel com:
+
+- `framework: nextjs`
+- build com `pnpm build`
+- região padrão `gru1`
+- headers de segurança e cache configurados em `vercel.json`
