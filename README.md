@@ -10,7 +10,7 @@ O projeto entrega:
 - Listagem e páginas individuais de posts em `/blog` e `/blog/[slug]`
 - Listagem e páginas individuais de projetos em `/projects` e `/projects/[slug]`
 - Conteúdo em MDX carregado de `src/content/posts` e `src/content/projects`
-- Formulário de contato com envio via EmailJS
+- Formulário de contato com envio via Resend (API route `/api/contact`)
 
 ## Stack principal
 
@@ -39,9 +39,9 @@ cp .env.example .env.local
 Variáveis utilizadas:
 
 - `NEXT_PUBLIC_SITE_URL` (URL pública do site)
-- `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
-- `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
-- `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
+- `RESEND_API_KEY` (server-side — gerada em <https://resend.com/api-keys>)
+- `RESEND_FROM_EMAIL` (remetente do domínio verificado no Resend)
+- `RESEND_TO_EMAIL` (caixa que recebe as mensagens do formulário)
 
 ## Como rodar localmente
 

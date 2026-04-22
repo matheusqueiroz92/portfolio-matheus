@@ -16,25 +16,9 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import emailjs from '@emailjs/browser'
 import { IconWhatsapp } from '@/components/ui/icons/icon-whatsapp'
 import { FadeIn } from '@/components/motion'
-
-// Schema de validação
-const contactFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, 'O nome deve ter pelo menos 2 caracteres')
-    .max(100, 'O nome deve ter no máximo 100 caracteres'),
-  email: z.string().email('Email inválido'),
-  message: z
-    .string()
-    .min(10, 'A mensagem deve ter pelo menos 10 caracteres')
-    .max(1000, 'A mensagem deve ter no máximo 1000 caracteres'),
-})
-
-type ContactFormData = z.infer<typeof contactFormSchema>
+import { contactFormSchema, type ContactFormData } from '@/lib/contact-schema'
 
 export function ContactSection() {
   const [isLoading, setIsLoading] = useState(false)
@@ -56,29 +40,23 @@ export function ContactSection() {
     setErrorMessage('')
 
     try {
-      // Verificar se as variáveis de ambiente estão configuradas
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      // POST para o route handler `/api/contact`, que roda no servidor e
+      // chama o Resend. O SDK do Resend nunca é importado no cliente —
+      // a API key fica restrita ao ambiente do Node.
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
 
-      if (!serviceId || !templateId || !publicKey) {
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as
+          | { error?: string }
+          | null
         throw new Error(
-          'Configuração do EmailJS não encontrada. Verifique as variáveis de ambiente.',
+          payload?.error ?? 'Erro ao enviar mensagem. Tente novamente mais tarde.',
         )
       }
-
-      // Enviar email usando EmailJS
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: data.name,
-          from_email: data.email,
-          message: data.message,
-          to_name: 'Matheus Queiroz',
-        },
-        publicKey,
-      )
 
       setSubmitStatus('success')
       reset()
