@@ -71,7 +71,7 @@ function HeroPortrait() {
         ref={portraitRef}
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
-        className="hero-portrait relative mx-auto aspect-square max-w-[560px]"
+        className="hero-portrait relative mx-auto aspect-square max-w-[380px] sm:max-w-[480px] lg:max-w-[560px]"
       >
         <div aria-hidden="true" className="hero-dots absolute inset-0" />
         <div className="hero-shape absolute inset-[5%]">
@@ -213,28 +213,28 @@ export function HeroSection() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-screen items-center border-b border-border/60 px-4 py-36 transition-colors duration-300 sm:px-6 lg:px-8"
+      className="relative flex min-h-screen items-center border-b border-border/60 px-4 py-24 transition-colors duration-300 sm:px-6 sm:py-32 lg:px-8 lg:py-36"
     >
       <motion.div
-        className="mx-auto flex w-full max-w-7xl flex-col gap-16 lg:flex-row lg:items-center"
+        className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-center lg:gap-16"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         {/* Left Side */}
-        <div className="w-full space-y-8 text-left lg:w-1/2">
+        <div className="w-full space-y-6 text-left sm:space-y-8 lg:w-1/2">
           {/* Badges */}
           <motion.div
-            className="flex flex-wrap items-center gap-3 text-xs font-medium text-muted-foreground"
+            className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground sm:gap-3"
             variants={badgesRowVariants}
           >
             {BADGES.map((badge) => (
               <motion.div
                 key={badge.title}
                 variants={badgeVariants}
-                className="inline-flex items-center rounded-full border border-border/60 bg-muted px-4 py-2 gap-2"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-muted px-3 py-1.5 sm:gap-2 sm:px-4 sm:py-2"
               >
-                <badge.icon className="h-4 w-4" /> {badge.title}
+                <badge.icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> {badge.title}
               </motion.div>
             ))}
           </motion.div>
@@ -261,11 +261,11 @@ export function HeroSection() {
           </motion.p>
 
           {/* Buttons CTAs */}
-          <motion.div className="flex flex-col gap-4 sm:flex-row" variants={ctaRowVariants}>
+          <motion.div className="flex flex-col gap-3 sm:flex-row sm:gap-4" variants={ctaRowVariants}>
             <motion.div variants={ctaItemVariants}>
               <Link
                 href="#contato"
-                className="btn-primary-glow group relative inline-flex items-center justify-center rounded-full bg-primary px-8 py-3.5 font-semibold text-primary-foreground shadow-lg shadow-primary/25 sm:px-10"
+                className="btn-primary-glow group relative inline-flex w-full items-center justify-center rounded-full bg-primary px-7 py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/25 sm:w-auto sm:px-10 sm:py-3.5"
               >
                 <div className="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
                 <span className="relative z-10 tracking-wide">Entre em Contato</span>
@@ -275,9 +275,9 @@ export function HeroSection() {
             <motion.div variants={ctaItemVariants}>
               <Link
                 href="#projetos"
-                className="group inline-flex items-center justify-center rounded-full border border-border px-6 py-3 font-semibold text-foreground transition-all duration-300 hover:scale-[1.03] hover:bg-muted/70 sm:px-8"
+                className="group inline-flex w-full items-center justify-center rounded-full border border-border px-7 py-3 font-semibold text-foreground transition-all duration-300 hover:scale-[1.03] hover:bg-muted/70 sm:w-auto sm:px-8 sm:py-3.5"
               >
-                <ExternalLink className="mr-2 h-5 w-5" />
+                <ExternalLink className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                 Ver Projetos
               </Link>
             </motion.div>
@@ -447,8 +447,8 @@ export function HeroSection() {
         .typewriter-wrapper {
           position: relative;
           display: inline-block;
-          min-width: clamp(16rem, 26ch, 28rem);
-          max-width: 28rem;
+          min-width: clamp(14rem, 26ch, 28rem);
+          max-width: min(100%, 28rem);
           white-space: nowrap;
           min-height: 1em;
           vertical-align: baseline;

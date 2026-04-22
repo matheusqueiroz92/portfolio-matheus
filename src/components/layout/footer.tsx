@@ -77,8 +77,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-8">
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 md:gap-8">
+          <div className="col-span-2 md:col-span-2">
             <Link
               href="/"
               aria-label="Ir para a página inicial"

@@ -18,15 +18,15 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
   return (
     <section
       id="projetos"
-      className="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-border/60 transition-colors duration-300"
+      className="relative py-20 px-4 sm:px-6 sm:py-24 lg:px-8 border-b border-border/60 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto">
         {/* Título */}
-        <FadeIn className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Meus Projetos</h2>
+        <FadeIn className="text-center mb-10 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">Meus Projetos</h2>
           <div className="w-20 h-1 bg-primary/60 mx-auto rounded-full"></div>
           {/* Subtítulo */}
-          <p className="text-xl text-muted-foreground mt-4">
+          <p className="text-base sm:text-xl text-muted-foreground mt-4 px-2">
             Alguns dos principais projetos que desenvolvi para clientes e empresas.
           </p>
         </FadeIn>
@@ -164,7 +164,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         <FadeIn className="text-center">
           <Link
             href="/projects"
-            className="btn-primary-glow group relative inline-flex items-center px-16 py-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full"
+            className="btn-primary-glow group relative inline-flex items-center justify-center px-8 sm:px-12 lg:px-16 py-3.5 sm:py-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full"
           >
             Ver Todos os Projetos
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
