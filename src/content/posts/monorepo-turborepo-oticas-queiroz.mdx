@@ -1,0 +1,27 @@
+---
+title: 'Escalando SaaS com Monorepo: A Arquitetura do Óticas Queiroz'
+slug: 'monorepo-turborepo-oticas-queiroz'
+excerpt: 'Por que escolhi Turborepo para gerenciar um ecossistema complexo de ERP e como isso acelerou o desenvolvimento.'
+coverImage: '/posts/monorepo-architecture.webp'
+publishedDate: '2026-04-22'
+tags:
+  - Arquitetura
+  - Monorepo
+  - Next.js
+---
+
+Gerenciar múltiplas aplicações que compartilham a mesma lógica de negócio é um desafio clássico. No **Óticas Queiroz**, um ecossistema de gestão ERP Fullstack, a resposta foi adotar uma arquitetura de **Monorepo com Turborepo**.
+
+## Por que Monorepo?
+
+Quando você tem um painel administrativo, um app de vendas e uma API, manter o TypeScript sincronizado entre eles é um pesadelo se estiverem em repositórios separados. Com Monorepo:
+
+- **Shared UI:** Componentes de interface (botões, inputs) são criados uma vez e usados em todos os apps.
+- **Shared Libs:** A lógica de validação de esquemas (Zod) e tipos do banco de dados é única.
+- **Velocidade:** O cache inteligente do Turborepo garante que eu nunca precise "buildar" duas vezes a mesma coisa.
+
+## A estrutura no mundo real
+
+No projeto, utilizamos **Next.js** para os frontends e **Node.js/Express** para os serviços de backend, todos conversando sob um mesmo guarda-chuva de tipos.
+
+Essa escolha não foi apenas técnica, foi de negócio: menos tempo gerenciando dependências significa mais tempo entregando funcionalidades que automatizam o fluxo comercial das óticas.

@@ -1,78 +1,78 @@
-import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Rss } from "lucide-react";
+import { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowRight, Rss } from 'lucide-react'
 
-import { Header, Footer } from "@/components/layout";
-import { FadeIn, FadeInStagger, FadeInItem } from "@/components/motion";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { ScrollTopButton } from "@/components/ui/scroll-top-button";
-import { getAllPosts } from "@/lib/content";
+import { Header, Footer } from '@/components/layout'
+import { FadeIn, FadeInStagger, FadeInItem } from '@/components/motion'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@/components/ui/card'
+import { ScrollTopButton } from '@/components/ui/scroll-top-button'
+import { getAllPosts } from '@/lib/content'
+import { BackButton } from '@/components/layout/back-button'
 
 export const metadata: Metadata = {
-  title: "Blog | Matheus Queiroz",
+  title: 'Blog | Matheus Queiroz',
   description:
-    "Artigos sobre desenvolvimento fullstack, IA aplicada, arquitetura de software e os bastidores dos projetos que construo.",
-};
+    'Artigos sobre desenvolvimento fullstack, IA aplicada, arquitetura de software e os bastidores dos projetos que construo.',
+}
 
 function formatDate(value: string): string {
-  return new Date(value).toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  });
+  return new Date(value).toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  })
 }
 
 export default async function BlogIndexPage() {
-  const posts = await getAllPosts();
-  const [featured, ...rest] = posts;
+  const posts = await getAllPosts()
+  const [featured, ...rest] = posts
 
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
       <Header />
 
-      <main
-        id="conteudo-principal"
-        className="relative pt-28 pb-24 px-4 sm:px-6 lg:px-8"
-      >
+      <main id="conteudo-principal" className="relative pt-28 pb-24 px-4 sm:px-6 lg:px-8">
         {/* Backdrop editorial — mesmo padrão das detail pages. */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-0 h-[50vh]"
           style={{
             background:
-              "radial-gradient(50% 50% at 50% 0%, var(--background-gradient-start) 0%, transparent 70%)",
+              'radial-gradient(50% 50% at 50% 0%, var(--background-gradient-start) 0%, transparent 70%)',
           }}
         />
 
         <div className="relative max-w-6xl mx-auto">
+          <BackButton href="/" label="início" />
+
           {/* Cabeçalho da página */}
           <FadeIn className="text-center mb-14">
-            <p className="eyebrow mb-3">Blog</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Notas &amp; bastidores
-            </h1>
-            <div className="w-20 h-1 bg-primary/60 mx-auto rounded-full" />
-            <p className="text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
-              Artigos sobre desenvolvimento fullstack, IA aplicada, arquitetura
-              e os aprendizados que colho construindo software de verdade.
-            </p>
+            <div className="flex flex-col items-center justify-center">
+              <span className="eyebrow mb-4 bg-primary/10 px-4 py-1 rounded-full border border-primary/20">
+                Blog
+              </span>
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Notas &amp; bastidores
+              </h1>
+              <div className="w-20 h-1 bg-primary/60 mx-auto rounded-full" />
+              <p className="text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
+                Artigos sobre desenvolvimento fullstack, IA aplicada, arquitetura e os aprendizados
+                que colho construindo software de verdade.
+              </p>
+            </div>
           </FadeIn>
 
           {posts.length === 0 ? (
             <FadeIn className="text-center">
               <div className="mx-auto max-w-md rounded-2xl border border-border/60 bg-card/60 p-10 backdrop-blur-sm">
-                <Rss
-                  className="mx-auto mb-4 h-8 w-8 text-primary/70"
-                  aria-hidden="true"
-                />
+                <Rss className="mx-auto mb-4 h-8 w-8 text-primary/70" aria-hidden="true" />
                 <h2 className="text-xl font-semibold text-foreground mb-2">
                   Nenhum post por aqui ainda
                 </h2>
                 <p className="text-sm text-muted-foreground">
-                  Logo, logo começam a aparecer as primeiras leituras. Volte em
-                  breve.
+                  Logo, logo começam a aparecer as primeiras leituras. Volte em breve.
                 </p>
               </div>
             </FadeIn>
@@ -87,12 +87,12 @@ export default async function BlogIndexPage() {
                     aria-label={`Ler: ${featured.title}`}
                   >
                     {featured.coverImage?.url ? (
-                      <div className="relative aspect-[16/10] md:aspect-auto md:min-h-[320px] bg-muted/30">
+                      <div className="relative aspect-16/10 md:aspect-auto md:min-h-[320px] bg-muted/30">
                         <Image
                           src={featured.coverImage.url}
                           alt={featured.coverImage.alt ?? featured.title}
                           fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="object-contain transition-transform duration-500 group-hover:scale-105"
                           sizes="(max-width: 768px) 100vw, 640px"
                           priority
                         />
@@ -141,10 +141,7 @@ export default async function BlogIndexPage() {
 
               {/* Grid com o restante */}
               {rest.length > 0 && (
-                <FadeInStagger
-                  className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
-                  stagger={0.1}
-                >
+                <FadeInStagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-4" stagger={0.1}>
                   {rest.map((post) => (
                     <FadeInItem key={post.slug} className="h-full">
                       <Card className="card-hover-lift group relative flex h-full flex-col overflow-hidden border border-border/60 bg-card/80 py-0 backdrop-blur-sm focus-within:ring-2 focus-within:ring-primary/40 focus-within:ring-offset-2 focus-within:ring-offset-background">
@@ -169,17 +166,12 @@ export default async function BlogIndexPage() {
                           </div>
                         ) : (
                           <div className="flex h-48 items-center justify-center bg-muted/40">
-                            <Rss
-                              className="h-8 w-8 text-primary/40"
-                              aria-hidden="true"
-                            />
+                            <Rss className="h-8 w-8 text-primary/40" aria-hidden="true" />
                           </div>
                         )}
 
                         <CardContent className="flex grow flex-col p-5">
-                          <p className="eyebrow mb-2">
-                            {formatDate(post.publishedDate)}
-                          </p>
+                          <p className="eyebrow mb-2">{formatDate(post.publishedDate)}</p>
                           <h3 className="text-lg font-semibold text-foreground mb-2 transition-colors duration-300 group-hover:text-primary">
                             {post.title}
                           </h3>
@@ -204,10 +196,7 @@ export default async function BlogIndexPage() {
                           <div className="mt-5 text-xs">
                             <span className="inline-flex items-center gap-1.5 font-medium text-primary transition-transform duration-300 group-hover:translate-x-0.5">
                               Ler artigo
-                              <ArrowRight
-                                className="h-3.5 w-3.5"
-                                aria-hidden="true"
-                              />
+                              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                             </span>
                           </div>
                         </CardContent>
@@ -224,5 +213,5 @@ export default async function BlogIndexPage() {
       <ScrollTopButton />
       <Footer />
     </div>
-  );
+  )
 }

@@ -38,18 +38,8 @@ export function Footer() {
       />
 
       <div className="max-w-7xl mx-auto relative">
-        <div className="mb-12 grid gap-6 rounded-2xl border border-border/60 bg-card/60 p-6 backdrop-blur-sm md:grid-cols-[1.3fr_1fr] md:items-center md:p-8">
+        {/* <div className="mb-12 grid gap-6 rounded-2xl border border-border/60 bg-card/60 p-6 backdrop-blur-sm md:grid-cols-[1.3fr_1fr] md:items-center md:p-8">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
-              <span className="relative inline-flex h-2 w-2">
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 animate-ping rounded-full bg-primary/60"
-                />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-              </span>
-              Disponível para novos projetos
-            </span>
             <h3 className="mt-4 text-2xl font-semibold text-foreground sm:text-3xl">
               Vamos construir algo <span className="text-primary">relevante</span>?
             </h3>
@@ -75,7 +65,7 @@ export function Footer() {
               gigamatheus@gmail.com
             </a>
           </div>
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 md:gap-8">
           <div className="col-span-2 md:col-span-2">

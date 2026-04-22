@@ -7,6 +7,7 @@ import { ScrollTopButton } from '@/components/ui/scroll-top-button'
 import { getAllProjects } from '@/lib/content'
 
 import { ProjectsGrid } from './projects-grid'
+import { BackButton } from '@/components/layout/back-button'
 
 export const metadata: Metadata = {
   title: 'Projetos | Matheus Queiroz',
@@ -21,7 +22,10 @@ export default async function ProjectsIndexPage() {
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
       <Header />
 
-      <main id="conteudo-principal" className="relative pt-24 pb-20 px-4 sm:pt-28 sm:pb-24 sm:px-6 lg:px-8">
+      <main
+        id="conteudo-principal"
+        className="relative pt-24 pb-20 px-4 sm:pt-28 sm:pb-24 sm:px-6 lg:px-8"
+      >
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-0 h-[50vh]"
@@ -32,17 +36,22 @@ export default async function ProjectsIndexPage() {
         />
 
         <div className="relative max-w-7xl mx-auto">
+          <BackButton href="/" label="início" />
           {/* Cabeçalho da página */}
           <FadeIn className="text-center mb-10 sm:mb-14">
-            <p className="eyebrow mb-3">Portfólio</p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Todos os projetos
-            </h1>
-            <div className="w-20 h-1 bg-primary/60 mx-auto rounded-full" />
-            <p className="text-base sm:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto px-2">
-              Uma seleção dos produtos e plataformas que construí — do MVP ao deploy em produção,
-              com foco em arquitetura sólida e experiência de uso.
-            </p>
+            <div className="flex flex-col items-center justify-center">
+              <span className="eyebrow mb-4 bg-primary/10 px-4 py-1 rounded-full border border-primary/20">
+                Portfólio
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Todos os projetos
+              </h1>
+              <div className="w-20 h-1 bg-primary/60 mx-auto rounded-full" />
+              <p className="text-base sm:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto px-2">
+                Uma seleção dos produtos e plataformas que construí — do MVP ao deploy em produção,
+                com foco em arquitetura sólida e experiência de uso.
+              </p>
+            </div>
           </FadeIn>
 
           {projects.length === 0 ? (

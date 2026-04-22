@@ -10,29 +10,25 @@
  * `next-mdx-remote/rsc` — portanto NÃO usar hooks (useState, useEffect) aqui.
  */
 
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 
 // ---------------------------------------------------------------------------
 // Utilitários
 // ---------------------------------------------------------------------------
 
 function isExternalUrl(href: string): boolean {
-  return /^(https?:)?\/\//.test(href);
+  return /^(https?:)?\/\//.test(href)
 }
 
 // ---------------------------------------------------------------------------
 // Link customizado — usa next/link para URLs internas
 // ---------------------------------------------------------------------------
 
-function MdxLink({
-  href,
-  children,
-  ...rest
-}: ComponentPropsWithoutRef<"a">) {
+function MdxLink({ href, children, ...rest }: ComponentPropsWithoutRef<'a'>) {
   if (!href) {
-    return <a {...rest}>{children}</a>;
+    return <a {...rest}>{children}</a>
   }
   if (isExternalUrl(href)) {
     return (
@@ -45,7 +41,7 @@ function MdxLink({
       >
         {children}
       </a>
-    );
+    )
   }
   return (
     <Link
@@ -54,33 +50,29 @@ function MdxLink({
     >
       {children}
     </Link>
-  );
+  )
 }
 
 // ---------------------------------------------------------------------------
 // Imagem customizada — usa next/image se dimensões forem informadas
 // ---------------------------------------------------------------------------
 
-function MdxImage({
-  src,
-  alt,
-  width,
-  height,
-}: ComponentPropsWithoutRef<"img">) {
-  if (!src || typeof src !== "string") return null;
+function MdxImage({ src, alt, width, height }: ComponentPropsWithoutRef<'img'>) {
+  if (!src || typeof src !== 'string') return null
 
-  const hasDimensions = typeof width === "number" && typeof height === "number";
+  const hasDimensions = typeof width === 'number' && typeof height === 'number'
 
   if (hasDimensions) {
     return (
       <Image
         src={src}
-        alt={alt ?? ""}
+        alt={alt ?? ''}
         width={width}
         height={height}
-        className="my-8 rounded-xl border border-border/60"
+        className="my-8 rounded-xl border border-border/60 object-cover"
+        loading="lazy"
       />
-    );
+    )
   }
 
   // Fallback responsivo quando dimensões não vierem no MDX.
@@ -88,13 +80,14 @@ function MdxImage({
     <span className="relative my-8 block aspect-video w-full overflow-hidden rounded-xl border border-border/60">
       <Image
         src={src}
-        alt={alt ?? ""}
+        alt={alt ?? ''}
         fill
         className="object-cover"
+        loading="lazy"
         sizes="(max-width: 768px) 100vw, 768px"
       />
     </span>
-  );
+  )
 }
 
 // ---------------------------------------------------------------------------
@@ -102,32 +95,30 @@ function MdxImage({
 //   <Callout tone="info">...</Callout>
 // ---------------------------------------------------------------------------
 
-type CalloutTone = "info" | "warning" | "success" | "note";
+type CalloutTone = 'info' | 'warning' | 'success' | 'note'
 
 const CALLOUT_STYLES: Record<CalloutTone, string> = {
-  info: "border-sky-500/30 bg-sky-500/5 text-sky-900 dark:text-sky-100",
-  warning:
-    "border-amber-500/30 bg-amber-500/5 text-amber-900 dark:text-amber-100",
-  success:
-    "border-emerald-500/30 bg-emerald-500/5 text-emerald-900 dark:text-emerald-100",
-  note: "border-border/60 bg-muted/40 text-foreground",
-};
+  info: 'border-sky-500/30 bg-sky-500/5 text-sky-900 dark:text-sky-100',
+  warning: 'border-amber-500/30 bg-amber-500/5 text-amber-900 dark:text-amber-100',
+  success: 'border-emerald-500/30 bg-emerald-500/5 text-emerald-900 dark:text-emerald-100',
+  note: 'border-border/60 bg-muted/40 text-foreground',
+}
 
 const CALLOUT_LABEL: Record<CalloutTone, string> = {
-  info: "Nota",
-  warning: "Atenção",
-  success: "Destaque",
-  note: "Observação",
-};
+  info: 'Nota',
+  warning: 'Atenção',
+  success: 'Destaque',
+  note: 'Observação',
+}
 
 function Callout({
-  tone = "note",
+  tone = 'note',
   title,
   children,
 }: {
-  tone?: CalloutTone;
-  title?: string;
-  children: ReactNode;
+  tone?: CalloutTone
+  title?: string
+  children: ReactNode
 }) {
   return (
     <aside
@@ -139,7 +130,7 @@ function Callout({
       </p>
       <div className="[&>p:last-child]:mb-0">{children}</div>
     </aside>
-  );
+  )
 }
 
 // ---------------------------------------------------------------------------
@@ -151,4 +142,4 @@ export const mdxComponents = {
   img: MdxImage,
   // Componentes custom disponíveis dentro do MDX:
   Callout,
-};
+}

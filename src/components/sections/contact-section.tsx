@@ -50,12 +50,8 @@ export function ContactSection() {
       })
 
       if (!response.ok) {
-        const payload = (await response.json().catch(() => null)) as
-          | { error?: string }
-          | null
-        throw new Error(
-          payload?.error ?? 'Erro ao enviar mensagem. Tente novamente mais tarde.',
-        )
+        const payload = (await response.json().catch(() => null)) as { error?: string } | null
+        throw new Error(payload?.error ?? 'Erro ao enviar mensagem. Tente novamente mais tarde.')
       }
 
       setSubmitStatus('success')
@@ -114,10 +110,16 @@ export function ContactSection() {
                 <h3 className="text-2xl font-bold text-foreground">Entre em contato</h3>
               </div>
 
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                Pronto para transformar suas ideias em realidade digital? Entre em contato para
-                conversarmos sobre novos projetos e como posso agregar valor ao seu negócio.
-              </p>
+              <span className="inline-flex items-center gap-2 mb-8 rounded-full border border-primary/25 bg-primary/5 px-8 py-2 text-xs font-medium text-primary">
+                <span className="relative inline-flex h-2 w-2">
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 animate-ping rounded-full bg-primary/60"
+                  />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                </span>
+                Disponível para novos projetos
+              </span>
 
               {/* Informações de Contato */}
               <div className="space-y-6 mb-8">
@@ -220,9 +222,8 @@ export function ContactSection() {
                 <h3 className="text-2xl font-bold text-foreground">Vamos construir algo juntos?</h3>
               </div>
 
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                Tem um projeto em mente? Vamos conversar, posso te ajudar a transformar sua ideia em
-                realidade!
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                Conte-me sobre sua ideia e vamos transformá-la em realidade.
               </p>
 
               {/* Formulário de Contato */}

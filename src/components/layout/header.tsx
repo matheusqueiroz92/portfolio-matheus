@@ -11,7 +11,7 @@ import Link from 'next/link'
 const NAV_ITEMS: { label: string; href: string }[] = [
   { label: 'Início', href: '/#inicio' },
   { label: 'Sobre', href: '/#sobre' },
-  { label: 'Projetos', href: '/#projetos' },
+  { label: 'Projetos', href: '/projects' },
   { label: 'Contato', href: '/#contato' },
   { label: 'Blog', href: '/blog' },
 ]

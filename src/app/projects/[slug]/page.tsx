@@ -1,32 +1,30 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { Metadata } from 'next'
+import Link from 'next/link'
+import Image from 'next/image'
+import { notFound } from 'next/navigation'
+import { ArrowLeft, ExternalLink, Github } from 'lucide-react'
 
-import { Header, Footer } from "@/components/layout";
-import { MdxContent } from "@/components/mdx";
-import { Badge } from "@/components/ui/badge";
-import { getAllProjectSlugs, getProjectBySlug } from "@/lib/content";
+import { Header, Footer } from '@/components/layout'
+import { MdxContent } from '@/components/mdx'
+import { Badge } from '@/components/ui/badge'
+import { getAllProjectSlugs, getProjectBySlug } from '@/lib/content'
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>
 }
 
 function normalizeSlug(slug: string): string {
   try {
-    return decodeURIComponent(slug).normalize("NFC");
+    return decodeURIComponent(slug).normalize('NFC')
   } catch {
-    return slug;
+    return slug
   }
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const project = await getProjectBySlug(normalizeSlug(slug));
-  if (!project) return { title: "Projeto não encontrado" };
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const project = await getProjectBySlug(normalizeSlug(slug))
+  if (!project) return { title: 'Projeto não encontrado' }
   return {
     title: `${project.title} | Projetos | Matheus Queiroz`,
     description: project.description,
@@ -42,21 +40,21 @@ export async function generateMetadata({
         ],
       }),
     },
-  };
+  }
 }
 
-export const dynamicParams = true;
+export const dynamicParams = true
 
 export async function generateStaticParams() {
-  const slugs = await getAllProjectSlugs();
-  return slugs.map((slug) => ({ slug }));
+  const slugs = await getAllProjectSlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
 export default async function ProjectPage({ params }: PageProps) {
-  const { slug } = await params;
-  const project = await getProjectBySlug(normalizeSlug(slug));
+  const { slug } = await params
+  const project = await getProjectBySlug(normalizeSlug(slug))
 
-  if (!project) notFound();
+  if (!project) notFound()
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
@@ -68,7 +66,7 @@ export default async function ProjectPage({ params }: PageProps) {
           className="pointer-events-none absolute inset-x-0 top-0 h-[50vh]"
           style={{
             background:
-              "radial-gradient(50% 50% at 50% 0%, var(--background-gradient-start) 0%, transparent 70%)",
+              'radial-gradient(50% 50% at 50% 0%, var(--background-gradient-start) 0%, transparent 70%)',
           }}
         />
 
@@ -116,17 +114,13 @@ export default async function ProjectPage({ params }: PageProps) {
               {project.content ? (
                 <MdxContent source={project.content} />
               ) : (
-                <p className="text-muted-foreground leading-relaxed">
-                  {project.description}
-                </p>
+                <p className="text-muted-foreground leading-relaxed">{project.description}</p>
               )}
             </div>
 
             {project.technologies && project.technologies.length > 0 && (
               <div className="mt-10">
-                <h2 className="text-sm font-semibold text-foreground mb-3">
-                  Tecnologias
-                </h2>
+                <h2 className="text-sm font-semibold text-foreground mb-3">Tecnologias</h2>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <Badge key={tech} variant="secondary">
@@ -167,5 +161,5 @@ export default async function ProjectPage({ params }: PageProps) {
 
       <Footer />
     </div>
-  );
+  )
 }

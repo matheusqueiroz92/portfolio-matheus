@@ -1,3 +1,4 @@
+import { IconWhatsapp } from '@/components/ui/icons/icon-whatsapp'
 import {
   PersonalInfo,
   SocialLink,
@@ -10,7 +11,7 @@ import {
   SiteConfig,
 } from '@/types'
 
-import { Linkedin, Github, Instagram, FileDown } from 'lucide-react'
+import { Linkedin, Github, Instagram, FileDown, PhoneCall } from 'lucide-react'
 
 export const PERSONAL_INFO: PersonalInfo = {
   name: 'Matheus Queiroz',
@@ -53,6 +54,13 @@ export const SOCIAL_LINKS: SocialLink[] = [
     color: 'hover:text-gray-800 dark:hover:text-white',
     label: 'Currículo',
   },
+  // {
+  //   name: 'WhatsApp',
+  //   url: 'https://web.whatsapp.com/send/?phone=5577988334370&text=Ol%C3%A1+Matheus',
+  //   icon: PhoneCall,
+  //   color: 'hover:text-green-600',
+  //   label: 'WhatsApp',
+  // },
 ]
 
 export const SERVICES: Service[] = [

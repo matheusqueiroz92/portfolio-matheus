@@ -1,0 +1,29 @@
+---
+title: 'Engenharia de Prompt para Sistemas Financeiros: Lições do M. Finnance AI'
+slug: 'engenharia-de-prompt-sistemas-financeiros'
+excerpt: 'Como estruturar contextos e instruções para obter saídas determinísticas e confiáveis em aplicações de gestão financeira.'
+coverImage: '/posts/prompt-engineering.webp'
+publishedDate: '2026-04-20'
+tags:
+  - IA
+  - Finanças
+  - Engenharia de Prompt
+---
+
+No desenvolvimento do **M. Finnance AI**, aprendi que lidar com dados financeiros exige uma precisão que o "chat comum" não oferece. Quando um usuário pede um insight sobre seu fluxo de caixa, a resposta não pode ser apenas criativa; ela precisa ser matematicamente exata e contextualmente relevante.
+
+## O desafio do determinismo
+
+Modelos de linguagem (LLMs) são probabilísticos por natureza. Para um sistema financeiro, isso é um risco. A solução não está apenas no modelo, mas na **Engenharia de Prompt**.
+
+### Estruturas que funcionaram:
+
+1. **Delimitação de Contexto:** Fornecer os dados brutos (JSON) de transações dentro de delimitadores claros, impedindo que a IA confunda instruções com dados do usuário.
+2. **Few-Shot Prompting:** Apresentar exemplos de "Pergunta -> Raciocínio -> Resposta" para guiar o modelo sobre como interpretar uma variação negativa no saldo.
+3. **Chain of Thought (Cadeia de Pensamento):** Instruir o modelo a realizar o cálculo passo a passo antes de entregar o insight final.
+
+## Além do texto: Saídas em JSON
+
+Para integrar a IA com o frontend do dashboard, forçamos o modelo a responder estritamente em JSON. Isso permite que o sistema valide os dados antes de exibi-los, unindo o poder da IA com a segurança do código tradicional.
+
+A IA no setor financeiro não substitui o cálculo; ela interpreta o resultado para o humano.
