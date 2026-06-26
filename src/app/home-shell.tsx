@@ -4,6 +4,7 @@ import { Header, Footer } from '@/components/layout'
 import {
   HeroSection,
   AboutSection,
+  HowIWorkSection,
   PracticeAreasSection,
   ProjectsSection,
   TechnologiesSection,
@@ -16,9 +17,10 @@ import type { ProjectListItem } from '@/types'
 
 interface HomeShellProps {
   featuredProjects: ProjectListItem[]
+  flagshipProject: ProjectListItem | null
 }
 
-export function HomeShell({ featuredProjects }: HomeShellProps) {
+export function HomeShell({ featuredProjects, flagshipProject }: HomeShellProps) {
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden transition-colors duration-300">
       <AnimatedParticles />
@@ -28,9 +30,10 @@ export function HomeShell({ featuredProjects }: HomeShellProps) {
         <main id="conteudo-principal">
           <HeroSection />
           <AboutSection />
+          <HowIWorkSection />
           <PracticeAreasSection />
           <TechnologiesSection />
-          <ProjectsSection projects={featuredProjects} />
+          <ProjectsSection projects={featuredProjects} flagshipProject={flagshipProject} />
           <ContactSection />
         </main>
         <ScrollTopButton />

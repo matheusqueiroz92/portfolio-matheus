@@ -196,12 +196,11 @@ interface ParsedProject {
   listItem: ProjectListItem
   order: number
   featured: boolean
+  flagship: boolean
   publishedDate: string
 }
 
-async function parseProjectFile(filename: string): Promise<ParsedProject> {
-  const fullPath = path.join(PROJECTS_DIR, filename)
-  const raw = await fs.readFile(fullPath, 'utf-8')
+export function parseProjectDocument(raw: string, filename: string): ParsedProject {
   const { data, content } = matter(raw)
 
   const fileLabel = `projects/${filename}`
@@ -217,6 +216,7 @@ async function parseProjectFile(filename: string): Promise<ParsedProject> {
   const tags = asStringArray(data.tags)
   const scale = optionalString(data, 'scale')
   const featured = data.featured === true
+  const flagship = data.flagship === true
   const order =
     typeof data.order === 'number' && Number.isFinite(data.order)
       ? data.order
@@ -242,7 +242,13 @@ async function parseProjectFile(filename: string): Promise<ParsedProject> {
     content,
   }
 
-  return { data: fullProject, listItem, order, featured, publishedDate }
+  return { data: fullProject, listItem, order, featured, flagship, publishedDate }
+}
+
+async function parseProjectFile(filename: string): Promise<ParsedProject> {
+  const fullPath = path.join(PROJECTS_DIR, filename)
+  const raw = await fs.readFile(fullPath, 'utf-8')
+  return parseProjectDocument(raw, filename)
 }
 
 const loadAllProjects = cache(async (): Promise<ParsedProject[]> => {
@@ -270,6 +276,16 @@ export async function getAllProjects(): Promise<ProjectListItem[]> {
 export async function getFeaturedProjects(): Promise<ProjectListItem[]> {
   const projects = await loadAllProjects()
   return projects.filter((p) => p.featured).map((p) => p.listItem)
+}
+
+/**
+ * Retorna o projeto marcado como `flagship: true` no frontmatter.
+ * Usado no banner editorial da home.
+ */
+export async function getFlagshipProject(): Promise<ProjectListItem | null> {
+  const projects = await loadAllProjects()
+  const match = projects.find((p) => p.flagship)
+  return match?.listItem ?? null
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {

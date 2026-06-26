@@ -1,24 +1,23 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { Download } from "lucide-react";
-import { ScrollDownButton } from "../ui/scroll-down-button";
-import { FadeInStagger, FadeInItem } from "@/components/motion";
+import Link from 'next/link'
+import { Download } from 'lucide-react'
+import { STATS } from '@/constants/site'
+import { ScrollDownButton } from '../ui/scroll-down-button'
+import { SectionHeader } from '../ui/section-header'
+import { FadeInStagger, FadeInItem } from '@/components/motion'
 
 export function AboutSection() {
   return (
-    <section
-      id="sobre"
-      className="relative py-32 px-4 sm:px-6 lg:px-8 border-b border-border/60 bg-background/50 transition-colors duration-300"
-    >
+    <section id="sobre" className="section-shell bg-background/50 transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
         <FadeInStagger className="space-y-8" stagger={0.12}>
-          {/* Título */}
-          <FadeInItem className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Sobre Mim
-            </h2>
-            <div className="w-20 h-1 bg-primary/60 mx-auto rounded-full"></div>
+          <FadeInItem>
+            <SectionHeader
+              eyebrow="Quem sou"
+              title="Sobre Mim"
+              subtitle="Saiba mais sobre minha trajetória profissional, minha formação acadêmica e a paixão que impulsiona meu trabalho."
+            />
           </FadeInItem>
 
           {/* Conteúdo — quebrado em três blocos temáticos com sub-heading
@@ -30,8 +29,9 @@ export function AboutSection() {
             <div className="space-y-3">
               <p className="eyebrow text-left">Trajetória</p>
               <p className="text-justify">
-                Com quase uma década de experiência na vanguarda da tecnologia, minha trajetória é marcada pela autonomia
-                e pelo empreendedorismo. Como Sócio-Fundador e Desenvolvedor Lead na {' '}
+                Com quase uma década de experiência na vanguarda da tecnologia, minha trajetória é
+                marcada pela autonomia e pelo empreendedorismo. Como Sócio-Fundador e Desenvolvedor
+                Lead na{' '}
                 <a
                   href="https://www.azworkcenter.com.br/"
                   target="_blank"
@@ -39,48 +39,46 @@ export function AboutSection() {
                   className="text-primary hover:text-primary/80 underline"
                 >
                   AZ Work Center
-                </a>, atuo há anos transformando
-                necessidades de negócio em soluções digitais robustas, escaláveis e de alto valor agregado.
+                </a>
+                , atuo há anos transformando necessidades de negócio em soluções digitais robustas,
+                escaláveis e de alto valor agregado.
               </p>
             </div>
 
             <div className="space-y-3">
               <p className="eyebrow text-left">Formação &amp; visão técnica</p>
               <p className="text-justify">
-                Sou graduado em Engenharia da Computação e especialista em Engenharia de Software. Essa base acadêmica, aliada
-                à experiência de gerir minha própria operação técnica, me permitiu desenvolver uma visão 360º de um produto:
-                desde a arquitetura e escolha da stack até a entrega final e o sucesso do cliente.
+                Sou graduado em Engenharia da Computação e especialista em Engenharia de Software.
+                Essa base acadêmica, aliada à experiência de gerir minha própria operação técnica,
+                me permitiu desenvolver uma visão 360º de um produto: desde a arquitetura e escolha
+                da stack até a entrega final e o sucesso do cliente.
               </p>
               <p className="text-justify">
-                Diferente de uma atuação convencional, minha vivência como empreendedor me deu a habilidade de alinhar decisões
-                técnicas a objetivos financeiros e estratégicos. Atualmente, foco em liderar o desenvolvimento de aplicações
-                fullstack que resolvem problemas reais para empresas de diversos nichos.
+                Diferente de uma atuação convencional, minha vivência como empreendedor me deu a
+                habilidade de alinhar decisões técnicas a objetivos financeiros e estratégicos.
+                Atualmente, foco em liderar o desenvolvimento de aplicações fullstack que resolvem
+                problemas reais para empresas de diversos nichos.
               </p>
             </div>
 
             <div className="space-y-3">
               <p className="eyebrow text-left">O que me move</p>
               <p className="text-justify">
-                Além da tecnologia, minha maior motivação é minha família e meu filho Noah, que impulsionam minha busca constante
-                por excelência e inovação em cada linha de código que escrevo.
+                Além da tecnologia, minha maior motivação é minha família e meu filho Noah, que
+                impulsionam minha busca constante por excelência e inovação em cada linha de código
+                que escrevo.
               </p>
             </div>
           </FadeInItem>
 
           {/* Estatísticas */}
-          <FadeInItem className="grid grid-cols-3 gap-4 pt-4">
-            <div className="text-center p-6 bg-card/80 backdrop-blur-sm rounded-2xl border border-border/60 hover:scale-105 transition-transform duration-300">
-              <div className="text-3xl font-bold text-foreground">10</div>
-              <div className="text-sm text-muted-foreground">Anos de Experiência</div>
-            </div>
-            <div className="text-center p-6 bg-card/80 backdrop-blur-sm rounded-2xl border border-border/60 hover:scale-105 transition-transform duration-300">
-              <div className="text-3xl font-bold text-foreground">+30</div>
-              <div className="text-sm text-muted-foreground">Projetos Desenvolvidos</div>
-            </div>
-            <div className="text-center p-6 bg-card/80 backdrop-blur-sm rounded-2xl border border-border/60 hover:scale-105 transition-transform duration-300">
-              <div className="text-3xl font-bold text-foreground">+15</div>
-              <div className="text-sm text-muted-foreground">Clientes Atendidos</div>
-            </div>
+          <FadeInItem className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+            {STATS.map((stat) => (
+              <div key={stat.label} className="stat-card">
+                <div className="text-3xl font-bold text-foreground tabular-nums">{stat.value}</div>
+                <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
+              </div>
+            ))}
           </FadeInItem>
 
           {/* Botão de Download do Currículo */}
@@ -97,8 +95,8 @@ export function AboutSection() {
           </FadeInItem>
         </FadeInStagger>
       </div>
-      
-      <ScrollDownButton href="#areas-atuacao" />
+
+      <ScrollDownButton href="#como-trabalho" />
     </section>
-  );
+  )
 }

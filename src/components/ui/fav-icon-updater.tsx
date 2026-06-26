@@ -22,7 +22,7 @@ export function FaviconUpdater() {
   useEffect(() => {
     const currentTheme = (theme === 'system' ? resolvedTheme : theme) ?? 'light'
     const isDark = currentTheme === 'dark'
-    const icon = isDark ? '/icon-dark.svg' : '/icon-light.svg'
+    const icon = isDark ? '/icon-matheus-dev.svg' : '/icon-matheus-dev-2.svg'
 
     updateIcon('icon', icon)
     updateIcon('shortcut icon', icon)

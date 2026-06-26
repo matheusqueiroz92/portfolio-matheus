@@ -49,10 +49,7 @@ export async function POST(request: Request) {
 
   if (!apiKey || !fromEmail || !toEmail) {
     console.error('[api/contact] Resend env vars ausentes.')
-    return NextResponse.json(
-      { error: 'Serviço de e-mail não configurado.' },
-      { status: 500 },
-    )
+    return NextResponse.json({ error: 'Serviço de e-mail não configurado.' }, { status: 500 })
   }
 
   const resend = new Resend(apiKey)
@@ -64,7 +61,7 @@ export async function POST(request: Request) {
   const safeMessage = escapeHtml(message).replace(/\n/g, '<br />')
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 560px; margin: 0 auto; padding: 24px; color: #0f172a;">
-      <h2 style="margin: 0 0 16px; font-size: 20px;">Nova mensagem do portfólio</h2>
+      <h2 style="margin: 0 0 16px; font-size: 20px;">Nova mensagem do portfólio Matheus Queiroz</h2>
       <p style="margin: 0 0 8px;"><strong>Nome:</strong> ${escapeHtml(name)}</p>
       <p style="margin: 0 0 8px;"><strong>E-mail:</strong> ${escapeHtml(email)}</p>
       <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 16px 0;" />

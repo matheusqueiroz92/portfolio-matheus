@@ -8,6 +8,7 @@ import { Header, Footer } from "@/components/layout";
 import { MdxContent } from "@/components/mdx";
 import { Badge } from "@/components/ui/badge";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/content";
+import { absoluteUrl } from "@/lib/metadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -37,7 +38,10 @@ export async function generateMetadata({
       publishedTime: post.publishedDate,
       ...(post.coverImage?.url && {
         images: [
-          { url: post.coverImage.url, alt: post.coverImage.alt ?? post.title },
+          {
+            url: absoluteUrl(post.coverImage.url),
+            alt: post.coverImage.alt ?? post.title,
+          },
         ],
       }),
     },
@@ -61,7 +65,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     <div className="relative min-h-screen bg-background text-foreground">
       <Header />
 
-      <main className="relative pt-28 pb-24">
+      <main id="conteudo-principal" className="relative pt-28 pb-24">
         {/* Backdrop editorial sutil. */}
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-[50vh]"

@@ -4,18 +4,6 @@ import { LucideIcon } from 'lucide-react'
 // Dados pessoais / site
 // ---------------------------------------------------------------------------
 
-export interface PersonalInfo {
-  name: string
-  age: number
-  children: number
-  birthDate: string
-  education: string
-  specialization: string
-  profession: string
-  origin: string
-  residence: string
-}
-
 export interface SocialLink {
   name: string
   url: string
@@ -25,30 +13,10 @@ export interface SocialLink {
   download?: boolean
 }
 
-export interface Service {
-  id: string
-  title: string
-  description: string
-  icon: string
-  gradient: string
-}
-
-export interface Technology {
-  name: string
-  category: 'frontend' | 'backend' | 'database' | 'tools'
-}
-
 export interface Stat {
   value: string
   label: string
-  color: string
-}
-
-export interface ContactForm {
-  name: string
-  email: string
-  subject: string
-  message: string
+  color?: string
 }
 
 export interface ContactInfo {
@@ -63,32 +31,8 @@ export interface NavigationItem {
   icon?: string
 }
 
-export interface AnimationConfig {
-  delay?: number
-  duration?: number
-  type?: 'fade' | 'slide' | 'scale'
-}
-
-export interface ThemeConfig {
-  primaryColor: string
-  secondaryColor: string
-  accentColor: string
-  backgroundColor: string
-}
-
-export interface SiteConfig {
-  title: string
-  description: string
-  author: string
-  theme: ThemeConfig
-  socialLinks: SocialLink[]
-  contactInfo: ContactInfo
-}
-
 // ---------------------------------------------------------------------------
 // Conteúdo — Blog e Projetos
-// (Originalmente vindo do Payload CMS. Agora alimentado por MDX no
-//  src/lib/content.ts.)
 // ---------------------------------------------------------------------------
 
 /**
@@ -118,7 +62,7 @@ export interface BlogPostListItem {
 export interface BlogPost extends BlogPostListItem {
   /**
    * Conteúdo bruto em MDX/Markdown. A página do post faz o parse com
-   * next-mdx-remote (Sprint 2).
+   * next-mdx-remote.
    */
   content: string
   /**

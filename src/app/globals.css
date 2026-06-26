@@ -97,6 +97,84 @@ h6 {
   color: var(--muted-foreground);
 }
 
+/* Linha de acento sob títulos de seção — storytelling visual consistente */
+.section-accent-line {
+  width: 3.5rem;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    color-mix(in srgb, var(--primary) 35%, transparent)
+  );
+}
+
+/* Gradiente de marca baseado em tokens — evita hardcode roxo/azul */
+.gradient-text-brand {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    color-mix(in srgb, var(--chart-3) 85%, var(--primary)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shell de seção — ritmo vertical 8dp consistente */
+.section-shell {
+  position: relative;
+  padding-block: clamp(4rem, 8vw, 8rem);
+  padding-inline: clamp(1rem, 4vw, 2rem);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+/* Cards de estatística — elevação sutil sem layout shift */
+.stat-card {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  background: color-mix(in srgb, var(--card) 80%, transparent);
+  backdrop-filter: blur(8px);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+  box-shadow: 0 8px 24px -12px color-mix(in srgb, var(--foreground) 12%, transparent);
+}
+
+/* Card de serviço — hover sem layout shift */
+.service-card {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--primary) 50%, transparent);
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+/* Badge de disponibilidade — reutilizável no hero e contato */
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  background: color-mix(in srgb, var(--primary) 6%, transparent);
+  padding: 0.375rem 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
 /* Hover sutil para cards — eleva com uma leve tintura do acento. Substitui
  * os antigos `hover:shadow-[...rgba(0,231,255,...)]` espalhados pelo código.
  */

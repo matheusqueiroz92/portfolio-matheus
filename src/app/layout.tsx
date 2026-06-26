@@ -4,6 +4,8 @@ import { ThemeProvider } from 'next-themes'
 import './globals.css'
 import { FaviconUpdater } from '@/components/ui/fav-icon-updater'
 import { MotionConfigProvider, SmoothScrollProvider } from '@/components/motion'
+import { JsonLd } from '@/components/seo/json-ld'
+import { createSiteMetadata } from '@/lib/metadata'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -15,34 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-export const metadata: Metadata = {
-  title: 'Matheus Queiroz - Desenvolvedor Web',
-  description: 'Portfólio de projetos desenvolvidos por Matheus Queiroz',
-  keywords: ['Matheus Queiroz', 'Desenvolvedor Web', 'Portfólio', 'Projetos'],
-  icons: {
-    icon: [
-      {
-        url: '/icon-matheus-dev.svg',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon-matheus-dev-2.svg',
-        media: '(prefers-color-scheme: light)',
-      },
-    ],
-    shortcut: '/icon-matheus-dev.svg',
-    apple: [
-      {
-        url: '/icon-matheus-dev.svg',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon-matheus-dev-2.svg',
-        media: '(prefers-color-scheme: light)',
-      },
-    ],
-  },
-}
+export const metadata: Metadata = createSiteMetadata()
 
 export default function RootLayout({
   children,
@@ -52,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <JsonLd />
         <a href="#conteudo-principal" className="skip-link">
           Pular para o conteúdo principal
         </a>

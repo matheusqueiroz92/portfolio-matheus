@@ -18,7 +18,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconWhatsapp } from '@/components/ui/icons/icon-whatsapp'
 import { FadeIn } from '@/components/motion'
+import { SectionHeader } from '@/components/ui/section-header'
 import { contactFormSchema, type ContactFormData } from '@/lib/contact-schema'
+import { AVAILABILITY_BADGE, CONTACT_INFO, SOCIAL_LINKS } from '@/constants/site'
 
 export function ContactSection() {
   const [isLoading, setIsLoading] = useState(false)
@@ -75,25 +77,20 @@ export function ContactSection() {
   }
 
   return (
-    <section
-      id="contato"
-      className="relative py-32 px-4 sm:px-6 lg:px-8 border-b border-border/60 bg-background/50 transition-colors duration-300"
-    >
+    <section id="contato" className="section-shell bg-background/50 transition-colors duration-300">
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-muted/40 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-muted/40 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-6xl mx-auto relative">
-        {/* Título */}
-        <FadeIn className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Contato</h2>
-          <div className="w-20 h-1 bg-primary/60 mx-auto rounded-full"></div>
-          {/* Subtítulo */}
-          <p className="text-xl text-muted-foreground mt-4">
-            Entre em contato comigo para conversar sobre seus projetos ou oportunidades de emprego.
-          </p>
+        <FadeIn className="mb-12">
+          <SectionHeader
+            eyebrow="Vamos conversar"
+            title="Contato"
+            subtitle="Fique à vontade para me enviar uma mensagem sobre projetos, parcerias ou oportunidades profissionais. Será um prazer conversar com você!"
+          />
         </FadeIn>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -110,7 +107,7 @@ export function ContactSection() {
                 <h3 className="text-2xl font-bold text-foreground">Entre em contato</h3>
               </div>
 
-              <span className="inline-flex items-center gap-2 mb-8 rounded-full border border-primary/25 bg-primary/5 px-8 py-2 text-xs font-medium text-primary">
+              <span className="availability-badge mb-8">
                 <span className="relative inline-flex h-2 w-2">
                   <span
                     aria-hidden="true"
@@ -118,7 +115,7 @@ export function ContactSection() {
                   />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                 </span>
-                Disponível para novos projetos
+                {AVAILABILITY_BADGE}
               </span>
 
               {/* Informações de Contato */}
@@ -131,12 +128,12 @@ export function ContactSection() {
                   <div>
                     <p className="font-semibold text-foreground">Email</p>
                     <Link
-                      href="mailto:contato@matheusqueiroz.dev.br"
+                      href={`mailto:${CONTACT_INFO.email}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary/90 underline decoration-primary/30 decoration-1 underline-offset-[3px] hover:text-primary hover:decoration-primary transition-colors break-all"
                     >
-                      contato@matheusqueiroz.dev.br
+                      {CONTACT_INFO.email}
                     </Link>
                   </div>
                 </div>
@@ -149,12 +146,12 @@ export function ContactSection() {
                   <div>
                     <p className="font-semibold text-foreground">Linkedin</p>
                     <Link
-                      href="https://linkedin.com/in/matheus-queiroz-dev-web"
+                      href={SOCIAL_LINKS[0].url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary/90 underline decoration-primary/30 decoration-1 underline-offset-[3px] hover:text-primary hover:decoration-primary transition-colors break-all"
                     >
-                      https://linkedin.com/in/matheus-queiroz-dev-web
+                      {SOCIAL_LINKS[0].url}
                     </Link>
                   </div>
                 </div>
@@ -167,12 +164,12 @@ export function ContactSection() {
                   <div>
                     <p className="font-semibold text-foreground">GitHub</p>
                     <Link
-                      href="https://github.com/matheusqueiroz92"
+                      href={SOCIAL_LINKS[1].url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary/90 underline decoration-primary/30 decoration-1 underline-offset-[3px] hover:text-primary hover:decoration-primary transition-colors break-all"
                     >
-                      https://github.com/matheusqueiroz92
+                      {SOCIAL_LINKS[1].url}
                     </Link>
                   </div>
                 </div>
@@ -185,12 +182,12 @@ export function ContactSection() {
                   <div>
                     <p className="font-semibold text-foreground">Instagram</p>
                     <Link
-                      href="https://instagram.com/matheusgiga"
+                      href={SOCIAL_LINKS[2].url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary/90 underline decoration-primary/30 decoration-1 underline-offset-[3px] hover:text-primary hover:decoration-primary transition-colors break-all"
                     >
-                      https://instagram.com/matheusgiga
+                      {SOCIAL_LINKS[2].url}
                     </Link>
                   </div>
                 </div>
@@ -198,7 +195,7 @@ export function ContactSection() {
 
               {/* WhatsApp */}
               <Link
-                href="https://web.whatsapp.com/send/?phone=5577988334370&text=Ol%C3%A1+Matheus"
+                href={CONTACT_INFO.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center w-full justify-center px-6 py-4 bg-transparent border border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"

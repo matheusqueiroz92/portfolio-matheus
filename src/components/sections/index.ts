@@ -1,5 +1,6 @@
 export { HeroSection } from './hero-section'
 export { AboutSection } from './about-section'
+export { HowIWorkSection } from './how-i-work-section'
 export { PracticeAreasSection } from './practice-areas-section'
 export { ProjectsSection } from './projects-section'
 export { TechnologiesSection } from './technologies-section'

@@ -2,6 +2,7 @@
 
 import { Code, Zap, Globe, Brain, Sparkles } from "lucide-react";
 import { ScrollDownButton } from "../ui/scroll-down-button";
+import { SectionHeader } from "../ui/section-header";
 import { FadeIn, FadeInStagger, FadeInItem } from "@/components/motion";
 
 interface Service {
@@ -43,15 +44,15 @@ export function PracticeAreasSection() {
   return (
     <section
       id="areas-atuacao"
-      className="relative py-20 px-4 sm:px-6 sm:py-28 lg:px-8 lg:py-32 border-b border-border/60 transition-colors duration-300"
+      className="section-shell transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Título */}
-        <FadeIn className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Áreas de Atuação
-          </h2>
-          <div className="w-20 h-1 bg-primary/60 mx-auto rounded-full"></div>
+        <FadeIn className="mb-12 sm:mb-16">
+          <SectionHeader
+            eyebrow="Serviços"
+            title="Áreas de Atuação"
+            subtitle="Da arquitetura ao deploy — soluções completas para escalar seu negócio digital."
+          />
         </FadeIn>
 
         {/* Áreas de Atuação — o primeiro card recebe tratamento "carro-chefe":
@@ -63,7 +64,7 @@ export function PracticeAreasSection() {
             return (
               <FadeInItem
                 key={service.title}
-                className={`group relative p-5 sm:p-6 backdrop-blur-sm rounded-2xl border transition-all duration-500 hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_8px_30px_rgba(59,130,246,0.15),0_0_15px_rgba(59,130,246,0.1)] ${
+                className={`service-card group relative p-5 sm:p-6 backdrop-blur-sm rounded-2xl border ${
                   isFeatured
                     ? "border-primary/60 bg-[color-mix(in_srgb,var(--primary)_5%,var(--card))] shadow-[0_0_0_1px_color-mix(in_srgb,var(--primary)_25%,transparent)]"
                     : "border-border/60 bg-card/80"

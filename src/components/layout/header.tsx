@@ -5,16 +5,8 @@ import { Menu, X } from 'lucide-react'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import Image from 'next/image'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { SOCIAL_LINKS } from '@/constants/data'
+import { NAV_ITEMS, SOCIAL_LINKS } from '@/constants/site'
 import Link from 'next/link'
-
-const NAV_ITEMS: { label: string; href: string }[] = [
-  { label: 'Início', href: '/#inicio' },
-  { label: 'Sobre', href: '/#sobre' },
-  { label: 'Projetos', href: '/projects' },
-  { label: 'Contato', href: '/#contato' },
-  { label: 'Blog', href: '/blog' },
-]
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)

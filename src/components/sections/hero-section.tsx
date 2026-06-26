@@ -6,6 +6,7 @@ import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ScrollDownButton } from '../ui/scroll-down-button'
+import { AVAILABILITY_BADGE, getHeroSubtitle, HERO_PHRASES } from '@/constants/site'
 
 /**
  * Retrato com efeito "lâmpada": o cursor escreve sua posição em `--mx` / `--my`
@@ -29,11 +30,12 @@ function HeroPortrait() {
     node.style.setProperty('--my', `${y}%`)
   }
 
+  // Esta função é chamada quando o ponteiro sai da área do retrato (evento onPointerLeave).
+  // Ela posiciona as variáveis CSS '--mx' e '--my' fora do quadro,
+  // fazendo com que o efeito de "spotlight" desapareça e a imagem retorne ao estado escurecido.
   function handlePointerLeave() {
     const node = portraitRef.current
     if (!node) return
-    // Joga o buraco do spotlight para fora do quadro — retorna ao estado
-    // uniformemente escurecido sem flicker.
     node.style.setProperty('--mx', '150%')
     node.style.setProperty('--my', '150%')
   }
@@ -89,13 +91,6 @@ function HeroPortrait() {
     </>
   )
 }
-
-const HERO_PHRASES = [
-  'Aplicações Escaláveis',
-  'Experiências Web',
-  'Soluções com IA',
-  'Ecossistemas Digitais',
-]
 
 const BADGES = [
   {
@@ -182,8 +177,22 @@ export function HeroSection() {
   const [phraseIndex, setPhraseIndex] = useState(0)
   const [displayText, setDisplayText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const updateMotionPreference = () => setPrefersReducedMotion(mediaQuery.matches)
+    updateMotionPreference()
+    mediaQuery.addEventListener('change', updateMotionPreference)
+    return () => mediaQuery.removeEventListener('change', updateMotionPreference)
+  }, [])
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setDisplayText(HERO_PHRASES[0])
+      return
+    }
+
     const currentPhrase = HERO_PHRASES[phraseIndex]
 
     if (!isDeleting && displayText === currentPhrase) {
@@ -208,21 +217,43 @@ export function HeroSection() {
     )
 
     return () => clearTimeout(timeout)
-  }, [displayText, isDeleting, phraseIndex])
+  }, [displayText, isDeleting, phraseIndex, prefersReducedMotion])
 
   return (
     <section
       id="inicio"
-      className="relative flex min-h-screen items-center border-b border-border/60 px-4 py-24 transition-colors duration-300 sm:px-6 sm:py-32 lg:px-8 lg:py-36"
+      className="section-shell relative flex min-h-screen items-center sm:px-6 lg:px-8"
     >
+      {/* Aura ambiente — uma única camada no topo para evitar repetição */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
+        <div className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-primary/8 blur-3xl dark:bg-primary/12" />
+      </div>
+
       <motion.div
-        className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-center lg:gap-16"
+        className="relative mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-center lg:gap-16"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         {/* Left Side */}
         <div className="w-full space-y-6 text-left sm:space-y-8 lg:w-1/2">
+          {/* Status de disponibilidade */}
+          <motion.div variants={copyVariants}>
+            <span className="availability-badge">
+              <span className="relative inline-flex h-2 w-2">
+                <span
+                  aria-hidden="true"
+                  className="hero-status-pulse absolute inset-0 rounded-full bg-primary/60"
+                />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
+              {AVAILABILITY_BADGE}
+            </span>
+          </motion.div>
+
           {/* Badges */}
           <motion.div
             className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground sm:gap-3"
@@ -241,13 +272,16 @@ export function HeroSection() {
 
           {/* Title */}
           <motion.h1
-            className="text-3xl font-bold leading-tight text-foreground sm:text-5xl lg:text-6xl min-h-[3.6rem] sm:min-h-[4.2rem]"
+            className="display-title text-3xl leading-tight text-foreground sm:text-5xl lg:text-6xl min-h-[3.6rem] sm:min-h-[4.2rem]"
             variants={copyVariants}
           >
-            Transformando ideias em{' '}
-            <span className="typewriter-wrapper text-primary">
-              {displayText}
-              <span className="typewriter-cursor" />
+            Transformando ideias{' '}
+            <span className="hero-title-line">
+              em{' '}
+              <span className="typewriter-wrapper text-primary">
+                {displayText}
+                {!prefersReducedMotion && <span className="typewriter-cursor" />}
+              </span>
             </span>
           </motion.h1>
 
@@ -256,12 +290,14 @@ export function HeroSection() {
             className="max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
             variants={copyVariants}
           >
-            Desenvolvedor Fullstack unindo 10 anos de experiência, IA e automação para criar
-            plataformas web de alta performance que escalam negócios.
+            {getHeroSubtitle()}
           </motion.p>
 
           {/* Buttons CTAs */}
-          <motion.div className="flex flex-col gap-3 sm:flex-row sm:gap-4" variants={ctaRowVariants}>
+          <motion.div
+            className="flex flex-col gap-3 sm:flex-row sm:gap-4"
+            variants={ctaRowVariants}
+          >
             <motion.div variants={ctaItemVariants}>
               <Link
                 href="#contato"
@@ -321,7 +357,7 @@ export function HeroSection() {
            estado :hover no light mode — só a profundidade muda agora, nunca
            a temperatura de cor. */
         .hero-shape {
-          background: var(--muted);
+          background: var(--chart-4);
           filter: drop-shadow(0 0 1.5px color-mix(in srgb, var(--primary) 90%, transparent))
             drop-shadow(0 0 1.5px color-mix(in srgb, var(--primary) 90%, transparent))
             drop-shadow(0 22px 40px color-mix(in srgb, var(--foreground) 26%, transparent))
@@ -439,19 +475,18 @@ export function HeroSection() {
           margin-left: 0.12rem;
           width: 2px;
           height: 1.1em;
-          background: currentColor;
+          background: var(--primary);
           animation: cursorBlink 1s steps(2, start) infinite;
           vertical-align: baseline;
         }
 
-        .typewriter-wrapper {
-          position: relative;
-          display: inline-block;
-          min-width: clamp(14rem, 26ch, 28rem);
-          max-width: min(100%, 28rem);
+        .hero-title-line {
           white-space: nowrap;
-          min-height: 1em;
-          vertical-align: baseline;
+        }
+
+        .typewriter-wrapper {
+          display: inline;
+          white-space: nowrap;
         }
 
         @keyframes cursorBlink {

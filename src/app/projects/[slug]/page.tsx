@@ -8,6 +8,7 @@ import { Header, Footer } from '@/components/layout'
 import { MdxContent } from '@/components/mdx'
 import { Badge } from '@/components/ui/badge'
 import { getAllProjectSlugs, getProjectBySlug } from '@/lib/content'
+import { absoluteUrl } from '@/lib/metadata'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ...(project.projectImage?.url && {
         images: [
           {
-            url: project.projectImage.url,
+            url: absoluteUrl(project.projectImage.url),
             alt: project.projectImage.alt ?? project.title,
           },
         ],
@@ -60,7 +61,7 @@ export default async function ProjectPage({ params }: PageProps) {
     <div className="relative min-h-screen bg-background text-foreground">
       <Header />
 
-      <main className="relative pt-28 pb-24">
+      <main id="conteudo-principal" className="relative pt-28 pb-24">
         {/* Backdrop editorial sutil. */}
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-[50vh]"

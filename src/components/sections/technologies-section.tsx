@@ -29,6 +29,7 @@ import {
   IconRedux,
 } from '@/components/ui/icons'
 import { ScrollDownButton } from '@/components/ui/scroll-down-button'
+import { SectionHeader } from '@/components/ui/section-header'
 import { IconGit } from '../ui/icons/icon-git'
 import { FadeIn } from '@/components/motion'
 
@@ -106,23 +107,20 @@ export function TechnologiesSection() {
   return (
     <section
       id="tecnologias"
-      className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-border/60 bg-background/50 transition-colors duration-300"
+      className="section-shell overflow-hidden bg-background/50 transition-colors duration-300"
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-muted/40 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative">
-        {/* Section Header */}
-        <FadeIn className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Stack Tecnológico</h2>
-          <div className="w-20 h-1 bg-primary/60 mx-auto rounded-full"></div>
-          {/* Subtítulo */}
-          <p className="text-xl text-muted-foreground mt-4">
-            Ferramentas e frameworks que utilizo para construir soluções robustas, do design da
-            arquitetura ao deploy escalável.
-          </p>
+        <FadeIn className="mb-12">
+          <SectionHeader
+            eyebrow="Stack"
+            title="Stack Tecnológico"
+            subtitle="Ferramentas e frameworks que utilizo para construir soluções robustas, do design da arquitetura ao deploy escalável."
+          />
         </FadeIn>
 
         {/* Marquee Lines */}
