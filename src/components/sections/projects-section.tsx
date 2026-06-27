@@ -158,7 +158,9 @@ function FlagshipCard({
           <h3 className="text-2xl sm:text-3xl font-semibold text-foreground mb-3 leading-tight">
             {flagshipProject.title}
           </h3>
-          <p className="text-muted-foreground leading-relaxed mb-5">{flagshipProject.description}</p>
+          <p className="text-muted-foreground leading-relaxed mb-5">
+            {flagshipProject.description}
+          </p>
 
           <ul className="space-y-2 mb-6">
             {copy.flagshipHighlights.map((highlight) => (
@@ -231,7 +233,10 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
   const hasProjects = projects.length > 0 || Boolean(flagshipProject)
 
   return (
-    <section id="projects" className="section-shell overflow-hidden bg-background transition-colors duration-300">
+    <section
+      id="projects"
+      className="section-shell overflow-hidden bg-background transition-colors duration-300"
+    >
       {!hasProjects ? (
         <div className="max-w-5xl mx-auto">
           <FadeIn className="mb-10 sm:mb-12">

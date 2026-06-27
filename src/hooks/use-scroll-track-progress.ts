@@ -12,7 +12,7 @@ interface ScrollTrackState {
   phase: ScrollTrackPhase
 }
 
-function computeState(trackEl: HTMLElement | null): ScrollTrackState {
+export function computeScrollTrackState(trackEl: HTMLElement | null): ScrollTrackState {
   if (!trackEl || typeof window === 'undefined') {
     return { progress: 0, phase: 'before' }
   }
@@ -43,7 +43,7 @@ export function useScrollTrackProgress(
   })
 
   const measure = useCallback(() => {
-    setState(computeState(trackRef.current))
+    setState(computeScrollTrackState(trackRef.current))
   }, [trackRef])
 
   useEffect(() => {

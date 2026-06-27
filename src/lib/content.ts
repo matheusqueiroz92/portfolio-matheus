@@ -127,9 +127,7 @@ interface ParsedPost {
   listItem: BlogPostListItem
 }
 
-async function parsePostFile(filename: string): Promise<ParsedPost> {
-  const fullPath = path.join(POSTS_DIR, filename)
-  const raw = await fs.readFile(fullPath, 'utf-8')
+export function parsePostDocument(raw: string, filename: string): ParsedPost {
   const { data, content } = matter(raw)
 
   const fileLabel = `posts/${filename}`
@@ -159,6 +157,12 @@ async function parsePostFile(filename: string): Promise<ParsedPost> {
   }
 
   return { data: fullPost, listItem }
+}
+
+async function parsePostFile(filename: string): Promise<ParsedPost> {
+  const fullPath = path.join(POSTS_DIR, filename)
+  const raw = await fs.readFile(fullPath, 'utf-8')
+  return parsePostDocument(raw, filename)
 }
 
 const loadAllPosts = cache(async (): Promise<ParsedPost[]> => {

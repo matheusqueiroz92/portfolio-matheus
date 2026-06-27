@@ -187,7 +187,7 @@ export const ptBR: Dictionary = {
     eyebrow: 'Portfólio',
     title: 'Meus Projetos',
     subtitle:
-      'Alguns dos principais projetos que desenvolvi para clientes e empresas. Role para explorá-los.',
+      'Alguns dos principais projetos que desenvolvi para clientes e empresas.\n Role para explorá-los.',
     featuredCase: 'Case em destaque',
     viewCase: 'Ver case',
     viewFullCase: 'Ver case completo',
