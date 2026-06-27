@@ -279,7 +279,7 @@ export function ProjectsScrollBelt({
       aria-label={copy.beltAria}
     >
       <div className="project-belt-pin" style={pinPanelStyle}>
-        <div className="mx-auto flex h-full w-full max-w-5xl flex-col px-4 pb-6 pt-4 sm:px-6 sm:pb-8 sm:pt-6">
+        <div className="mx-auto flex h-full w-full max-w-7xl flex-col px-4 pb-6 pt-4 sm:px-6 sm:pb-8 sm:pt-6 lg:px-8">
           <SectionHeader
             eyebrow={copy.eyebrow}
             title={copy.title}

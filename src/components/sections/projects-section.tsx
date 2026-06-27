@@ -231,7 +231,7 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
   const hasProjects = projects.length > 0 || Boolean(flagshipProject)
 
   return (
-    <section id="projects" className="section-shell bg-background transition-colors duration-300">
+    <section id="projects" className="section-shell overflow-hidden bg-background transition-colors duration-300">
       {!hasProjects ? (
         <div className="max-w-5xl mx-auto">
           <FadeIn className="mb-10 sm:mb-12">
