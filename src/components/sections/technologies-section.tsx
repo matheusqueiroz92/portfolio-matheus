@@ -181,7 +181,7 @@ export function TechnologiesSection() {
         </div>
       </div>
 
-      <ScrollDownButton href="#projetos" />
+      <ScrollDownButton href="#projects" />
     </section>
   )
 }

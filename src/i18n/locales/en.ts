@@ -186,7 +186,8 @@ export const en: Dictionary = {
   projects: {
     eyebrow: 'Portfolio',
     title: 'My Projects',
-    subtitle: 'Some of the main projects I have built for clients and companies.',
+    subtitle:
+      'Some of the main projects I have built for clients and companies. Scroll to explore them.',
     featuredCase: 'Featured case study',
     viewCase: 'View case',
     viewFullCase: 'View full case study',
@@ -202,6 +203,8 @@ export const en: Dictionary = {
       'Production ERP for a multi-branch retail network',
       'Unified inventory, sales, and optical lab control',
     ],
+    beltAria: 'Scroll-driven project showcase',
+    beltProgressAria: 'Project showcase progress',
   },
   contact: {
     eyebrow: "Let's talk",

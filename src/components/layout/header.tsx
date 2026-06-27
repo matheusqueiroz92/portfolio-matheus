@@ -95,8 +95,8 @@ export function Header() {
                 <TooltipContent side="bottom">{dictionary.social[social.key]}</TooltipContent>
               </Tooltip>
             ))}
-            <LanguageToggle />
             <ThemeToggle />
+            <LanguageToggle />
           </div>
 
           <button
@@ -120,10 +120,7 @@ export function Header() {
             id="menu-mobile"
             className="md:hidden py-6 border-t border-border/60 bg-background/95 animate-in slide-in-from-top-2 transition-colors duration-300"
           >
-            <nav
-              aria-label={dictionary.header.mobileNav}
-              className="flex flex-col space-y-6"
-            >
+            <nav aria-label={dictionary.header.mobileNav} className="flex flex-col space-y-6">
               {NAV_ITEMS.map((item) => (
                 <Link
                   key={item.key}

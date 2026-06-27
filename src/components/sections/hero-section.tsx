@@ -173,7 +173,11 @@ export function HeroSection() {
   const { dictionary } = useLocale()
   const heroPhrases = dictionary.site.heroPhrases
   const longestPhrase = useMemo(
-    () => heroPhrases.reduce((longest, phrase) => (phrase.length > longest.length ? phrase : longest), ''),
+    () =>
+      heroPhrases.reduce(
+        (longest, phrase) => (phrase.length > longest.length ? phrase : longest),
+        '',
+      ),
     [heroPhrases],
   )
   const [phraseIndex, setPhraseIndex] = useState(0)
@@ -321,7 +325,7 @@ export function HeroSection() {
             </motion.div>
             <motion.div variants={ctaItemVariants}>
               <Link
-                href="#projects"
+                href="/projects"
                 className="group inline-flex w-full items-center justify-center rounded-full border border-border px-7 py-3 font-semibold text-foreground transition-all duration-300 hover:scale-[1.03] hover:bg-muted/70 sm:w-auto sm:px-8 sm:py-3.5"
               >
                 <ExternalLink className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />

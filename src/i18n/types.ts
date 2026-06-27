@@ -127,6 +127,8 @@ export interface Dictionary {
     openDemoAria: (title: string) => string
     openRepoAria: (title: string) => string
     flagshipHighlights: readonly string[]
+    beltAria: string
+    beltProgressAria: string
   }
   contact: {
     eyebrow: string

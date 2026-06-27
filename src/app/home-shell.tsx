@@ -26,7 +26,7 @@ export function HomeShell({ featuredProjects, flagshipProject }: HomeShellProps)
   const { dictionary } = useLocale()
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-background text-foreground relative overflow-x-clip transition-colors duration-300">
       <LocalizedMetadata
         title={dictionary.seo.site.title}
         description={dictionary.seo.site.description}

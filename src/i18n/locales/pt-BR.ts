@@ -186,7 +186,8 @@ export const ptBR: Dictionary = {
   projects: {
     eyebrow: 'Portfólio',
     title: 'Meus Projetos',
-    subtitle: 'Alguns dos principais projetos que desenvolvi para clientes e empresas.',
+    subtitle:
+      'Alguns dos principais projetos que desenvolvi para clientes e empresas. Role para explorá-los.',
     featuredCase: 'Case em destaque',
     viewCase: 'Ver case',
     viewFullCase: 'Ver case completo',
@@ -202,6 +203,8 @@ export const ptBR: Dictionary = {
       'ERP em produção para rede multi-filial',
       'Controle de estoque, vendas e laboratório ótico unificados',
     ],
+    beltAria: 'Esteira de projetos controlada por rolagem',
+    beltProgressAria: 'Progresso na esteira de projetos',
   },
   contact: {
     eyebrow: 'Vamos conversar',

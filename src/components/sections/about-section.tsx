@@ -11,7 +11,7 @@ export function AboutSection() {
   const { dictionary } = useLocale()
 
   return (
-    <section id="sobre" className="section-shell bg-background/80 transition-colors duration-300">
+    <section id="about" className="section-shell bg-background/80 transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
         <FadeInStagger className="space-y-8" stagger={0.12}>
           <FadeInItem>
