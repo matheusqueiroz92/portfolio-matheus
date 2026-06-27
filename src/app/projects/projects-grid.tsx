@@ -7,6 +7,7 @@ import { ArrowRight, ExternalLink, FolderOpen, Github } from 'lucide-react'
 import { FadeInStagger, FadeInItem } from '@/components/motion'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
+import { useLocale } from '@/providers/locale-provider'
 import type { ProjectListItem } from '@/types'
 
 interface ProjectsGridProps {
@@ -21,6 +22,8 @@ interface ProjectsGridProps {
  * sendo async/server component e passa os dados já resolvidos.
  */
 export function ProjectsGrid({ projects }: ProjectsGridProps) {
+  const { dictionary } = useLocale()
+  const projectCopy = dictionary.projects
   const staggerKey = projects.map((project) => project.slug).join('|')
 
   return (
@@ -42,10 +45,10 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
                   esta navegação. */}
               <Link
                 href={`/projects/${project.slug}`}
-                aria-label={`Ver case: ${project.title}`}
+                aria-label={projectCopy.viewCaseAria(project.title)}
                 className="absolute inset-0 z-10 rounded-[inherit] focus:outline-none"
               >
-                <span className="sr-only">Ver case: {project.title}</span>
+                <span className="sr-only">{projectCopy.viewCaseAria(project.title)}</span>
               </Link>
 
               {project.projectImage?.url ? (
@@ -66,7 +69,7 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
               )}
 
               <CardContent className="flex grow flex-col p-5">
-                <p className="eyebrow mb-2" aria-label="Ano e escala do projeto">
+                <p className="eyebrow mb-2" aria-label={projectCopy.yearScaleAria}>
                   {meta}
                 </p>
 
@@ -105,7 +108,7 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
                     aria-hidden="true"
                     className="inline-flex items-center gap-1.5 text-xs font-medium text-primary transition-transform duration-300 group-hover:translate-x-0.5"
                   >
-                    Ver case
+                    {projectCopy.viewCase}
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
 
@@ -117,7 +120,7 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
                         className="relative z-20 inline-flex items-center justify-center p-2 border border-border/60 text-muted-foreground rounded-lg hover:bg-muted/50 hover:text-foreground hover:border-primary/50 transition-all duration-300"
-                        aria-label={`Abrir demo de ${project.title}`}
+                        aria-label={projectCopy.openDemoAria(project.title)}
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                       </Link>
@@ -129,7 +132,7 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
                         className="relative z-20 inline-flex items-center justify-center p-2 border border-border/60 text-muted-foreground rounded-lg hover:bg-muted/50 hover:text-foreground hover:border-primary/50 transition-all duration-300"
-                        aria-label={`Abrir repositório de ${project.title}`}
+                        aria-label={projectCopy.openRepoAria(project.title)}
                       >
                         <Github className="w-3.5 h-3.5" />
                       </Link>

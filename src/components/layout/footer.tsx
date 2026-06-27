@@ -1,11 +1,15 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import LogoDark from '../../../public/logo-matheus-dev-azul-claro.png'
 import LogoLight from '../../../public/logo-matheus-dev-azul-escuro.png'
-import { FOOTER_QUICK_LINKS, FOOTER_SERVICES, SITE_CONFIG, SOCIAL_LINKS } from '@/constants/site'
+import { FOOTER_QUICK_LINKS, FOOTER_SERVICES, SOCIAL_LINKS } from '@/constants/site'
+import { useLocale } from '@/providers/locale-provider'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const { dictionary } = useLocale()
 
   return (
     <footer
@@ -13,7 +17,7 @@ export function Footer() {
       aria-labelledby="rodape-heading"
     >
       <h2 id="rodape-heading" className="sr-only">
-        Rodapé
+        {dictionary.footer.heading}
       </h2>
 
       <div
@@ -26,12 +30,12 @@ export function Footer() {
           <div className="col-span-2 md:col-span-2">
             <Link
               href="/"
-              aria-label="Ir para a página inicial"
+              aria-label={dictionary.footer.homeAriaLabel}
               className="inline-flex items-center mb-4 rounded-md transition-transform duration-300 hover:scale-[1.03]"
             >
               <Image
                 src={LogoLight}
-                alt="Logo Matheus Queiroz"
+                alt={dictionary.footer.logoAlt}
                 width={240}
                 height={80}
                 priority
@@ -47,16 +51,18 @@ export function Footer() {
                 className="hidden dark:block h-auto w-[240px]"
               />
             </Link>
-            <p className="text-muted-foreground mb-6 max-w-md">{SITE_CONFIG.footerTagline}</p>
-            <ul aria-label="Redes sociais" className="flex items-center gap-4">
+            <p className="text-muted-foreground mb-6 max-w-md">{dictionary.site.footerTagline}</p>
+            <ul aria-label={dictionary.footer.socialAria} className="flex items-center gap-4">
               {SOCIAL_LINKS.map((social) => (
                 <li key={social.url}>
                   <a
                     href={social.url}
                     target={social.download ? '_self' : '_blank'}
                     rel={social.download ? undefined : 'noopener noreferrer'}
-                    download={social.download ? 'curriculo-matheus-queiroz.pdf' : undefined}
-                    aria-label={social.label}
+                    download={
+                      social.download ? dictionary.common.resumeDownloadFilename : undefined
+                    }
+                    aria-label={dictionary.social[social.key]}
                     className="inline-flex text-muted-foreground transition-all duration-300 hover:scale-110 hover:text-foreground rounded-full p-1"
                   >
                     <social.icon className="w-5 h-5" aria-hidden="true" />
@@ -68,16 +74,16 @@ export function Footer() {
 
           <nav aria-labelledby="footer-links" className="relative">
             <h3 id="footer-links" className="text-lg font-semibold mb-4 text-foreground">
-              Links Rápidos
+              {dictionary.footer.quickLinks}
             </h3>
             <ul className="space-y-2">
               {FOOTER_QUICK_LINKS.map((item) => (
-                <li key={item.label}>
+                <li key={item.key}>
                   <Link
                     href={item.href}
                     className="inline-block text-muted-foreground hover:text-foreground transition-colors duration-300 hover:translate-x-1"
                   >
-                    {item.label}
+                    {dictionary.nav[item.key]}
                   </Link>
                 </li>
               ))}
@@ -86,16 +92,16 @@ export function Footer() {
 
           <nav aria-labelledby="footer-servicos" className="relative">
             <h3 id="footer-servicos" className="text-lg font-semibold mb-4 text-foreground">
-              Serviços
+              {dictionary.footer.services}
             </h3>
             <ul className="space-y-2">
               {FOOTER_SERVICES.map((item) => (
-                <li key={item.label}>
+                <li key={item.key}>
                   <Link
                     href={item.href}
                     className="inline-block text-muted-foreground hover:text-foreground transition-colors duration-300 hover:translate-x-1"
                   >
-                    {item.label}
+                    {dictionary.footer.serviceLinks[item.key]}
                   </Link>
                 </li>
               ))}
@@ -104,9 +110,10 @@ export function Footer() {
         </div>
 
         <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-8 text-sm text-muted-foreground sm:flex-row">
-          <p>© {currentYear} Matheus Queiroz. Todos os direitos reservados.</p>
+          <p>{dictionary.footer.copyright(currentYear)}</p>
           <p className="text-xs">
-            Construído com <span className="text-foreground/80">Next.js</span>,{' '}
+            {dictionary.footer.builtWith}{' '}
+            <span className="text-foreground/80">Next.js</span>,{' '}
             <span className="text-foreground/80">Tailwind</span> &{' '}
             <span className="text-foreground/80">MDX</span>.
           </p>

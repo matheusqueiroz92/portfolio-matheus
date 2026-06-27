@@ -9,6 +9,8 @@ import { Card, CardContent } from '../ui/card'
 import { ScrollDownButton } from '../ui/scroll-down-button'
 import { SectionHeader } from '../ui/section-header'
 import { FadeIn, FadeInStagger, FadeInItem } from '@/components/motion'
+import { useLocale } from '@/providers/locale-provider'
+import type { Dictionary } from '@/i18n/types'
 import type { ProjectListItem } from '@/types'
 
 interface ProjectsSectionProps {
@@ -16,21 +18,21 @@ interface ProjectsSectionProps {
   flagshipProject?: ProjectListItem | null
 }
 
-const FLAGSHIP_HIGHLIGHTS = [
-  'Monorepo Turborepo com API, painel e pacote compartilhado',
-  'ERP em produção para rede multi-filial',
-  'Controle de estoque, vendas e laboratório ótico unificados',
-] as const
-
-function ProjectCard({ project }: { project: ProjectListItem }) {
+function ProjectCard({
+  project,
+  copy,
+}: {
+  project: ProjectListItem
+  copy: Dictionary['projects']
+}) {
   return (
     <Card className="card-hover-lift group relative bg-card/80 backdrop-blur-sm border border-border/60 overflow-hidden py-0 flex flex-col h-full focus-within:ring-2 focus-within:ring-primary/40 focus-within:ring-offset-2 focus-within:ring-offset-background">
       <Link
         href={`/projects/${project.slug}`}
-        aria-label={`Ver case: ${project.title}`}
+        aria-label={copy.viewCaseAria(project.title)}
         className="absolute inset-0 z-10 rounded-[inherit] focus:outline-none"
       >
-        <span className="sr-only">Ver case: {project.title}</span>
+        <span className="sr-only">{copy.viewCaseAria(project.title)}</span>
       </Link>
 
       {project.projectImage?.url && (
@@ -51,7 +53,7 @@ function ProjectCard({ project }: { project: ProjectListItem }) {
           const year = new Date(project.updatedAt).getFullYear()
           const meta = project.scale ? `${year} · ${project.scale}` : `${year}`
           return (
-            <p className="eyebrow mb-2" aria-label="Ano e escala do projeto">
+            <p className="eyebrow mb-2" aria-label={copy.yearScaleAria}>
               {meta}
             </p>
           )
@@ -89,7 +91,7 @@ function ProjectCard({ project }: { project: ProjectListItem }) {
             aria-hidden="true"
             className="inline-flex items-center gap-1.5 text-xs font-medium text-primary transition-transform duration-300 group-hover:translate-x-0.5"
           >
-            Ver case
+            {copy.viewCase}
             <ArrowRight className="w-3.5 h-3.5" />
           </span>
 
@@ -101,7 +103,7 @@ function ProjectCard({ project }: { project: ProjectListItem }) {
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 className="relative z-20 inline-flex items-center justify-center p-2 border border-border/60 text-muted-foreground rounded-lg hover:bg-muted/50 hover:text-foreground hover:border-primary/50 transition-all duration-300"
-                aria-label={`Abrir demo de ${project.title}`}
+                aria-label={copy.openDemoAria(project.title)}
               >
                 <ExternalLink className="w-3.5 h-3.5" />
               </Link>
@@ -113,7 +115,7 @@ function ProjectCard({ project }: { project: ProjectListItem }) {
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 className="relative z-20 inline-flex items-center justify-center p-2 border border-border/60 text-muted-foreground rounded-lg hover:bg-muted/50 hover:text-foreground hover:border-primary/50 transition-all duration-300"
-                aria-label={`Abrir repositório de ${project.title}`}
+                aria-label={copy.openRepoAria(project.title)}
               >
                 <Github className="w-3.5 h-3.5" />
               </Link>
@@ -126,6 +128,9 @@ function ProjectCard({ project }: { project: ProjectListItem }) {
 }
 
 export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionProps) {
+  const { dictionary } = useLocale()
+  const copy = dictionary.projects
+
   return (
     <section
       id="projects"
@@ -133,11 +138,7 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
     >
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-10 sm:mb-12">
-          <SectionHeader
-            eyebrow="Portfólio"
-            title="Meus Projetos"
-            subtitle="Alguns dos principais projetos que desenvolvi para clientes e empresas."
-          />
+          <SectionHeader eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} />
         </FadeIn>
 
         {flagshipProject && (
@@ -159,7 +160,7 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
                 )}
 
                 <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-                  <span className="eyebrow mb-3">Case em destaque</span>
+                  <span className="eyebrow mb-3">{copy.featuredCase}</span>
                   <h3 className="text-2xl sm:text-3xl font-semibold text-foreground mb-3">
                     {flagshipProject.title}
                   </h3>
@@ -168,7 +169,7 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
                   </p>
 
                   <ul className="space-y-2 mb-6">
-                    {FLAGSHIP_HIGHLIGHTS.map((highlight) => (
+                    {copy.flagshipHighlights.map((highlight) => (
                       <li
                         key={highlight}
                         className="flex items-start gap-2 text-sm text-muted-foreground"
@@ -187,7 +188,7 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
                       href={`/projects/${flagshipProject.slug}`}
                       className="btn-primary-glow inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25"
                     >
-                      Ver case completo
+                      {copy.viewFullCase}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                     {flagshipProject.urlProject && (
@@ -198,7 +199,7 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
                         className="inline-flex items-center justify-center rounded-full border border-border/60 px-5 py-2.5 text-sm font-medium text-foreground hover:border-primary/50 hover:bg-muted/50 transition-colors"
                       >
                         <ExternalLink className="mr-2 h-4 w-4" />
-                        Abrir demo
+                        {copy.openDemo}
                       </Link>
                     )}
                     {flagshipProject.urlRepository && (
@@ -209,7 +210,7 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
                         className="inline-flex items-center justify-center rounded-full border border-border/60 px-5 py-2.5 text-sm font-medium text-foreground hover:border-primary/50 hover:bg-muted/50 transition-colors"
                       >
                         <Github className="mr-2 h-4 w-4" />
-                        GitHub
+                        {dictionary.social.github}
                       </Link>
                     )}
                   </div>
@@ -220,26 +221,23 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
         )}
 
         {projects.length === 0 && !flagshipProject ? (
-          <p className="text-center text-muted-foreground py-12">
-            Em breve novos projetos por aqui.
-          </p>
+          <p className="text-center text-muted-foreground py-12">{copy.emptyState}</p>
         ) : projects.length > 0 ? (
           <FadeInStagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8" stagger={0.12}>
             {projects.map((project) => (
               <FadeInItem key={project.slug} className="h-full">
-                <ProjectCard project={project} />
+                <ProjectCard project={project} copy={copy} />
               </FadeInItem>
             ))}
           </FadeInStagger>
         ) : null}
 
-        {/* Botão de Ver Todos os Projetos */}
         <FadeIn className="text-center">
           <Link
             href="/projects"
             className="btn-primary-glow group relative inline-flex items-center justify-center px-8 sm:px-12 lg:px-16 py-3.5 sm:py-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full"
           >
-            Ver Todos os Projetos
+            {copy.viewAll}
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
           </Link>
         </FadeIn>

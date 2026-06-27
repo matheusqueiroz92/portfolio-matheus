@@ -4,8 +4,6 @@ import type { ContactInfo, NavigationItem, SocialLink, Stat } from '@/types'
 
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://matheusqueiroz.dev.br'
 
-export const AVAILABILITY_BADGE = 'Aberto a oportunidades e projetos fullstack'
-
 export const SITE_CONFIG = {
   title: 'Matheus Queiroz — Desenvolvedor Fullstack',
   description:
@@ -13,8 +11,6 @@ export const SITE_CONFIG = {
   author: 'Matheus Queiroz',
   siteUrl: SITE_URL,
   yearsOfExperience: 10,
-  footerTagline:
-    'Desenvolvedor Fullstack com foco em arquitetura, produto e entrega ponta a ponta.',
 } as const
 
 export const STATS: Stat[] = [
@@ -29,8 +25,11 @@ export const CONTACT_INFO: ContactInfo = {
   whatsapp: 'https://web.whatsapp.com/send/?phone=5577988334370&text=Ol%C3%A1+Matheus',
 }
 
-export const SOCIAL_LINKS: SocialLink[] = [
+export type SocialLinkKey = 'linkedin' | 'github' | 'instagram' | 'resume'
+
+export const SOCIAL_LINKS: (SocialLink & { key: SocialLinkKey })[] = [
   {
+    key: 'linkedin',
     name: 'LinkedIn',
     url: 'https://linkedin.com/in/matheus-queiroz-dev-web',
     icon: Linkedin,
@@ -38,6 +37,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     label: 'LinkedIn',
   },
   {
+    key: 'github',
     name: 'GitHub',
     url: 'https://github.com/matheusqueiroz92',
     icon: Github,
@@ -45,6 +45,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     label: 'GitHub',
   },
   {
+    key: 'instagram',
     name: 'Instagram',
     url: 'https://instagram.com/matheusgiga',
     icon: Instagram,
@@ -52,6 +53,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     label: 'Instagram',
   },
   {
+    key: 'resume',
     name: 'Currículo',
     url: '/curriculo.pdf',
     icon: FileDown,
@@ -61,27 +63,31 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
 ]
 
-export const NAV_ITEMS: NavigationItem[] = [
-  { label: 'Início', href: '/#home' },
-  { label: 'Sobre', href: '/#about' },
-  { label: 'Projetos', href: '/#projects' },
-  { label: 'Contato', href: '/#contact' },
-  { label: 'Blog', href: '/blog' },
+export type NavItemKey = 'home' | 'about' | 'projects' | 'contact' | 'blog'
+
+export const NAV_ITEMS: (NavigationItem & { key: NavItemKey })[] = [
+  { key: 'home', label: 'Início', href: '/#home' },
+  { key: 'about', label: 'Sobre', href: '/#about' },
+  { key: 'projects', label: 'Projetos', href: '/#projects' },
+  { key: 'contact', label: 'Contato', href: '/#contact' },
+  { key: 'blog', label: 'Blog', href: '/blog' },
 ]
 
-export const FOOTER_QUICK_LINKS: NavigationItem[] = [
-  { label: 'Início', href: '/#home' },
-  { label: 'Sobre', href: '/#about' },
-  { label: 'Projetos', href: '/#projects' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contato', href: '/#contact' },
+export const FOOTER_QUICK_LINKS: (NavigationItem & { key: NavItemKey })[] = [
+  { key: 'home', label: 'Início', href: '/#home' },
+  { key: 'about', label: 'Sobre', href: '/#about' },
+  { key: 'projects', label: 'Projetos', href: '/#projects' },
+  { key: 'blog', label: 'Blog', href: '/blog' },
+  { key: 'contact', label: 'Contato', href: '/#contact' },
 ]
 
-export const FOOTER_SERVICES: NavigationItem[] = [
-  { label: 'Desenvolvimento Fullstack', href: '/#practice-areas' },
-  { label: 'Soluções com IA', href: '/#practice-areas' },
-  { label: 'Consultoria', href: '/#contact' },
-  { label: 'Manutenção & Evolução', href: '/#contact' },
+export type FooterServiceKey = 'fullstack' | 'ai' | 'consulting' | 'maintenance'
+
+export const FOOTER_SERVICES: (NavigationItem & { key: FooterServiceKey })[] = [
+  { key: 'fullstack', label: 'Desenvolvimento Fullstack', href: '/#practice-areas' },
+  { key: 'ai', label: 'Soluções com IA', href: '/#practice-areas' },
+  { key: 'consulting', label: 'Consultoria', href: '/#contact' },
+  { key: 'maintenance', label: 'Manutenção & Evolução', href: '/#contact' },
 ]
 
 export const HERO_PHRASES = [

@@ -1,11 +1,15 @@
+'use client'
+
 import { Suspense } from 'react'
 
 import { ContentSearch } from '@/components/content/content-search'
+import { useLocale } from '@/providers/locale-provider'
 import { cn } from '@/lib/utils'
 
 interface ContentListToolbarProps {
   totalItems: number
-  itemLabel: string
+  itemSingular: string
+  itemPlural: string
   searchPlaceholder: string
   query?: string
   className?: string
@@ -13,31 +17,34 @@ interface ContentListToolbarProps {
 
 function ResultsSummary({
   totalItems,
-  itemLabel,
+  itemSingular,
+  itemPlural,
   query,
-}: Pick<ContentListToolbarProps, 'totalItems' | 'itemLabel' | 'query'>) {
-  const label = totalItems === 1 ? itemLabel.replace(/s$/, '') : itemLabel
+}: Pick<ContentListToolbarProps, 'totalItems' | 'itemSingular' | 'itemPlural' | 'query'>) {
+  const { dictionary } = useLocale()
+  const items = totalItems === 1 ? itemSingular : itemPlural
 
   if (query?.trim()) {
     return (
       <p className="text-sm text-muted-foreground">
         {totalItems === 0
-          ? `Nenhum resultado para “${query.trim()}”`
-          : `${totalItems} ${label} encontrado${totalItems === 1 ? '' : 's'} para “${query.trim()}”`}
+          ? dictionary.content.noResultsFor(query.trim())
+          : dictionary.content.resultsFound(totalItems, items, query.trim())}
       </p>
     )
   }
 
   return (
     <p className="text-sm text-muted-foreground">
-      {totalItems} {label}
+      {dictionary.content.totalCount(totalItems, items)}
     </p>
   )
 }
 
 export function ContentListToolbar({
   totalItems,
-  itemLabel,
+  itemSingular,
+  itemPlural,
   searchPlaceholder,
   query,
   className,
@@ -52,7 +59,12 @@ export function ContentListToolbar({
       <Suspense fallback={<div className="h-10 w-full max-w-xl rounded-md bg-muted/30" />}>
         <ContentSearch placeholder={searchPlaceholder} />
       </Suspense>
-      <ResultsSummary totalItems={totalItems} itemLabel={itemLabel} query={query} />
+      <ResultsSummary
+        totalItems={totalItems}
+        itemSingular={itemSingular}
+        itemPlural={itemPlural}
+        query={query}
+      />
     </div>
   )
 }

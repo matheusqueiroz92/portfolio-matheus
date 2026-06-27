@@ -32,6 +32,7 @@ import { ScrollDownButton } from '@/components/ui/scroll-down-button'
 import { SectionHeader } from '@/components/ui/section-header'
 import { IconGit } from '../ui/icons/icon-git'
 import { FadeIn } from '@/components/motion'
+import { useLocale } from '@/providers/locale-provider'
 
 interface TechItem {
   name: string
@@ -104,6 +105,8 @@ function TechBadge({ tech }: { tech: TechItem }) {
 }
 
 export function TechnologiesSection() {
+  const { dictionary } = useLocale()
+
   return (
     <section
       id="tecnologias"
@@ -117,9 +120,9 @@ export function TechnologiesSection() {
       <div className="max-w-7xl mx-auto relative">
         <FadeIn className="mb-12">
           <SectionHeader
-            eyebrow="Stack"
-            title="Stack Tecnológico"
-            subtitle="Ferramentas e frameworks que utilizo para construir soluções robustas, do design da arquitetura ao deploy escalável."
+            eyebrow={dictionary.technologies.eyebrow}
+            title={dictionary.technologies.title}
+            subtitle={dictionary.technologies.subtitle}
           />
         </FadeIn>
 

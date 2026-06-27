@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { IconSearch } from '@/components/ui/icons/icon-search'
 import { buildListHref } from '@/lib/list-utils'
+import { useLocale } from '@/providers/locale-provider'
 import { cn } from '@/lib/utils'
 
 interface ContentSearchProps {
@@ -25,6 +26,7 @@ export function ContentSearch({
   className,
   debounceMs = 300,
 }: ContentSearchProps) {
+  const { dictionary } = useLocale()
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -100,7 +102,7 @@ export function ContentSearch({
           size="icon-sm"
           onClick={handleClear}
           className="absolute top-1/2 right-1.5 z-10 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-          aria-label="Limpar busca"
+          aria-label={dictionary.content.clearSearch}
         >
           <X className="h-4 w-4" aria-hidden="true" />
         </Button>

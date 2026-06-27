@@ -1,8 +1,11 @@
+'use client'
+
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { buildListHref, getPaginationRange } from '@/lib/list-utils'
+import { useLocale } from '@/providers/locale-provider'
 import { cn } from '@/lib/utils'
 
 interface ContentPaginationProps {
@@ -20,6 +23,8 @@ export function ContentPagination({
   query,
   className,
 }: ContentPaginationProps) {
+  const { dictionary } = useLocale()
+
   if (totalPages <= 1) return null
 
   const pages = getPaginationRange(currentPage, totalPages)
@@ -28,23 +33,23 @@ export function ContentPagination({
 
   return (
     <nav
-      aria-label="Paginação"
+      aria-label={dictionary.content.paginationAria}
       className={cn('flex flex-wrap items-center justify-center gap-2', className)}
     >
       {previousPage ? (
         <Button variant="outline" size="sm" asChild>
           <Link
             href={buildListHref(basePath, { q: query, page: previousPage })}
-            aria-label="Página anterior"
+            aria-label={dictionary.content.previous}
           >
             <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-            Anterior
+            {dictionary.content.previous}
           </Link>
         </Button>
       ) : (
         <Button variant="outline" size="sm" disabled aria-hidden="true">
           <ChevronLeft className="h-4 w-4" />
-          Anterior
+          {dictionary.content.previous}
         </Button>
       )}
 
@@ -71,7 +76,7 @@ export function ContentPagination({
               ) : (
                 <Link
                   href={buildListHref(basePath, { q: query, page })}
-                  aria-label={`Ir para página ${page}`}
+                  aria-label={dictionary.content.goToPage(page)}
                 >
                   {page}
                 </Link>
@@ -83,14 +88,17 @@ export function ContentPagination({
 
       {nextPage ? (
         <Button variant="outline" size="sm" asChild>
-          <Link href={buildListHref(basePath, { q: query, page: nextPage })} aria-label="Próxima página">
-            Próxima
+          <Link
+            href={buildListHref(basePath, { q: query, page: nextPage })}
+            aria-label={dictionary.content.next}
+          >
+            {dictionary.content.next}
             <ChevronRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </Button>
       ) : (
         <Button variant="outline" size="sm" disabled aria-hidden="true">
-          Próxima
+          {dictionary.content.next}
           <ChevronRight className="h-4 w-4" />
         </Button>
       )}

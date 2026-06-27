@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import { getDictionary, type Locale } from '@/i18n'
 import { CONTACT_INFO, SITE_CONFIG, SITE_URL, SOCIAL_LINKS } from '@/constants/site'
 
 export { SITE_URL }
@@ -11,25 +12,24 @@ export function absoluteUrl(path: string): string {
 
 const defaultOgImage = absoluteUrl('/foto-matheus-portfolio.png')
 
-export function createSiteMetadata(overrides: Metadata = {}): Metadata {
-  const title = overrides.title ?? SITE_CONFIG.title
-  const description = overrides.description ?? SITE_CONFIG.description
-  const resolvedTitle = typeof title === 'string' ? title : SITE_CONFIG.title
+function getOpenGraphLocale(locale: Locale): string {
+  return locale === 'pt-BR' ? 'pt_BR' : 'en_US'
+}
+
+export function createSiteMetadata(locale: Locale = 'pt-BR', overrides: Metadata = {}): Metadata {
+  const seo = getDictionary(locale).seo.site
+  const title = overrides.title ?? seo.title
+  const description = overrides.description ?? seo.description
+  const resolvedTitle = typeof title === 'string' ? title : seo.title
   const resolvedDescription =
-    typeof description === 'string' ? description : SITE_CONFIG.description
+    typeof description === 'string' ? description : seo.description
+  const { openGraph: openGraphOverrides, twitter: twitterOverrides, ...restOverrides } = overrides
 
   return {
     metadataBase: new URL(SITE_URL),
     title,
     description,
-    keywords: [
-      'Matheus Queiroz',
-      'Desenvolvedor Fullstack',
-      'React',
-      'Next.js',
-      'Node.js',
-      'Portfólio',
-    ],
+    keywords: [...seo.keywords],
     authors: [{ name: SITE_CONFIG.author }],
     creator: SITE_CONFIG.author,
     icons: {
@@ -57,7 +57,7 @@ export function createSiteMetadata(overrides: Metadata = {}): Metadata {
     },
     openGraph: {
       type: 'website',
-      locale: 'pt_BR',
+      locale: getOpenGraphLocale(locale),
       url: SITE_URL,
       siteName: SITE_CONFIG.author,
       title: resolvedTitle,
@@ -67,23 +67,49 @@ export function createSiteMetadata(overrides: Metadata = {}): Metadata {
           url: defaultOgImage,
           width: 1200,
           height: 630,
-          alt: `${SITE_CONFIG.author} — Desenvolvedor Fullstack`,
+          alt: seo.ogImageAlt,
         },
       ],
-      ...overrides.openGraph,
+      ...openGraphOverrides,
     },
     twitter: {
       card: 'summary_large_image',
       title: resolvedTitle,
       description: resolvedDescription,
       images: [defaultOgImage],
-      ...overrides.twitter,
+      ...twitterOverrides,
     },
-    ...overrides,
+    ...restOverrides,
   }
 }
 
-export function getPersonJsonLd() {
+export function createPageMetadata(
+  locale: Locale,
+  config: {
+    title: string
+    description: string
+    openGraph?: Metadata['openGraph']
+    twitter?: Metadata['twitter']
+  },
+): Metadata {
+  return createSiteMetadata(locale, {
+    title: config.title,
+    description: config.description,
+    openGraph: {
+      title: config.title,
+      description: config.description,
+      ...config.openGraph,
+    },
+    twitter: {
+      title: config.title,
+      description: config.description,
+      ...config.twitter,
+    },
+  })
+}
+
+export function getPersonJsonLd(locale: Locale = 'pt-BR') {
+  const seo = getDictionary(locale).seo.site
   const sameAs = SOCIAL_LINKS.filter((link) => !link.download).map((link) => link.url)
 
   return {
@@ -92,17 +118,17 @@ export function getPersonJsonLd() {
       {
         '@type': 'Person',
         name: SITE_CONFIG.author,
-        jobTitle: 'Desenvolvedor Fullstack',
+        jobTitle: seo.jobTitle,
         url: SITE_URL,
         sameAs,
         email: `mailto:${CONTACT_INFO.email}`,
       },
       {
         '@type': 'WebSite',
-        name: SITE_CONFIG.title,
+        name: seo.title,
         url: SITE_URL,
-        description: SITE_CONFIG.description,
-        inLanguage: 'pt-BR',
+        description: seo.description,
+        inLanguage: locale === 'pt-BR' ? 'pt-BR' : 'en',
         author: {
           '@type': 'Person',
           name: SITE_CONFIG.author,

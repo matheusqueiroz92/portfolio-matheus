@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Rss } from 'lucide-react'
@@ -5,21 +7,17 @@ import { ArrowRight, Rss } from 'lucide-react'
 import { FadeInStagger, FadeInItem } from '@/components/motion'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
+import { formatLocaleDate } from '@/lib/format-locale-date'
+import { useLocale } from '@/providers/locale-provider'
 import type { BlogPostListItem } from '@/types'
-
-function formatDate(value: string): string {
-  return new Date(value).toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  })
-}
 
 interface BlogPostsGridProps {
   posts: BlogPostListItem[]
 }
 
 export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
+  const { locale, dictionary } = useLocale()
+  const copy = dictionary.pages.blog
   const staggerKey = posts.map((post) => post.slug).join('|')
 
   return (
@@ -35,9 +33,9 @@ export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
             <Link
               href={`/blog/${post.slug}`}
               className="absolute inset-0 z-10 rounded-[inherit] focus:outline-none"
-              aria-label={`Ler: ${post.title}`}
+              aria-label={copy.readAria(post.title)}
             >
-              <span className="sr-only">Ler: {post.title}</span>
+              <span className="sr-only">{copy.readAria(post.title)}</span>
             </Link>
 
             {post.coverImage?.url ? (
@@ -58,7 +56,7 @@ export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
             )}
 
             <CardContent className="flex grow flex-col p-5">
-              <p className="eyebrow mb-2">{formatDate(post.publishedDate)}</p>
+              <p className="eyebrow mb-2">{formatLocaleDate(post.publishedDate, locale)}</p>
               <h3 className="mb-2 text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
                 {post.title}
               </h3>
@@ -82,7 +80,7 @@ export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
 
               <div className="mt-5 text-xs">
                 <span className="inline-flex items-center gap-1.5 font-medium text-primary transition-transform duration-300 group-hover:translate-x-0.5">
-                  Ler artigo
+                  {copy.readArticle}
                   <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </span>
               </div>

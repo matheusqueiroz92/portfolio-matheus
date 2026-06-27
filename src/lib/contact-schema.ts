@@ -1,21 +1,23 @@
 import { z } from 'zod'
 
+import { getDictionary, type Locale } from '@/i18n'
+
 /**
  * Schema compartilhado entre o formulário de contato (cliente) e o route
  * handler `/api/contact` (servidor). Mantendo num só lugar, ambos ficam
  * sincronizados — se uma regra mudar aqui, os dois lados são atualizados
  * e o TypeScript avisa em caso de divergência.
  */
-export const contactFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, 'O nome deve ter pelo menos 2 caracteres')
-    .max(100, 'O nome deve ter no máximo 100 caracteres'),
-  email: z.string().email('Email inválido'),
-  message: z
-    .string()
-    .min(10, 'A mensagem deve ter pelo menos 10 caracteres')
-    .max(1000, 'A mensagem deve ter no máximo 1000 caracteres'),
-})
+export function createContactFormSchema(locale: Locale = 'pt-BR') {
+  const validation = getDictionary(locale).contact.validation
 
-export type ContactFormData = z.infer<typeof contactFormSchema>
+  return z.object({
+    name: z.string().min(2, validation.nameMin).max(100, validation.nameMax),
+    email: z.string().email(validation.emailInvalid),
+    message: z.string().min(10, validation.messageMin).max(1000, validation.messageMax),
+  })
+}
+
+export const contactFormSchema = createContactFormSchema()
+
+export type ContactFormData = z.infer<ReturnType<typeof createContactFormSchema>>

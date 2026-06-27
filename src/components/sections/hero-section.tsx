@@ -1,12 +1,12 @@
 'use client'
 
 import { ExternalLink, ArrowRight, CodeXml, LaptopMinimal, Cpu } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ScrollDownButton } from '../ui/scroll-down-button'
-import { AVAILABILITY_BADGE, getHeroSubtitle, HERO_PHRASES } from '@/constants/site'
+import { useLocale } from '@/providers/locale-provider'
 
 /**
  * Retrato com efeito "lâmpada": o cursor escreve sua posição em `--mx` / `--my`
@@ -94,19 +94,15 @@ function HeroPortrait() {
 
 const BADGES = [
   {
-    title: 'Dev. Fullstack',
     icon: CodeXml,
-    description: 'Desenvolvedor Fullstack',
   },
   {
-    title: 'Eng. Software',
     icon: LaptopMinimal,
   },
   {
-    title: 'Eng. Computação',
     icon: Cpu,
   },
-]
+] as const
 
 // Parent orchestrator: staggers the children on mount.
 const containerVariants: Variants = {
@@ -174,10 +170,22 @@ const photoVariants: Variants = {
 }
 
 export function HeroSection() {
+  const { dictionary } = useLocale()
+  const heroPhrases = dictionary.site.heroPhrases
+  const longestPhrase = useMemo(
+    () => heroPhrases.reduce((longest, phrase) => (phrase.length > longest.length ? phrase : longest), ''),
+    [heroPhrases],
+  )
   const [phraseIndex, setPhraseIndex] = useState(0)
   const [displayText, setDisplayText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+
+  useEffect(() => {
+    setPhraseIndex(0)
+    setDisplayText('')
+    setIsDeleting(false)
+  }, [heroPhrases])
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -189,11 +197,11 @@ export function HeroSection() {
 
   useEffect(() => {
     if (prefersReducedMotion) {
-      setDisplayText(HERO_PHRASES[0])
+      setDisplayText(heroPhrases[0])
       return
     }
 
-    const currentPhrase = HERO_PHRASES[phraseIndex]
+    const currentPhrase = heroPhrases[phraseIndex]
 
     if (!isDeleting && displayText === currentPhrase) {
       const timeout = setTimeout(() => setIsDeleting(true), 1500)
@@ -203,7 +211,7 @@ export function HeroSection() {
     if (isDeleting && displayText === '') {
       const timeout = setTimeout(() => {
         setIsDeleting(false)
-        setPhraseIndex((prev) => (prev + 1) % HERO_PHRASES.length)
+        setPhraseIndex((prev) => (prev + 1) % heroPhrases.length)
       }, 400)
       return () => clearTimeout(timeout)
     }
@@ -217,7 +225,7 @@ export function HeroSection() {
     )
 
     return () => clearTimeout(timeout)
-  }, [displayText, isDeleting, phraseIndex, prefersReducedMotion])
+  }, [displayText, heroPhrases, isDeleting, phraseIndex, prefersReducedMotion])
 
   return (
     <section
@@ -247,7 +255,7 @@ export function HeroSection() {
                 />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              {AVAILABILITY_BADGE}
+              {dictionary.site.availabilityBadge}
             </span>
           </motion.div>
 
@@ -256,13 +264,14 @@ export function HeroSection() {
             className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground sm:gap-3"
             variants={badgesRowVariants}
           >
-            {BADGES.map((badge) => (
+            {BADGES.map((badge, index) => (
               <motion.div
-                key={badge.title}
+                key={index}
                 variants={badgeVariants}
                 className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-muted px-3 py-1.5 sm:gap-2 sm:px-4 sm:py-2"
               >
-                <badge.icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> {badge.title}
+                <badge.icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />{' '}
+                {dictionary.site.heroBadges[index]?.title}
               </motion.div>
             ))}
           </motion.div>
@@ -272,12 +281,17 @@ export function HeroSection() {
             className="display-title text-3xl leading-tight text-foreground sm:text-5xl lg:text-6xl min-h-[3.6rem] sm:min-h-[4.2rem]"
             variants={copyVariants}
           >
-            Transformando ideias{' '}
+            {dictionary.site.heroTitlePrefix}{' '}
             <span className="hero-title-line">
-              em{' '}
+              {dictionary.site.heroTitleMiddle}{' '}
               <span className="typewriter-wrapper text-primary">
-                {displayText}
-                {!prefersReducedMotion && <span className="typewriter-cursor" />}
+                <span className="typewriter-measure" aria-hidden="true">
+                  {longestPhrase}
+                </span>
+                <span className="typewriter-text">
+                  {displayText}
+                  {!prefersReducedMotion && <span className="typewriter-cursor" />}
+                </span>
               </span>
             </span>
           </motion.h1>
@@ -287,7 +301,7 @@ export function HeroSection() {
             className="max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
             variants={copyVariants}
           >
-            {getHeroSubtitle()}
+            {dictionary.site.heroSubtitle}
           </motion.p>
 
           {/* Buttons CTAs */}
@@ -301,7 +315,7 @@ export function HeroSection() {
                 className="btn-primary-glow group relative inline-flex w-full items-center justify-center rounded-full bg-primary px-7 py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/25 sm:w-auto sm:px-10 sm:py-3.5"
               >
                 <div className="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
-                <span className="relative z-10 tracking-wide">Entre em Contato</span>
+                <span className="relative z-10 tracking-wide">{dictionary.hero.contactCta}</span>
                 <ArrowRight className="ml-2 h-4 w-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </motion.div>
@@ -311,7 +325,7 @@ export function HeroSection() {
                 className="group inline-flex w-full items-center justify-center rounded-full border border-border px-7 py-3 font-semibold text-foreground transition-all duration-300 hover:scale-[1.03] hover:bg-muted/70 sm:w-auto sm:px-8 sm:py-3.5"
               >
                 <ExternalLink className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                Ver Projetos
+                {dictionary.hero.viewProjectsCta}
               </Link>
             </motion.div>
           </motion.div>
@@ -482,8 +496,19 @@ export function HeroSection() {
         }
 
         .typewriter-wrapper {
-          display: inline;
+          display: inline-grid;
+          vertical-align: bottom;
+        }
+
+        .typewriter-measure,
+        .typewriter-text {
+          grid-area: 1 / 1;
           white-space: nowrap;
+        }
+
+        .typewriter-measure {
+          visibility: hidden;
+          pointer-events: none;
         }
 
         @keyframes cursorBlink {

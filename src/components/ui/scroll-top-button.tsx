@@ -1,64 +1,53 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { ArrowUp } from "lucide-react";
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { ArrowUp } from 'lucide-react'
 
-/**
- * Botão flutuante para voltar ao topo. Aparece quando o rodapé entra na
- * viewport, para não competir com o conteúdo durante a leitura.
- *
- * Acessibilidade:
- * - `aria-label` descreve a ação para leitores de tela.
- * - Quando invisível, o botão fica inacessível via teclado (`tabIndex={-1}`
- *   e `aria-hidden`), evitando foco em um alvo fora da tela.
- * - A animação de transição respeita `prefers-reduced-motion` via CSS global.
- */
+import { useLocale } from '@/providers/locale-provider'
+
 export function ScrollTopButton() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
+  const { dictionary } = useLocale()
 
   useEffect(() => {
     const handleScroll = () => {
-      const footer = document.querySelector("footer");
-      if (!footer) return;
+      const footer = document.querySelector('footer')
+      if (!footer) return
 
-      const footerRect = footer.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+      const footerRect = footer.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      const isFooterVisible = footerRect.top < windowHeight && footerRect.bottom > 0
 
-      // Exibe somente quando o rodapé começa a aparecer na viewport.
-      const isFooterVisible =
-        footerRect.top < windowHeight && footerRect.bottom > 0;
+      setIsVisible(isFooterVisible)
+    }
 
-      setIsVisible(isFooterVisible);
-    };
+    handleScroll()
 
-    // Verifica no momento da montagem.
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
+  }, [])
 
   return (
     <Link
       href="#inicio"
-      aria-label="Voltar ao topo da página"
+      aria-label={dictionary.common.scrollTop}
       aria-hidden={!isVisible}
       tabIndex={isVisible ? 0 : -1}
       className={`fixed bottom-8 right-8 z-50 bg-primary text-primary-foreground p-4 rounded-full shadow-2xl hover:bg-primary/90 transition-all duration-500 hover:scale-110 active:scale-95 group ${
         isVisible
-          ? "opacity-100 translate-y-0 pointer-events-auto"
-          : "opacity-0 translate-y-4 pointer-events-none"
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >
       <ArrowUp size={28} aria-hidden="true" />
     </Link>
-  );
+  )
 }
 
-export default ScrollTopButton;
+export default ScrollTopButton

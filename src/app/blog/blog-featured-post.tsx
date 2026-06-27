@@ -1,30 +1,29 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Rss } from 'lucide-react'
 
 import { FadeIn } from '@/components/motion'
 import { Badge } from '@/components/ui/badge'
+import { formatLocaleDate } from '@/lib/format-locale-date'
+import { useLocale } from '@/providers/locale-provider'
 import type { BlogPostListItem } from '@/types'
-
-function formatDate(value: string): string {
-  return new Date(value).toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  })
-}
 
 interface BlogFeaturedPostProps {
   post: BlogPostListItem
 }
 
 export function BlogFeaturedPost({ post }: BlogFeaturedPostProps) {
+  const { locale, dictionary } = useLocale()
+  const copy = dictionary.pages.blog
+
   return (
     <FadeIn className="mb-12">
       <Link
         href={`/blog/${post.slug}`}
         className="card-hover-lift group relative grid overflow-hidden rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background md:grid-cols-[1.1fr_1fr]"
-        aria-label={`Ler: ${post.title}`}
+        aria-label={copy.readAria(post.title)}
       >
         {post.coverImage?.url ? (
           <div className="relative aspect-16/10 bg-muted/30 md:aspect-auto md:min-h-[320px]">
@@ -45,13 +44,13 @@ export function BlogFeaturedPost({ post }: BlogFeaturedPostProps) {
         )}
 
         <div className="flex flex-col justify-center p-6 md:p-10">
-          <p className="eyebrow mb-3">Em destaque</p>
+          <p className="eyebrow mb-3">{copy.featured}</p>
           <h2 className="mb-3 text-2xl font-semibold text-foreground transition-colors duration-300 group-hover:text-primary md:text-3xl">
             {post.title}
           </h2>
           <p className="mb-5 line-clamp-3 leading-relaxed text-muted-foreground">{post.excerpt}</p>
           <div className="mb-5 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-            <time dateTime={post.publishedDate}>{formatDate(post.publishedDate)}</time>
+            <time dateTime={post.publishedDate}>{formatLocaleDate(post.publishedDate, locale)}</time>
           </div>
           {post.tags && post.tags.length > 0 && (
             <div className="mb-6 flex flex-wrap gap-2">
@@ -67,7 +66,7 @@ export function BlogFeaturedPost({ post }: BlogFeaturedPostProps) {
             </div>
           )}
           <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
-            Ler artigo
+            {copy.readArticle}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </span>
         </div>
