@@ -36,7 +36,7 @@ export function Header() {
           >
             <Image
               src="/logo-matheus-dev-azul-escuro.png"
-              alt="Logo Matheus Queiroz"
+              alt="Logo Matheus Queiroz - Tema Escuro"
               width={150}
               height={100}
               priority
@@ -44,7 +44,7 @@ export function Header() {
             />
             <Image
               src="/logo-matheus-dev-azul-claro.png"
-              alt=""
+              alt="Logo Matheus Queiroz - TemaClaro"
               aria-hidden="true"
               width={150}
               height={100}

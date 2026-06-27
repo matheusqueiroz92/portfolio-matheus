@@ -128,8 +128,8 @@ function ProjectCard({ project }: { project: ProjectListItem }) {
 export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionProps) {
   return (
     <section
-      id="projetos"
-      className="section-shell transition-colors duration-300"
+      id="projects"
+      className="section-shell transition-colors bg-background/80 duration-300"
     >
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-10 sm:mb-12">
@@ -245,7 +245,7 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
         </FadeIn>
       </div>
 
-      <ScrollDownButton href="#contato" />
+      <ScrollDownButton href="#contact" />
     </section>
   )
 }

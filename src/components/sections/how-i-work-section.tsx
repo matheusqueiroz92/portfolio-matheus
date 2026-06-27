@@ -35,8 +35,8 @@ const PILLARS = [
 export function HowIWorkSection() {
   return (
     <section
-      id="como-trabalho"
-      className="section-shell bg-background/50 transition-colors duration-300"
+      id="how-i-work"
+      className="section-shell bg-background/80 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-12 sm:mb-16">
@@ -69,7 +69,7 @@ export function HowIWorkSection() {
         </FadeInStagger>
       </div>
 
-      <ScrollDownButton href="#areas-atuacao" />
+      <ScrollDownButton href="#practice-areas" />
     </section>
   )
 }

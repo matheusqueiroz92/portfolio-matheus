@@ -2,8 +2,7 @@ import { Linkedin, Github, Instagram, FileDown } from 'lucide-react'
 
 import type { ContactInfo, NavigationItem, SocialLink, Stat } from '@/types'
 
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://matheusqueiroz.dev.br'
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://matheusqueiroz.dev.br'
 
 export const AVAILABILITY_BADGE = 'Aberto a oportunidades e projetos fullstack'
 
@@ -27,8 +26,7 @@ export const STATS: Stat[] = [
 export const CONTACT_INFO: ContactInfo = {
   email: 'contato@matheusqueiroz.dev.br',
   phone: '(77) 98833-4370',
-  whatsapp:
-    'https://web.whatsapp.com/send/?phone=5577988334370&text=Ol%C3%A1+Matheus',
+  whatsapp: 'https://web.whatsapp.com/send/?phone=5577988334370&text=Ol%C3%A1+Matheus',
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
@@ -64,26 +62,26 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ]
 
 export const NAV_ITEMS: NavigationItem[] = [
-  { label: 'Início', href: '/#inicio' },
-  { label: 'Sobre', href: '/#sobre' },
-  { label: 'Projetos', href: '/projects' },
-  { label: 'Contato', href: '/#contato' },
+  { label: 'Início', href: '/#home' },
+  { label: 'Sobre', href: '/#about' },
+  { label: 'Projetos', href: '/#projects' },
+  { label: 'Contato', href: '/#contact' },
   { label: 'Blog', href: '/blog' },
 ]
 
 export const FOOTER_QUICK_LINKS: NavigationItem[] = [
-  { label: 'Início', href: '/#inicio' },
-  { label: 'Sobre', href: '/#sobre' },
-  { label: 'Projetos', href: '/projects' },
+  { label: 'Início', href: '/#home' },
+  { label: 'Sobre', href: '/#about' },
+  { label: 'Projetos', href: '/#projects' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Contato', href: '/#contato' },
+  { label: 'Contato', href: '/#contact' },
 ]
 
 export const FOOTER_SERVICES: NavigationItem[] = [
-  { label: 'Desenvolvimento Fullstack', href: '/#areas-atuacao' },
-  { label: 'Soluções com IA', href: '/#areas-atuacao' },
-  { label: 'Consultoria', href: '/#contato' },
-  { label: 'Manutenção & Evolução', href: '/#contato' },
+  { label: 'Desenvolvimento Fullstack', href: '/#practice-areas' },
+  { label: 'Soluções com IA', href: '/#practice-areas' },
+  { label: 'Consultoria', href: '/#contact' },
+  { label: 'Manutenção & Evolução', href: '/#contact' },
 ]
 
 export const HERO_PHRASES = [

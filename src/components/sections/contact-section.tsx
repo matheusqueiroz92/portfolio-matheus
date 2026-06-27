@@ -77,7 +77,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contato" className="section-shell bg-background/50 transition-colors duration-300">
+    <section id="contato" className="section-shell transition-colors duration-300">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-muted/40 rounded-full blur-3xl"></div>

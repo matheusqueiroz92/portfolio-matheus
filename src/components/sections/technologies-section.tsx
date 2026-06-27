@@ -107,7 +107,7 @@ export function TechnologiesSection() {
   return (
     <section
       id="tecnologias"
-      className="section-shell overflow-hidden bg-background/50 transition-colors duration-300"
+      className="section-shell overflow-hidden transition-colors duration-300"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

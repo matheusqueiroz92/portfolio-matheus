@@ -9,7 +9,7 @@ import { FadeInStagger, FadeInItem } from '@/components/motion'
 
 export function AboutSection() {
   return (
-    <section id="sobre" className="section-shell bg-background/50 transition-colors duration-300">
+    <section id="sobre" className="section-shell bg-background/80 transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
         <FadeInStagger className="space-y-8" stagger={0.12}>
           <FadeInItem>

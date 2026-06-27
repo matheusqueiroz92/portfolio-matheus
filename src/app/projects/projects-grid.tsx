@@ -21,8 +21,15 @@ interface ProjectsGridProps {
  * sendo async/server component e passa os dados já resolvidos.
  */
 export function ProjectsGrid({ projects }: ProjectsGridProps) {
+  const staggerKey = projects.map((project) => project.slug).join('|')
+
   return (
-    <FadeInStagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-4" stagger={0.1}>
+    <FadeInStagger
+      key={staggerKey}
+      immediate
+      className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
+      stagger={0.1}
+    >
       {projects.map((project) => {
         const year = new Date(project.updatedAt).getFullYear()
         const meta = project.scale ? `${year} · ${project.scale}` : `${year}`

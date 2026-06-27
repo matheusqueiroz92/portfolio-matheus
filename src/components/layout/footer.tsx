@@ -2,19 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import LogoDark from '../../../public/logo-matheus-dev-azul-claro.png'
 import LogoLight from '../../../public/logo-matheus-dev-azul-escuro.png'
-import {
-  FOOTER_QUICK_LINKS,
-  FOOTER_SERVICES,
-  SITE_CONFIG,
-  SOCIAL_LINKS,
-} from '@/constants/site'
+import { FOOTER_QUICK_LINKS, FOOTER_SERVICES, SITE_CONFIG, SOCIAL_LINKS } from '@/constants/site'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
     <footer
-      className="relative bg-background text-foreground py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 border-t border-border/60"
+      className="relative bg-background/80 text-foreground py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 border-t border-border/60"
       aria-labelledby="rodape-heading"
     >
       <h2 id="rodape-heading" className="sr-only">

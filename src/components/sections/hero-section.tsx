@@ -221,14 +221,11 @@ export function HeroSection() {
 
   return (
     <section
-      id="inicio"
+      id="home"
       className="section-shell relative flex min-h-screen items-center sm:px-6 lg:px-8"
     >
       {/* Aura ambiente — uma única camada no topo para evitar repetição */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-      >
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-primary/8 blur-3xl dark:bg-primary/12" />
       </div>
 
@@ -300,7 +297,7 @@ export function HeroSection() {
           >
             <motion.div variants={ctaItemVariants}>
               <Link
-                href="#contato"
+                href="#contact"
                 className="btn-primary-glow group relative inline-flex w-full items-center justify-center rounded-full bg-primary px-7 py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/25 sm:w-auto sm:px-10 sm:py-3.5"
               >
                 <div className="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
@@ -310,7 +307,7 @@ export function HeroSection() {
             </motion.div>
             <motion.div variants={ctaItemVariants}>
               <Link
-                href="#projetos"
+                href="#projects"
                 className="group inline-flex w-full items-center justify-center rounded-full border border-border px-7 py-3 font-semibold text-foreground transition-all duration-300 hover:scale-[1.03] hover:bg-muted/70 sm:w-auto sm:px-8 sm:py-3.5"
               >
                 <ExternalLink className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -326,7 +323,7 @@ export function HeroSection() {
         </motion.div>
       </motion.div>
 
-      <ScrollDownButton href="#sobre" />
+      <ScrollDownButton href="#about" />
 
       {/* Estilos globais para o retrato: precisam ser `global` porque o
           `HeroPortrait` é um subcomponente — styled-jsx escopado não

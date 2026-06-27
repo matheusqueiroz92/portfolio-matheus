@@ -31,8 +31,8 @@ export function HomeShell({ featuredProjects, flagshipProject }: HomeShellProps)
           <HeroSection />
           <AboutSection />
           <HowIWorkSection />
-          <PracticeAreasSection />
           <TechnologiesSection />
+          <PracticeAreasSection />
           <ProjectsSection projects={featuredProjects} flagshipProject={flagshipProject} />
           <ContactSection />
         </main>

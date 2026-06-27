@@ -16,13 +16,13 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(currentTheme === 'light' ? 'dark' : 'light')}
-      className="relative w-14 h-7 bg-secondary rounded-full transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50"
+      className="relative w-14 h-7 bg-secondary cursor-pointer rounded-full transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50"
       aria-label="Alternar tema"
     >
       <span className="sr-only">Alternar tema</span>
 
       {/* Track background */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-secondary to-muted transition-all duration-300" />
+      <div className="absolute inset-0 rounded-full bg-linear-to-r from-secondary to-muted transition-all duration-300" />
 
       {/* Icons on track */}
       <div className="absolute inset-0 flex items-center justify-between px-1.5">
@@ -37,7 +37,7 @@ export function ThemeToggle() {
         }`}
       >
         {/* Handle glow effect */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-card to-secondary shadow-inner" />
+        <div className="absolute inset-0 rounded-full bg-linear-to-br from-card to-secondary shadow-inner" />
 
         {/* Handle icon */}
         <div className="absolute inset-0 flex items-center justify-center">
@@ -52,7 +52,7 @@ export function ThemeToggle() {
       </div>
 
       {/* Hover effect */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-primary/10 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute inset-0 rounded-full bg-linear-to-r from-primary/20 to-primary/10 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
     </button>
   )
 }
