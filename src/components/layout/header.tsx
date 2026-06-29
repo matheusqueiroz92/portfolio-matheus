@@ -43,7 +43,7 @@ export function Header() {
               width={150}
               height={100}
               priority
-              className="block dark:hidden h-auto w-[150px]"
+              className="block dark:hidden h-auto w-[120px] sm:w-[150px]"
             />
             <Image
               src="/logo-matheus-dev-azul-claro.png"
@@ -52,13 +52,13 @@ export function Header() {
               width={150}
               height={100}
               priority
-              className="hidden dark:block h-auto w-[150px]"
+              className="hidden dark:block h-auto w-[120px] sm:w-[150px]"
             />
           </Link>
 
           <nav
             aria-label={dictionary.header.mainNav}
-            className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2"
+            className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2"
           >
             {NAV_ITEMS.map((item) => (
               <Link
@@ -75,50 +75,51 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center space-x-4">
-            {SOCIAL_LINKS.map((social) => (
-              <Tooltip key={social.url}>
-                <TooltipTrigger asChild>
-                  <a
-                    href={social.url}
-                    target={social.download ? '_self' : '_blank'}
-                    rel={social.download ? undefined : 'noopener noreferrer'}
-                    download={
-                      social.download ? dictionary.common.resumeDownloadFilename : undefined
-                    }
-                    aria-label={dictionary.social[social.key]}
-                    className="text-muted-foreground transition-all duration-300 hover:scale-110 hover:text-foreground rounded-full p-1"
-                  >
-                    <social.icon className="w-5 h-5" aria-hidden="true" />
-                  </a>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">{dictionary.social[social.key]}</TooltipContent>
-              </Tooltip>
-            ))}
+          <div className="flex items-center gap-1 sm:gap-2 lg:gap-4">
+            <div className="hidden lg:flex items-center space-x-4">
+              {SOCIAL_LINKS.map((social) => (
+                <Tooltip key={social.url}>
+                  <TooltipTrigger asChild>
+                    <a
+                      href={social.url}
+                      target={social.download ? '_self' : '_blank'}
+                      rel={social.download ? undefined : 'noopener noreferrer'}
+                      download={
+                        social.download ? dictionary.common.resumeDownloadFilename : undefined
+                      }
+                      aria-label={dictionary.social[social.key]}
+                      className="text-muted-foreground transition-all duration-300 hover:scale-110 hover:text-foreground rounded-full p-1"
+                    >
+                      <social.icon className="w-5 h-5" aria-hidden="true" />
+                    </a>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom">{dictionary.social[social.key]}</TooltipContent>
+                </Tooltip>
+              ))}
+            </div>
             <ThemeToggle />
             <LanguageToggle />
+            <button
+              type="button"
+              onClick={toggleMenu}
+              aria-expanded={isMenuOpen}
+              aria-controls="menu-mobile"
+              aria-label={isMenuOpen ? dictionary.header.closeMenu : dictionary.header.openMenu}
+              className="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground transition-all duration-300"
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6" aria-hidden="true" />
+              ) : (
+                <Menu className="w-6 h-6" aria-hidden="true" />
+              )}
+            </button>
           </div>
-
-          <button
-            type="button"
-            onClick={toggleMenu}
-            aria-expanded={isMenuOpen}
-            aria-controls="menu-mobile"
-            aria-label={isMenuOpen ? dictionary.header.closeMenu : dictionary.header.openMenu}
-            className="md:hidden p-2 rounded-md text-muted-foreground hover:text-foreground transition-all duration-300"
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" aria-hidden="true" />
-            ) : (
-              <Menu className="w-6 h-6" aria-hidden="true" />
-            )}
-          </button>
         </div>
 
         {isMenuOpen && (
           <div
             id="menu-mobile"
-            className="md:hidden py-6 border-t border-border/60 bg-background/95 animate-in slide-in-from-top-2 transition-colors duration-300"
+            className="lg:hidden py-6 border-t border-border/60 bg-background/95 animate-in slide-in-from-top-2 transition-colors duration-300"
           >
             <nav aria-label={dictionary.header.mobileNav} className="flex flex-col space-y-6">
               {NAV_ITEMS.map((item) => (
@@ -151,8 +152,6 @@ export function Header() {
                     <TooltipContent side="bottom">{dictionary.social[social.key]}</TooltipContent>
                   </Tooltip>
                 ))}
-                <LanguageToggle />
-                <ThemeToggle />
               </div>
             </nav>
           </div>

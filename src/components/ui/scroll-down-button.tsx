@@ -14,7 +14,7 @@ export function ScrollDownButton({ href, label }: ScrollDownButtonProps) {
   const { dictionary } = useLocale()
 
   return (
-    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce motion-reduce:animate-none">
+    <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 pb-[env(safe-area-inset-bottom)] animate-bounce motion-reduce:animate-none">
       <Link
         href={href}
         aria-label={label ?? dictionary.common.scrollDown}

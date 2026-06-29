@@ -20,7 +20,7 @@ export function SectionHeader({
   return (
     <header className={cn(isCenter ? 'text-center' : 'text-left', className)}>
       {eyebrow && <p className={cn('eyebrow mb-3', isCenter && 'mx-auto')}>{eyebrow}</p>}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tracking-tight">
+      <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-foreground tracking-tight">
         {title}
       </h2>
       <div

@@ -64,7 +64,7 @@ export function AboutSection() {
             <Link
               href="/curriculo.pdf"
               download={dictionary.common.resumeDownloadFilename}
-              className="btn-primary-glow group relative inline-flex items-center justify-center rounded-full bg-primary px-14 py-4 font-semibold text-primary-foreground shadow-lg shadow-primary/30"
+              className="btn-primary-glow group relative inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-primary px-8 sm:px-14 py-3.5 sm:py-4 font-semibold text-primary-foreground shadow-lg shadow-primary/30"
             >
               <div className="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
               <Download className="mr-3 h-5 w-5 relative z-10 transition-transform duration-300 group-hover:translate-y-[-2px] group-hover:scale-110" />

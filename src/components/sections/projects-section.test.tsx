@@ -19,6 +19,10 @@ vi.mock('@/hooks/use-prefers-reduced-motion', () => ({
   usePrefersReducedMotion: () => true,
 }))
 
+vi.mock('@/hooks/use-media-query', () => ({
+  useCompactViewport: () => true,
+}))
+
 describe('ProjectsSection', () => {
   it('lists featured and regular projects with links to detail pages', () => {
     renderWithProviders(

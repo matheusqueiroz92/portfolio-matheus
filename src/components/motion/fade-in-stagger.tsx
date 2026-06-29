@@ -25,7 +25,7 @@ export function FadeInStagger({
   stagger = 0.1,
   delay = 0,
   immediate = false,
-  amount = 0.2,
+  amount = 0.1,
   ...rest
 }: FadeInStaggerProps) {
   const variants: Variants = {
@@ -43,7 +43,7 @@ export function FadeInStagger({
     : {
         initial: "hidden" as const,
         whileInView: "visible" as const,
-        viewport: { once: true, amount },
+        viewport: { once: true, amount, margin: '0px 0px -8% 0px' },
       };
 
   return (

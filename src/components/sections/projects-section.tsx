@@ -9,6 +9,7 @@ import { ScrollDownButton } from '../ui/scroll-down-button'
 import { SectionHeader } from '../ui/section-header'
 import { FadeIn, FadeInStagger, FadeInItem } from '@/components/motion'
 import { ProjectsScrollBelt, shouldUseProjectsBelt } from './projects-scroll-belt'
+import { useCompactViewport } from '@/hooks/use-media-query'
 import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion'
 import { useLocale } from '@/providers/locale-provider'
 import type { Dictionary } from '@/i18n/types'
@@ -228,7 +229,13 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
   const { dictionary } = useLocale()
   const copy = dictionary.projects
   const prefersReducedMotion = usePrefersReducedMotion()
-  const useBelt = shouldUseProjectsBelt(prefersReducedMotion, flagshipProject ?? null, projects)
+  const isCompactViewport = useCompactViewport()
+  const useBelt = shouldUseProjectsBelt(
+    prefersReducedMotion,
+    isCompactViewport,
+    flagshipProject ?? null,
+    projects,
+  )
 
   const hasProjects = projects.length > 0 || Boolean(flagshipProject)
 

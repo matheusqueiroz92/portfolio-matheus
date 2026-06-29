@@ -116,7 +116,7 @@ function ProjectBeltSlide({
           </p>
 
           {isFlagship && (
-            <ul className="hidden sm:block space-y-1.5">
+            <ul className="space-y-1.5">
               {copy.flagshipHighlights.slice(0, 2).map((highlight) => (
                 <li
                   key={highlight}
@@ -213,13 +213,14 @@ function ProjectBeltSlide({
 
 export function shouldUseProjectsBelt(
   prefersReducedMotion: boolean,
+  isCompactViewport: boolean,
   flagshipProject: ProjectListItem | null,
   projects: ProjectListItem[],
 ): boolean {
   const count =
     (flagshipProject ? 1 : 0) +
     projects.filter((p) => p.slug !== flagshipProject?.slug).length
-  return !prefersReducedMotion && count >= 2
+  return !prefersReducedMotion && !isCompactViewport && count >= 2
 }
 
 export function ProjectsScrollBelt({

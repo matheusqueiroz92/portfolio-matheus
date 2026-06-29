@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import './globals.css'
 import { SkipLink } from '@/components/layout/skip-link'
+import { FloatingChatbot } from '@/components/chatbot'
 import { FaviconUpdater } from '@/components/ui/fav-icon-updater'
 import { MotionConfigProvider, SmoothScrollProvider } from '@/components/motion'
 import { JsonLd } from '@/components/seo/json-ld'
@@ -46,6 +47,7 @@ export default function RootLayout({
               <MotionConfigProvider>
                 <FaviconUpdater />
                 {children}
+                <FloatingChatbot />
               </MotionConfigProvider>
             </SmoothScrollProvider>
           </ThemeProvider>

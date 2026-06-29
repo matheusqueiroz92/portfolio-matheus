@@ -234,6 +234,28 @@ export const en: Dictionary = {
       messageMax: 'Message must be at most 1000 characters',
     },
   },
+  chatbot: {
+    open: 'Open virtual assistant',
+    close: 'Close virtual assistant',
+    title: 'Matheus Assistant',
+    subtitle: 'Ask about projects, experience, and technologies',
+    welcome:
+      'Hi! I am Matheus assistant. I can answer questions about projects, stack, background, and availability.',
+    placeholder: 'Type your question…',
+    send: 'Send',
+    searching: 'Searching documents…',
+    generating: 'Generating response…',
+    limitReached: 'You reached the question limit for this session.',
+    remaining: (n) => `${n} question${n === 1 ? '' : 's'} remaining`,
+    rateLimited: 'Too many requests. Please wait a moment and try again.',
+    genericError: 'Could not get a response. Please try again.',
+    contactCta: 'Contact me directly',
+    suggestions: [
+      'What technologies do you work with?',
+      'Tell me about your projects',
+      'Are you available for freelance work?',
+    ],
+  },
   footer: {
     heading: 'Footer',
     homeAriaLabel: 'Go to homepage',

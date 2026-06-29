@@ -28,7 +28,7 @@ export function ProjectDetailShell({ project }: ProjectDetailShellProps) {
       />
       <Header />
 
-      <main id="conteudo-principal" className="relative pt-28 pb-24">
+      <main id="conteudo-principal" className="relative px-4 pt-24 pb-20 sm:px-6 sm:pt-28 sm:pb-24 lg:px-8">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-[50vh]"
           style={{
@@ -37,7 +37,7 @@ export function ProjectDetailShell({ project }: ProjectDetailShellProps) {
           }}
         />
 
-        <article className="relative px-4 sm:px-6 lg:px-8">
+        <article className="relative">
           <div className="max-w-3xl mx-auto">
             <Link
               href="/projects"
@@ -48,7 +48,7 @@ export function ProjectDetailShell({ project }: ProjectDetailShellProps) {
             </Link>
 
             <header className="space-y-4 mb-10">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-foreground">
                 {project.title}
               </h1>
               <div className="flex flex-wrap gap-2">

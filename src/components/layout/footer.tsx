@@ -39,7 +39,7 @@ export function Footer() {
                 width={240}
                 height={80}
                 priority
-                className="block dark:hidden h-auto w-[240px]"
+                className="block dark:hidden h-auto w-full max-w-[180px] sm:max-w-[240px]"
               />
               <Image
                 src={LogoDark}
@@ -48,7 +48,7 @@ export function Footer() {
                 width={240}
                 height={80}
                 priority
-                className="hidden dark:block h-auto w-[240px]"
+                className="hidden dark:block h-auto w-full max-w-[180px] sm:max-w-[240px]"
               />
             </Link>
             <p className="text-muted-foreground mb-6 max-w-md">{dictionary.site.footerTagline}</p>

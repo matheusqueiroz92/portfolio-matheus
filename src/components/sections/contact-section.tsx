@@ -85,9 +85,9 @@ export function ContactSection() {
           <SectionHeader eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} />
         </FadeIn>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
           <FadeIn direction="left">
-            <div className="bg-card/80 rounded-2xl p-8 shadow-2xl border border-border/60 transition-colors duration-300">
+            <div className="bg-card/80 rounded-2xl p-5 sm:p-8 shadow-2xl border border-border/60 transition-colors duration-300">
               <div className="flex items-center mb-6">
                 <div
                   aria-hidden="true"
@@ -192,7 +192,7 @@ export function ContactSection() {
           </FadeIn>
 
           <FadeIn direction="right">
-            <div className="bg-card/80 rounded-2xl p-8 shadow-2xl border border-border/60 transition-colors duration-300">
+            <div className="bg-card/80 rounded-2xl p-5 sm:p-8 shadow-2xl border border-border/60 transition-colors duration-300">
               <div className="flex items-center mb-4">
                 <div
                   aria-hidden="true"

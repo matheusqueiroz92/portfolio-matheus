@@ -157,6 +157,23 @@ export interface Dictionary {
       messageMax: string
     }
   }
+  chatbot: {
+    open: string
+    close: string
+    title: string
+    subtitle: string
+    welcome: string
+    placeholder: string
+    send: string
+    searching: string
+    generating: string
+    limitReached: string
+    remaining: (n: number) => string
+    rateLimited: string
+    genericError: string
+    contactCta: string
+    suggestions: readonly string[]
+  }
   footer: {
     heading: string
     homeAriaLabel: string

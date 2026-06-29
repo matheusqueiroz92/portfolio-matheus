@@ -1,5 +1,6 @@
 "use client";
 
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { ReactLenis, useLenis } from "lenis/react";
 import { ReactNode, useEffect, useMemo, useSyncExternalStore } from "react";
 
@@ -99,10 +100,11 @@ function usePrefersReducedMotion(): boolean {
 
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const isCompactViewport = useMediaQuery("(max-width: 1023px)");
 
-  // If the user asks for reduced motion, skip Lenis entirely and let the
-  // browser handle scroll natively (instant, no easing).
-  if (prefersReducedMotion) {
+  // Em viewports compactos ou com movimento reduzido, scroll nativo evita
+  // jank em touch e conflitos com animações de scroll-pin.
+  if (prefersReducedMotion || isCompactViewport) {
     return <>{children}</>;
   }
 

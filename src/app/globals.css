@@ -50,9 +50,12 @@
 html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 body {
+  overflow-x: clip;
+  max-width: 100%;
   font-family:
     var(--font-geist-sans),
     ui-sans-serif,
@@ -124,9 +127,14 @@ h6 {
 /* Shell de seção — ritmo vertical 8dp consistente */
 .section-shell {
   position: relative;
-  padding-block: clamp(4rem, 8vw, 8rem);
+  padding-block: clamp(3rem, 7vw, 8rem);
   padding-inline: clamp(1rem, 4vw, 2rem);
   border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+/* Compensa header fixo (h-20) em âncoras de seção */
+main > section[id] {
+  scroll-margin-top: 5.5rem;
 }
 
 /* Cards de estatística — elevação sutil sem layout shift */
@@ -299,6 +307,29 @@ h6 {
   min-height: calc(100vh - 80px);
 }
 
+@media (max-width: 1023px) {
+  .project-belt-track {
+    height: auto;
+    min-height: auto;
+  }
+
+  .project-belt-pin {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    height: auto;
+    min-height: auto;
+  }
+
+  .project-belt-viewport {
+    min-height: 18rem;
+    max-height: none;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
+
 .project-belt-pin {
   width: 100%;
   height: calc(100vh - 80px);
@@ -321,6 +352,23 @@ h6 {
     black 90%,
     transparent 100%
   );
+}
+
+@media (max-width: 639px) {
+  .project-belt-viewport {
+    min-height: 16rem;
+    max-height: none;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .project-belt-card-body {
+    padding: 1rem 1.125rem;
+  }
+
+  .project-belt-card-media {
+    min-height: 9.5rem;
+  }
 }
 
 .project-belt-card {

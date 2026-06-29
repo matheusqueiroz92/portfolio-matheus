@@ -234,7 +234,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="section-shell relative flex min-h-screen items-center sm:px-6 lg:px-8"
+      className="section-shell relative flex min-h-[calc(100dvh-5rem)] items-center pt-24 sm:px-6 sm:pt-28 lg:min-h-screen lg:px-8 lg:pt-0"
     >
       {/* Aura ambiente — uma única camada no topo para evitar repetição */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -282,7 +282,7 @@ export function HeroSection() {
 
           {/* Title */}
           <motion.h1
-            className="display-title text-3xl leading-tight text-foreground sm:text-5xl lg:text-6xl min-h-[3.6rem] sm:min-h-[4.2rem]"
+            className="display-title text-[clamp(1.65rem,6.5vw,3.75rem)] leading-[1.12] text-foreground sm:leading-tight lg:text-6xl"
             variants={copyVariants}
           >
             {dictionary.site.heroTitlePrefix}{' '}
@@ -495,24 +495,45 @@ export function HeroSection() {
           vertical-align: baseline;
         }
 
-        .hero-title-line {
-          white-space: nowrap;
-        }
-
+        /* Mobile: só o texto visível — o span measure fica oculto para
+         * não reservar altura de 2+ linhas invisíveis (causava buraco enorme).
+         * Desktop: grid overlay measure + text evita layout shift horizontal. */
         .typewriter-wrapper {
-          display: inline-grid;
-          vertical-align: bottom;
-        }
-
-        .typewriter-measure,
-        .typewriter-text {
-          grid-area: 1 / 1;
-          white-space: nowrap;
+          display: inline;
+          max-width: 100%;
         }
 
         .typewriter-measure {
-          visibility: hidden;
-          pointer-events: none;
+          display: none;
+        }
+
+        .typewriter-text {
+          white-space: normal;
+          overflow-wrap: break-word;
+        }
+
+        @media (min-width: 1024px) {
+          .hero-title-line {
+            white-space: nowrap;
+          }
+
+          .typewriter-wrapper {
+            display: inline-grid;
+            vertical-align: bottom;
+          }
+
+          .typewriter-measure {
+            display: block;
+            visibility: hidden;
+            pointer-events: none;
+          }
+
+          .typewriter-measure,
+          .typewriter-text {
+            grid-area: 1 / 1;
+            white-space: nowrap;
+            overflow-wrap: normal;
+          }
         }
 
         @keyframes cursorBlink {

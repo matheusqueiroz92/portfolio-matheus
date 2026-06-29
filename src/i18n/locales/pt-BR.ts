@@ -234,6 +234,28 @@ export const ptBR: Dictionary = {
       messageMax: 'A mensagem deve ter no máximo 1000 caracteres',
     },
   },
+  chatbot: {
+    open: 'Abrir assistente virtual',
+    close: 'Fechar assistente virtual',
+    title: 'Assistente Matheus',
+    subtitle: 'Pergunte sobre projetos, experiência e tecnologias',
+    welcome:
+      'Olá! Sou o assistente do Matheus. Posso responder sobre projetos, stack, trajetória e disponibilidade.',
+    placeholder: 'Digite sua pergunta…',
+    send: 'Enviar',
+    searching: 'Buscando nos documentos…',
+    generating: 'Gerando resposta…',
+    limitReached: 'Você atingiu o limite de perguntas desta sessão.',
+    remaining: (n) => `${n} pergunta${n === 1 ? '' : 's'} restante${n === 1 ? '' : 's'}`,
+    rateLimited: 'Muitas requisições. Aguarde um momento e tente novamente.',
+    genericError: 'Não foi possível obter uma resposta. Tente novamente.',
+    contactCta: 'Falar diretamente comigo',
+    suggestions: [
+      'Quais tecnologias você domina?',
+      'Me conte sobre seus projetos',
+      'Você está disponível para freelas?',
+    ],
+  },
   footer: {
     heading: 'Rodapé',
     homeAriaLabel: 'Ir para a página inicial',
