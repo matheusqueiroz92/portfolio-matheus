@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import Link from 'next/link'
 import { describe, expect, it } from 'vitest'
 
 import { Button } from '@/components/ui/button'
@@ -15,7 +16,7 @@ describe('Button', () => {
   it('supports variants and asChild', () => {
     render(
       <Button variant="outline" size="sm" asChild>
-        <a href="/projects">Ver projetos</a>
+        <Link href="/projects">Ver projetos</Link>
       </Button>,
     )
 

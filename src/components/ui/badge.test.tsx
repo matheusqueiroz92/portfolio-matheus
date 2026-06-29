@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import Link from 'next/link'
 import { describe, expect, it } from 'vitest'
 
 import { Badge } from '@/components/ui/badge'
@@ -13,7 +14,7 @@ describe('Badge', () => {
   it('supports variant and asChild', () => {
     render(
       <Badge variant="outline" asChild>
-        <a href="/blog">Blog</a>
+        <Link href="/blog">Blog</Link>
       </Badge>,
     )
 
