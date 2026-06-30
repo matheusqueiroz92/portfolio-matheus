@@ -1,6 +1,6 @@
 'use client'
 
-import { MessageCircle, X } from 'lucide-react'
+import { BotMessageSquare, MessageCircle, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 import { useChatbot } from '@/hooks/use-chatbot'
@@ -17,7 +17,6 @@ export function FloatingChatbot() {
     messages,
     phase,
     isLoading,
-    remainingQuestions,
     limitReached,
     toggleOpen,
     close,
@@ -31,7 +30,6 @@ export function FloatingChatbot() {
         messages={messages}
         phase={phase}
         isLoading={isLoading}
-        remainingQuestions={remainingQuestions}
         limitReached={limitReached}
         copy={copy}
         onClose={close}
@@ -50,7 +48,7 @@ export function FloatingChatbot() {
         {isOpen ? (
           <X className="size-6" aria-hidden="true" />
         ) : (
-          <MessageCircle className="size-6" aria-hidden="true" />
+          <BotMessageSquare className="size-6" aria-hidden="true" />
         )}
       </motion.button>
     </>

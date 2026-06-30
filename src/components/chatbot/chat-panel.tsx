@@ -16,7 +16,6 @@ interface ChatPanelProps {
   messages: ChatMessage[]
   phase: ChatPhase
   isLoading: boolean
-  remainingQuestions: number
   limitReached: boolean
   copy: Dictionary['chatbot']
   onClose: () => void
@@ -28,7 +27,6 @@ export function ChatPanel({
   messages,
   phase,
   isLoading,
-  remainingQuestions,
   limitReached,
   copy,
   onClose,
@@ -60,6 +58,7 @@ export function ChatPanel({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 16, scale: 0.96 }}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          data-lenis-prevent
           className="fixed bottom-24 right-4 z-50 flex w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/90 shadow-xl backdrop-blur-xl sm:right-6 sm:bottom-24"
           style={{ maxHeight: 'min(32rem, 70dvh)' }}
           role="dialog"
@@ -102,11 +101,6 @@ export function ChatPanel({
           ) : null}
 
           <footer className="mt-auto">
-            {!limitReached ? (
-              <p className="px-4 pb-1 text-[11px] text-muted-foreground">
-                {copy.remaining(remainingQuestions)}
-              </p>
-            ) : null}
             <ChatInput
               copy={copy}
               isLoading={isLoading}

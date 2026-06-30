@@ -168,10 +168,8 @@ export interface Dictionary {
     searching: string
     generating: string
     limitReached: string
-    remaining: (n: number) => string
     rateLimited: string
     genericError: string
-    contactCta: string
     suggestions: readonly string[]
   }
   footer: {

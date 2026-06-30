@@ -6,6 +6,7 @@ import type { ChatMessage, ChatPhase } from '@/hooks/use-chatbot'
 import type { Dictionary } from '@/i18n/types'
 
 import { ChatMessageBubble } from './chat-message-bubble'
+import { ChatTypingIndicator } from './chat-typing-indicator'
 
 interface ChatMessagesProps {
   messages: ChatMessage[]
@@ -21,27 +22,31 @@ export function ChatMessages({ messages, phase, welcome, copy }: ChatMessagesPro
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }, [messages, phase])
 
-  const statusLabel =
-    phase === 'searching' ? copy.searching : phase === 'generating' ? copy.generating : null
+  const lastAssistant = [...messages].reverse().find((message) => message.role === 'assistant')
+  const showTypingIndicator =
+    (phase === 'searching' || phase === 'generating') && !lastAssistant?.content.trim()
+  const typingLabel = phase === 'searching' ? copy.searching : copy.generating
 
   return (
     <div
       role="log"
       aria-live="polite"
       aria-relevant="additions text"
-      className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-4 py-3"
+      data-lenis-prevent
+      className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overscroll-y-contain px-4 py-3"
     >
       {messages.length === 0 ? (
         <p className="text-sm leading-relaxed text-muted-foreground">{welcome}</p>
       ) : (
-        messages.map((message) => <ChatMessageBubble key={message.id} message={message} />)
+        messages
+          .filter(
+            (message) =>
+              !(message.role === 'assistant' && message.status === 'streaming' && !message.content.trim()),
+          )
+          .map((message) => <ChatMessageBubble key={message.id} message={message} />)
       )}
 
-      {statusLabel ? (
-        <p className="text-xs text-muted-foreground animate-pulse" aria-live="polite">
-          {statusLabel}
-        </p>
-      ) : null}
+      {showTypingIndicator ? <ChatTypingIndicator label={typingLabel} /> : null}
 
       <div ref={endRef} />
     </div>

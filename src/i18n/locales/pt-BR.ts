@@ -245,11 +245,9 @@ export const ptBR: Dictionary = {
     send: 'Enviar',
     searching: 'Buscando nos documentos…',
     generating: 'Gerando resposta…',
-    limitReached: 'Você atingiu o limite de perguntas desta sessão.',
-    remaining: (n) => `${n} pergunta${n === 1 ? '' : 's'} restante${n === 1 ? '' : 's'}`,
+    limitReached: 'Você atingiu o limite de mensagens desta sessão. Entre em contato comigo pelo e-mail ou telefone:',
     rateLimited: 'Muitas requisições. Aguarde um momento e tente novamente.',
     genericError: 'Não foi possível obter uma resposta. Tente novamente.',
-    contactCta: 'Falar diretamente comigo',
     suggestions: [
       'Quais tecnologias você domina?',
       'Me conte sobre seus projetos',

@@ -2,10 +2,10 @@
 
 import { useState, type FormEvent, type KeyboardEvent } from 'react'
 import { Loader2, Send } from 'lucide-react'
-import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
+import { CONTACT_INFO } from '@/constants/site'
 import { CHATBOT_LIMITS } from '@/lib/chatbot/config'
 import type { Dictionary } from '@/i18n/types'
 
@@ -48,10 +48,22 @@ export function ChatInput({
   if (limitReached) {
     return (
       <div className="border-t border-border/60 px-4 py-3">
-        <p className="mb-3 text-xs text-muted-foreground">{copy.limitReached}</p>
-        <Button asChild variant="outline" size="sm" className="w-full cursor-pointer">
-          <Link href="/#contact">{copy.contactCta}</Link>
-        </Button>
+        <p className="text-sm leading-relaxed text-muted-foreground">{copy.limitReached}</p>
+        <p className="mt-2 text-sm leading-relaxed">
+          <a
+            href={`mailto:${CONTACT_INFO.email}`}
+            className="text-primary underline decoration-primary/30 underline-offset-[3px] hover:decoration-primary"
+          >
+            {CONTACT_INFO.email}
+          </a>
+          <span className="text-muted-foreground"> · </span>
+          <a
+            href="tel:+5577988334370"
+            className="text-primary underline decoration-primary/30 underline-offset-[3px] hover:decoration-primary"
+          >
+            {CONTACT_INFO.phone}
+          </a>
+        </p>
       </div>
     )
   }

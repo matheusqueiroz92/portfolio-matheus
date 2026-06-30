@@ -245,11 +245,9 @@ export const en: Dictionary = {
     send: 'Send',
     searching: 'Searching documents…',
     generating: 'Generating response…',
-    limitReached: 'You reached the question limit for this session.',
-    remaining: (n) => `${n} question${n === 1 ? '' : 's'} remaining`,
+    limitReached: 'You reached the message limit for this session. Contact me by email or phone:',
     rateLimited: 'Too many requests. Please wait a moment and try again.',
     genericError: 'Could not get a response. Please try again.',
-    contactCta: 'Contact me directly',
     suggestions: [
       'What technologies do you work with?',
       'Tell me about your projects',

@@ -23,7 +23,7 @@ export function ChatMessageBubble({ message }: ChatMessageBubbleProps) {
       >
         <p className="whitespace-pre-wrap break-words">
           {message.content}
-          {isStreaming && (
+          {isStreaming && message.content.trim() && (
             <span
               className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-current align-middle"
               aria-hidden="true"
