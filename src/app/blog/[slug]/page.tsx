@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { BlogPostShell } from '@/app/blog/blog-post-shell'
+import { MdxContent } from '@/components/mdx'
 import { getDictionary } from '@/i18n'
 import { getAllPostSlugs, getPostBySlug } from '@/lib/content'
 import { absoluteUrl, createPageMetadata } from '@/lib/metadata'
@@ -65,5 +66,11 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   if (!post) notFound()
 
-  return <BlogPostShell post={post} />
+  const { content, ...postMeta } = post
+
+  return (
+    <BlogPostShell post={postMeta}>
+      <MdxContent source={content} />
+    </BlogPostShell>
+  )
 }

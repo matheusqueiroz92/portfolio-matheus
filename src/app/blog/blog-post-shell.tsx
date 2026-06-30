@@ -1,11 +1,11 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Clock } from 'lucide-react'
 
 import { Header, Footer } from '@/components/layout'
-import { MdxContent } from '@/components/mdx'
 import { Badge } from '@/components/ui/badge'
 import { LocalizedMetadata } from '@/components/seo/localized-metadata'
 import { formatLocaleDate } from '@/lib/format-locale-date'
@@ -13,10 +13,11 @@ import { useLocale } from '@/providers/locale-provider'
 import type { BlogPost } from '@/types'
 
 interface BlogPostShellProps {
-  post: BlogPost
+  post: Omit<BlogPost, 'content'>
+  children: ReactNode
 }
 
-export function BlogPostShell({ post }: BlogPostShellProps) {
+export function BlogPostShell({ post, children }: BlogPostShellProps) {
   const { locale, dictionary } = useLocale()
   const copy = dictionary.pages.blog
   const seo = dictionary.seo.blog
@@ -88,9 +89,7 @@ export function BlogPostShell({ post }: BlogPostShellProps) {
               </div>
             )}
 
-            <div className="mdx-prose max-w-none">
-              <MdxContent source={post.content} />
-            </div>
+            <div className="mdx-prose max-w-none">{children}</div>
           </div>
         </article>
       </main>

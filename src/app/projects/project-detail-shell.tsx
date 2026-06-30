@@ -1,21 +1,22 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react'
 
 import { Header, Footer } from '@/components/layout'
-import { MdxContent } from '@/components/mdx'
 import { Badge } from '@/components/ui/badge'
 import { LocalizedMetadata } from '@/components/seo/localized-metadata'
 import { useLocale } from '@/providers/locale-provider'
 import type { Project } from '@/types'
 
 interface ProjectDetailShellProps {
-  project: Project
+  project: Omit<Project, 'content'>
+  children?: ReactNode
 }
 
-export function ProjectDetailShell({ project }: ProjectDetailShellProps) {
+export function ProjectDetailShell({ project, children }: ProjectDetailShellProps) {
   const { dictionary } = useLocale()
   const copy = dictionary.pages.projects
   const seo = dictionary.seo.projects
@@ -78,9 +79,7 @@ export function ProjectDetailShell({ project }: ProjectDetailShellProps) {
             )}
 
             <div className="mdx-prose max-w-none">
-              {project.content ? (
-                <MdxContent source={project.content} />
-              ) : (
+              {children ?? (
                 <p className="text-muted-foreground leading-relaxed">{project.description}</p>
               )}
             </div>

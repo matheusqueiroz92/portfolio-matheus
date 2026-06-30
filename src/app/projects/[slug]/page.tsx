@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { ProjectDetailShell } from '@/app/projects/project-detail-shell'
+import { MdxContent } from '@/components/mdx'
 import { getDictionary } from '@/i18n'
 import { getAllProjectSlugs, getProjectBySlug } from '@/lib/content'
 import { absoluteUrl, createPageMetadata } from '@/lib/metadata'
@@ -63,5 +64,11 @@ export default async function ProjectPage({ params }: PageProps) {
 
   if (!project) notFound()
 
-  return <ProjectDetailShell project={project} />
+  const { content, ...projectMeta } = project
+
+  return (
+    <ProjectDetailShell project={projectMeta}>
+      {content ? <MdxContent source={content} /> : null}
+    </ProjectDetailShell>
+  )
 }
