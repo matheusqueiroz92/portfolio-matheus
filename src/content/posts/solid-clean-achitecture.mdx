@@ -1,0 +1,40 @@
+---
+title: 'SOLID e Clean Architecture são exagero — até o dia que você tenta testar o próprio código'
+slug: 'solid-clean-architecture'
+excerpt: 'Como tentar escrever testes no M. Agendy revelou funções acopladas demais — e por que SOLID e Clean Architecture deixam de ser luxo acadêmico quando o código impede você de validar regras de negócio.'
+coverImage: '/posts/solid-clean-architecture.webp'
+publishedDate: '2026-06-30'
+tags:
+  - Arquitetura
+  - SOLID
+  - Clean Architecture
+  - Testes
+---
+
+Se você trabalha com desenvolvimento de software há algum tempo, já ouviu falar de **SOLID** e **Clean Architecture**.
+
+Mas no dia a dia, entregando feature sob prazo apertado, é comum ver esses conceitos como "luxo acadêmico" — burocracia que atrasa o código.
+
+A verdade é outra: em produtos escaláveis como SaaS, a falta desses padrões cobra um preço caríssimo a médio prazo. O código rápido de entregar hoje vira o monolito acoplado impossível de manter amanhã.
+
+Isso ficou claro pra mim enquanto desenvolvia o **M. Agendy**, um SaaS que venho construindo. Resolvi escrever testes pra algumas funcionalidades e foi aí que o problema apareceu: algumas funções faziam coisa demais — validação, regra de negócio e acesso a dados, tudo misturado. Pra testar uma única regra, eu precisava mockar meio sistema.
+
+Foi o gatilho pra revisar a arquitetura, aplicando SOLID e DDD de verdade. Não por perfeccionismo, mas porque o código estava literalmente me impedindo de testar.
+
+## Responsabilidade Única (SRP) e manutenção
+
+O **S** do SOLID — *Single Responsibility Principle* — garante que cada componente tenha apenas uma razão para mudar. Parece óbvio, mas é incrível como é fácil ir empilhando responsabilidade numa função "só dessa vez". Depois de separar essas responsabilidades no M. Agendy, escrever teste deixou de ser sofrimento. Cada peça testa uma coisa só, sem precisar simular o sistema inteiro.
+
+## Inversão de Dependência (DIP) e portabilidade
+
+O **D** do SOLID — *Dependency Inversion Principle* — ainda não precisei aplicar a fundo no M. Agendy, mas já sei que é a próxima dor quando o projeto escalar. Se seu código depende de abstração e não de implementação, trocar um banco relacional por NoSQL ou desacoplar uma rota virando função serverless deixa de ser pesadelo de refatoração. Já vi esse cenário em outros projetos — quando o DIP não está lá, a migração trava o desenvolvimento.
+
+## Clean Architecture na prática
+
+Clean Architecture não é sobre regra rígida. É sobre isolar a regra de negócio dos detalhes técnicos — banco, framework, UI — pra que front-end e back-end evoluam sem que um trave o outro.
+
+Código limpo não é sobre escrever mais linhas. É sobre um sistema simples o suficiente pra você confiar nele quando precisar mexer de novo — seja pra testar, escalar ou trocar uma peça de infraestrutura.
+
+Às vezes a refatoração não nasce de planejamento, nasce de tropeçar no próprio código.
+
+Já passou por isso? Começou a escrever teste e descobriu que sua arquitetura tinha mais problema do que imaginava?
