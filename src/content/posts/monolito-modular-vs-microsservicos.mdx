@@ -1,0 +1,54 @@
+---
+title: '"Vamos de microsserviços" é a decisão de arquitetura que mais gera retrabalho em time pequeno'
+slug: 'monolito-modular-vs-microsservicos'
+excerpt: 'Microsserviços resolvem problemas de escala e de organização de times — não de código. Por que um monólito modular bem feito entrega ~80% dos benefícios com uma fração do custo, e o checklist que uso antes de extrair qualquer serviço.'
+coverImage: '/posts/monolito-modular-vs-microsservicos.webp'
+publishedDate: '2026-07-02'
+tags:
+  - Arquitetura
+  - Microsserviços
+  - Back-end
+  - Desenvolvimento Web
+---
+
+Na maioria dos casos, um **monólito modular** bem feito resolve — e ainda te dá tempo para crescer.
+
+A forma como você separa os módulos do sistema esconde uma armadilha comum: adotar microsserviços cedo demais.
+
+A real: microsserviços resolvem problemas de **escala** e de **organização de times**, não problemas de código. Eles trazem deploy independente e isolamento de falhas, mas cobram o preço em rede, consistência de dados e complexidade operacional.
+
+O monólito modular entrega ~80% dos benefícios de organização com uma fração do custo: fronteiras claras entre módulos, baixo acoplamento e um único deploy. E o melhor: se um dia precisar quebrar em serviços, as fronteiras já estão desenhadas.
+
+## Monólito modular vs. microsserviços
+
+**Monólito modular** — um deploy, módulos bem separados:
+
+- Começar rápido, com baixo custo
+- Simplicidade operacional
+- Transações e consistência fáceis
+
+Mas atenção: escala tudo junto, não por parte. No limite, deploys ficam acoplados.
+
+**Microsserviços** — serviços independentes, deploy isolado:
+
+- Escalar cada parte sozinha
+- Times autônomos em paralelo
+- Isolamento de falhas
+
+Mas atenção: complexidade de rede e dados, e exige observabilidade forte.
+
+## A regra prática
+
+Comece com um monólito modular. Só extraia um serviço quando existir um motivo concreto — escala independente, time dedicado ou requisito de disponibilidade diferente.
+
+## Checklist antes de extrair um serviço
+
+1. Esse módulo precisa escalar de forma independente?
+2. Existe um time dedicado para cuidar dele?
+3. Ele tem requisito de disponibilidade diferente?
+4. As fronteiras de dados já estão bem definidas?
+5. O ganho compensa a complexidade operacional?
+
+Maioria "não"? Mantenha no monólito modular — e siga entregando.
+
+E você: já viu um projeto sofrer por adotar microsserviços cedo demais? Conta o contexto — quero comparar cenários.
