@@ -1,0 +1,50 @@
+---
+title: 'Vibe coding leva até o MVP. Produção ainda é engenharia.'
+slug: 'vibe-coding-producao'
+excerpt: 'Um cliente montou um sistema inteiro com IA — e pediu pra "só subir pra produção". O que encontrei no código revelou onde o trabalho do engenheiro realmente começa.'
+coverImage: '/posts/vibe-coding-producao.webp'
+publishedDate: '2026-07-09'
+tags:
+  - Engenharia de Software
+  - Inteligência Artificial
+  - Vibe Coding
+  - Desenvolvimento Web
+---
+
+Ontem um cliente que atendo há anos me chamou: *"Matheus, criei um sisteminha aqui, consegue subir pra produção pra mim?"*
+
+Achei sensacional, porque ele não é da área de tecnologia e mesmo assim montou uma aplicação inteira sozinho, usando IA. Há dois anos isso era praticamente impensável.
+
+Respondi que subia numa boa e pedi os arquivos só pra dar uma olhada antes de mandar pro servidor.
+
+Aí a conversa mudou de figura.
+
+## O que encontrei no projeto
+
+Quando abri o projeto, não era um sistema pronto. Era um **MVP**. Funcionava? Funcionava. Mas o backend inteiro estava num único arquivo de quase 400 linhas, sem um teste sequer, sem Docker, com o banco se criando sozinho e sem nenhuma das proteções básicas que qualquer coisa exposta na internet precisa ter. O frontend, mesma história: um arquivo só, com tudo misturado.
+
+E não tô contando isso pra tirar sarro dele. Muito pelo contrário. O cara resolveu um problema real com as próprias mãos, e foi a IA que deu esse poder pra ele. Acho isso o máximo.
+
+Mas foi ali que caiu a ficha do que mudou no nosso trabalho.
+
+## Vibe coding vs. engenharia de software
+
+Tem até nome pra isso agora: **vibe coding**. Você descreve o que quer e a IA vai construindo. É poderoso demais, de verdade. Mas o "vibe" te leva até o protótipo. Botar em produção ainda é engenharia.
+
+A IA deixou barato e rápido gerar código que funciona. Só que *"funciona aqui na minha máquina"* e *"tá pronto pra rodar em produção, com usuário real, dados de verdade e gente tentando quebrar"* são coisas bem diferentes.
+
+E essa distância entre o MVP e o produto? É a engenharia de software:
+
+- **Segurança** — proteções básicas contra exposição na internet
+- **Arquitetura** — separação de responsabilidades, não tudo num arquivo só
+- **Testes** — confiança de que mudanças não quebram o que já funciona
+- **Deploy** — Docker, pipelines, ambiente reproduzível
+- **Monitoramento** — saber quando algo cai antes do usuário reclamar
+
+## Onde o trabalho do engenheiro começa
+
+No fim, a IA não tirou o nosso trabalho. Ela só deixou mais claro onde ele começa.
+
+**IA gera o código. Engenharia constrói o sistema.**
+
+E você, já pegou um projeto pra "só subir" e descobriu que precisava de bem mais que isso? Me conta aí — quero saber se é só comigo.
