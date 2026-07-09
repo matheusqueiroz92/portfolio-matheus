@@ -31,7 +31,7 @@ export function BlogFeaturedPost({ post }: BlogFeaturedPostProps) {
               src={post.coverImage.url}
               alt={post.coverImage.alt ?? post.title}
               fill
-              className="object-contain transition-transform duration-500 group-hover:scale-105"
+              className="object-contain transition-transform duration-500"
               sizes="(max-width: 768px) 100vw, 640px"
               priority
             />
@@ -50,7 +50,9 @@ export function BlogFeaturedPost({ post }: BlogFeaturedPostProps) {
           </h2>
           <p className="mb-5 line-clamp-3 leading-relaxed text-muted-foreground">{post.excerpt}</p>
           <div className="mb-5 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-            <time dateTime={post.publishedDate}>{formatLocaleDate(post.publishedDate, locale)}</time>
+            <time dateTime={post.publishedDate}>
+              {formatLocaleDate(post.publishedDate, locale)}
+            </time>
           </div>
           {post.tags && post.tags.length > 0 && (
             <div className="mb-6 flex flex-wrap gap-2">

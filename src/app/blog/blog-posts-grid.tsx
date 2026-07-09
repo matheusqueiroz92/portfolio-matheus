@@ -44,7 +44,7 @@ export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
                   src={post.coverImage.url}
                   alt={post.coverImage.alt ?? post.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-card/80 via-card/30 to-transparent" />

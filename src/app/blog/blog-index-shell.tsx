@@ -60,9 +60,13 @@ export function BlogIndexShell({
               <span className="eyebrow mb-4 rounded-full border border-primary/20 bg-primary/10 px-4 py-1">
                 {copy.eyebrow}
               </span>
-              <h1 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">{copy.title}</h1>
+              <h1 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
+                {copy.title}
+              </h1>
               <div className="mx-auto h-1 w-20 rounded-full bg-primary/60" />
-              <p className="mx-auto mt-4 max-w-2xl px-2 text-base text-muted-foreground sm:text-xl">{copy.subtitle}</p>
+              <p className="mx-auto mt-4 max-w-2xl px-2 text-base text-muted-foreground sm:text-xl">
+                {copy.subtitle}
+              </p>
             </div>
           </FadeIn>
 
