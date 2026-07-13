@@ -78,7 +78,7 @@ export const ptBR: Dictionary = {
     footerTagline:
       'Desenvolvedor Fullstack com foco em arquitetura, produto e entrega ponta a ponta.',
     heroSubtitle:
-      'Desenvolvedor Fullstack unindo 10 anos de experiência, IA e automação para criar plataformas web de alta performance que escalam negócios.',
+      'Desenvolvedor Fullstack unindo 5 anos de experiência, IA e automação para criar plataformas web de alta performance que escalam negócios.',
     heroTitlePrefix: 'Transformando ideias',
     heroTitleMiddle: 'em',
     heroPhrases: [
@@ -93,7 +93,7 @@ export const ptBR: Dictionary = {
       { title: 'Eng. Computação' },
     ],
     stats: [
-      { value: '10', label: 'Anos de Experiência' },
+      { value: '5', label: 'Anos de Experiência' },
       { value: '+30', label: 'Projetos Desenvolvidos' },
       { value: '+15', label: 'Clientes Atendidos' },
     ],

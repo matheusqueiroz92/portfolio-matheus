@@ -10,11 +10,11 @@ export const SITE_CONFIG = {
     'Portfólio de Matheus Queiroz, desenvolvedor Fullstack especializado em React, Next.js, Node.js e soluções com IA.',
   author: 'Matheus Queiroz',
   siteUrl: SITE_URL,
-  yearsOfExperience: 10,
+  yearsOfExperience: 5,
 } as const
 
 export const STATS: Stat[] = [
-  { value: '10', label: 'Anos de Experiência' },
+  { value: '5', label: 'Anos de Experiência' },
   { value: '+30', label: 'Projetos Desenvolvidos' },
   { value: '+15', label: 'Clientes Atendidos' },
 ]
@@ -84,8 +84,8 @@ export const FOOTER_QUICK_LINKS: (NavigationItem & { key: NavItemKey })[] = [
 export type FooterServiceKey = 'fullstack' | 'ai' | 'consulting' | 'maintenance'
 
 export const FOOTER_SERVICES: (NavigationItem & { key: FooterServiceKey })[] = [
-  { key: 'fullstack', label: 'Desenvolvimento Fullstack', href: '/#practice-areas' },
-  { key: 'ai', label: 'Soluções com IA', href: '/#practice-areas' },
+  { key: 'fullstack', label: 'Desenvolvimento Fullstack', href: '/#areas-atuacao' },
+  { key: 'ai', label: 'Soluções com IA', href: '/#areas-atuacao' },
   { key: 'consulting', label: 'Consultoria', href: '/#contact' },
   { key: 'maintenance', label: 'Manutenção & Evolução', href: '/#contact' },
 ]

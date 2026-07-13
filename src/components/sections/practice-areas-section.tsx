@@ -13,8 +13,8 @@ export function PracticeAreasSection() {
   const services = dictionary.practiceAreas.services
 
   return (
-    <section id="areas-atuacao" className="section-shell transition-colors duration-300">
-      <div className="max-w-7xl mx-auto">
+    <section id="areas-atuacao" className="section-shell section-shell--scroll-cue transition-colors duration-300">
+      <div className="mx-auto max-w-7xl pb-6 sm:pb-8">
         <FadeIn className="mb-12 sm:mb-16">
           <SectionHeader
             eyebrow={dictionary.practiceAreas.eyebrow}
@@ -70,7 +70,7 @@ export function PracticeAreasSection() {
         </FadeInStagger>
       </div>
 
-      <ScrollDownButton href="#tecnologias" />
+      <ScrollDownButton href="#tecnologias" spacing="relaxed" />
     </section>
   )
 }

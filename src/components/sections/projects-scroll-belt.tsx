@@ -280,15 +280,15 @@ export function ProjectsScrollBelt({
       aria-label={copy.beltAria}
     >
       <div className="project-belt-pin" style={pinPanelStyle}>
-        <div className="mx-auto flex h-full w-full max-w-7xl flex-col px-4 pb-6 pt-4 sm:px-6 sm:pb-8 sm:pt-6 lg:px-8">
+        <div className="project-belt-layout mx-auto h-full w-full max-w-7xl px-4 pb-4 pt-4 sm:px-6 sm:pb-5 sm:pt-5 lg:px-8">
           <SectionHeader
             eyebrow={copy.eyebrow}
             title={copy.title}
             subtitle={copy.subtitle}
-            className="mb-6 shrink-0 sm:mb-8"
+            className="mb-4 shrink-0 sm:mb-5"
           />
 
-          <div className="project-belt-viewport relative mx-auto w-full">
+          <div className="project-belt-viewport relative mx-auto w-full min-h-0">
             {beltProjects.map((item, index) => {
               const motionState = getSlideMotion(index, scaledProgress)
               return (
@@ -302,24 +302,34 @@ export function ProjectsScrollBelt({
             })}
           </div>
 
-          <div
-            className="mt-5 flex shrink-0 items-center justify-center gap-2 sm:mt-6"
-            role="tablist"
-            aria-label={copy.beltProgressAria}
-          >
-            {beltProjects.map((item, index) => (
-              <span
-                key={item.project.slug}
-                role="tab"
-                aria-selected={index === activeDot}
-                aria-label={item.project.title}
-                className={
-                  index === activeDot
-                    ? 'h-1.5 w-7 rounded-full bg-primary transition-all duration-300'
-                    : 'h-1.5 w-1.5 rounded-full bg-border transition-all duration-300'
-                }
-              />
-            ))}
+          <div className="project-belt-footer">
+            <div
+              className="flex items-center justify-center gap-2"
+              role="tablist"
+              aria-label={copy.beltProgressAria}
+            >
+              {beltProjects.map((item, index) => (
+                <span
+                  key={item.project.slug}
+                  role="tab"
+                  aria-selected={index === activeDot}
+                  aria-label={item.project.title}
+                  className={
+                    index === activeDot
+                      ? 'h-1.5 w-7 rounded-full bg-primary transition-all duration-300'
+                      : 'h-1.5 w-1.5 rounded-full bg-border transition-all duration-300'
+                  }
+                />
+              ))}
+            </div>
+
+            <Link
+              href="/projects"
+              className="btn-primary-glow group relative inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 sm:px-12 sm:py-3.5 sm:text-base lg:px-16"
+            >
+              {copy.viewAll}
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 sm:h-5 sm:w-5" />
+            </Link>
           </div>
         </div>
       </div>

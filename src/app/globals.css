@@ -124,17 +124,23 @@ h6 {
   background-clip: text;
 }
 
-/* Shell de seção — ritmo vertical 8dp consistente */
+/* Shell de seção — menos espaço no topo para o conteúdo aparecer sem scroll extra */
 .section-shell {
   position: relative;
-  padding-block: clamp(3rem, 7vw, 8rem);
+  padding-top: clamp(1.25rem, 2.5vw, 2rem);
+  padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
   padding-inline: clamp(1rem, 4vw, 2rem);
   border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
 }
 
 /* Compensa header fixo (h-20) em âncoras de seção */
 main > section[id] {
-  scroll-margin-top: 5.5rem;
+  scroll-margin-top: 5rem;
+}
+
+/* Mais respiro entre conteúdo e seta de navegação inferior */
+.section-shell--scroll-cue {
+  padding-bottom: clamp(5.5rem, 10vw, 8rem);
 }
 
 /* Cards de estatística — elevação sutil sem layout shift */
@@ -302,9 +308,15 @@ main > section[id] {
 .project-belt-track {
   position: relative;
   width: 100%;
+  --belt-pin-offset: 6.5rem;
+  --belt-chrome: 19rem;
   /* Altura = painel fixo + N transições × 95vh ( --belt-transitions vem do JSX ) */
-  height: calc(var(--belt-transitions) * 95vh + 100vh - 80px);
-  min-height: calc(100vh - 80px);
+  height: calc(var(--belt-transitions) * 95vh + 100dvh - var(--belt-pin-offset));
+  min-height: calc(100dvh - var(--belt-pin-offset));
+}
+
+.section-shell--projects-belt {
+  padding-top: clamp(0.75rem, 1.5vw, 1.25rem);
 }
 
 @media (max-width: 1023px) {
@@ -332,16 +344,21 @@ main > section[id] {
 
 .project-belt-pin {
   width: 100%;
-  height: calc(100vh - 80px);
+  height: calc(100dvh - var(--belt-pin-offset));
   background: var(--background);
+}
+
+.project-belt-layout {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100%;
 }
 
 .project-belt-viewport {
   position: relative;
-  flex: 1 1 auto;
-  min-height: 13rem;
-  max-height: min(26rem, 46vh);
   width: 100%;
+  min-height: 0;
+  max-height: calc(100dvh - var(--belt-pin-offset) - var(--belt-chrome));
   overflow: hidden;
   /* Mesmo fade lateral do marquee em Stack Tecnológico */
   mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
@@ -352,6 +369,21 @@ main > section[id] {
     black 90%,
     transparent 100%
   );
+}
+
+.project-belt-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+  padding-top: 0.625rem;
+}
+
+@media (min-width: 640px) {
+  .project-belt-footer {
+    gap: 1rem;
+    padding-top: 0.75rem;
+  }
 }
 
 @media (max-width: 639px) {
@@ -388,7 +420,7 @@ main > section[id] {
 @media (min-width: 640px) {
   .project-belt-card {
     flex-direction: row;
-    min-height: min(22rem, 100%);
+    min-height: min(19rem, 100%);
   }
 }
 

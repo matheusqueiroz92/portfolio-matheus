@@ -11,8 +11,11 @@ export function AboutSection() {
   const { dictionary } = useLocale()
 
   return (
-    <section id="about" className="section-shell bg-background/80 transition-colors duration-300">
-      <div className="max-w-4xl mx-auto">
+    <section
+      id="about"
+      className="section-shell section-shell--scroll-cue bg-background/80 transition-colors duration-300"
+    >
+      <div className="mx-auto max-w-4xl pb-6 sm:pb-8">
         <FadeInStagger className="space-y-8" stagger={0.12}>
           <FadeInItem>
             <SectionHeader
@@ -74,7 +77,7 @@ export function AboutSection() {
         </FadeInStagger>
       </div>
 
-      <ScrollDownButton href="#como-trabalho" />
+      <ScrollDownButton href="#how-i-work" spacing="relaxed" />
     </section>
   )
 }

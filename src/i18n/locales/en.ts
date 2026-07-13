@@ -78,7 +78,7 @@ export const en: Dictionary = {
     footerTagline:
       'Fullstack developer focused on architecture, product, and end-to-end delivery.',
     heroSubtitle:
-      'Fullstack developer combining 10 years of experience, AI, and automation to build high-performance web platforms that scale businesses.',
+      'Fullstack developer combining 5 years of experience, AI, and automation to build high-performance web platforms that scale businesses.',
     heroTitlePrefix: 'Turning ideas',
     heroTitleMiddle: 'into',
     heroPhrases: [
@@ -93,7 +93,7 @@ export const en: Dictionary = {
       { title: 'Comp. Eng.' },
     ],
     stats: [
-      { value: '10', label: 'Years of Experience' },
+      { value: '5', label: 'Years of Experience' },
       { value: '+30', label: 'Projects Delivered' },
       { value: '+15', label: 'Clients Served' },
     ],

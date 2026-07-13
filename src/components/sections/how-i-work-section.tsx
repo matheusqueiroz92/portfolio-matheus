@@ -14,9 +14,9 @@ export function HowIWorkSection() {
   return (
     <section
       id="how-i-work"
-      className="section-shell bg-background/80 transition-colors duration-300"
+      className="section-shell section-shell--scroll-cue bg-background/80 transition-colors duration-300"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl pb-6 sm:pb-8">
         <FadeIn className="mb-12 sm:mb-16">
           <SectionHeader
             eyebrow={dictionary.howIWork.eyebrow}
@@ -51,7 +51,7 @@ export function HowIWorkSection() {
         </FadeInStagger>
       </div>
 
-      <ScrollDownButton href="#practice-areas" />
+      <ScrollDownButton href="#areas-atuacao" spacing="relaxed" />
     </section>
   )
 }

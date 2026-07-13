@@ -242,7 +242,9 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
   return (
     <section
       id="projects"
-      className="section-shell overflow-hidden bg-background transition-colors duration-300"
+      className={`section-shell overflow-hidden bg-background transition-colors duration-300${
+        useBelt && hasProjects ? ' section-shell--projects-belt' : ''
+      }`}
     >
       {!hasProjects ? (
         <div className="max-w-5xl mx-auto">
@@ -252,24 +254,11 @@ export function ProjectsSection({ projects, flagshipProject }: ProjectsSectionPr
           <p className="text-center text-muted-foreground py-12">{copy.emptyState}</p>
         </div>
       ) : useBelt ? (
-        <>
-          <ProjectsScrollBelt
-            flagshipProject={flagshipProject ?? null}
-            projects={projects}
-            copy={copy}
-          />
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <FadeIn className="text-center pb-4 pt-2">
-              <Link
-                href="/projects"
-                className="btn-primary-glow group relative inline-flex items-center justify-center px-8 sm:px-12 lg:px-16 py-3.5 sm:py-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full"
-              >
-                {copy.viewAll}
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </FadeIn>
-          </div>
-        </>
+        <ProjectsScrollBelt
+          flagshipProject={flagshipProject ?? null}
+          projects={projects}
+          copy={copy}
+        />
       ) : (
         <div className="max-w-5xl mx-auto">
           <FadeIn className="mb-10 sm:mb-12">

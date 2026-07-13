@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import { ProjectsSection } from '@/components/sections/projects-section'
@@ -11,7 +11,9 @@ vi.mock('next/image', () => ({
 
 vi.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: { children?: React.ReactNode }) => <div {...props}>{children}</div>,
+    div: ({ children, ...props }: { children?: React.ReactNode }) => (
+      <div {...props}>{children}</div>
+    ),
   },
 }))
 
@@ -33,9 +35,10 @@ describe('ProjectsSection', () => {
     expect(screen.getByText(sampleProjectAlpha.title)).toBeInTheDocument()
     expect(screen.getByText(sampleProjectBeta.title)).toBeInTheDocument()
 
-    expect(
-      screen.getByRole('link', { name: 'Ver case completo' }),
-    ).toHaveAttribute('href', `/projects/${sampleProjectAlpha.slug}`)
+    expect(screen.getByRole('link', { name: 'Ver case completo' })).toHaveAttribute(
+      'href',
+      `/projects/${sampleProjectAlpha.slug}`,
+    )
     expect(
       screen.getByRole('link', { name: `Ver case: ${sampleProjectBeta.title}` }),
     ).toHaveAttribute('href', `/projects/${sampleProjectBeta.slug}`)
